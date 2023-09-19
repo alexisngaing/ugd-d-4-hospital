@@ -5,9 +5,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ugd_4_hospital/view/home.dart';
 
 class LoginPage extends StatefulWidget {
-  final Map<String, dynamic> data; // Tambahkan deklarasi parameter data
+  final Map? data;
 
-  const LoginPage({Key? key, required this.data}) : super(key: key);
+  const LoginPage({super.key, this.data});
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
