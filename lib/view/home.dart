@@ -57,7 +57,8 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: SingleChildScrollView(
+          child: Center(child: _widgetOptions.elementAt(_selectedIndex))),
     );
   }
 }
