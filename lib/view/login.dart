@@ -5,8 +5,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ugd_4_hospital/view/home.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final Map<String, dynamic> data; // Tambahkan deklarasi parameter data
 
+  const LoginPage({Key? key, required this.data}) : super(key: key);
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -160,7 +161,8 @@ class _LoginPageState extends State<LoginPage> {
         debugPrint("Email : ${emailController.text}");
         debugPrint("Password : ${passwordController.text}");
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()),
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
         // Show a toast notification
         showToast('Berhasil Login');

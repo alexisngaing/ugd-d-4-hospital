@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/component/form_component';
 import 'package:intl/intl.dart';
 
@@ -120,7 +121,7 @@ class _RegisterViewState extends State<RegisterView> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => LoginView(
+                        builder: (_) => LoginPage(
                           data: formData,
                         ),
                       ),
