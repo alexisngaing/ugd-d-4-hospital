@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:ugd_4_hospital/view/home.dart';
@@ -159,16 +159,11 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {
         debugPrint("Email : ${emailController.text}");
         debugPrint("Password : ${passwordController.text}");
-        // Fluttertoast.showToast(
-        //   msg: "Berhasil Login",
-        //   toastLength: Toast.LENGTH_SHORT,
-        //   timeInSecForIosWeb: 1,
-        //   backgroundColor: Colors.black,
-        //   textColor: Colors.white,
-        //   fontSize: 16.0,
-        // );
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+            context, MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        // Show a toast notification
+        showToast('Berhasil Login');
       },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
