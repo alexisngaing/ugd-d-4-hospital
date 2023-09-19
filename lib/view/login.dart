@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:ugd_4_hospital/View/register.dart';
 import 'package:ugd_4_hospital/view/home.dart';
 
 class LoginPage extends StatefulWidget {
@@ -150,7 +150,11 @@ class _LoginPageState extends State<LoginPage> {
             _buildGreyText("Remember me"),
           ],
         ),
-        TextButton(onPressed: () {}, child: _buildGreyText("Register"))
+        TextButton(
+            onPressed: () {
+              pushRegister(context);
+            },
+            child: _buildGreyText("Register"))
       ],
     );
   }
@@ -195,4 +199,13 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+void pushRegister(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => const RegisterView(),
+    ),
+  );
 }
