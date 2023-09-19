@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/component/form_component';
 import 'package:intl/intl.dart';
+import 'package:ugd_4_hospital/dialog/alert_dialog.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -119,7 +120,7 @@ class _RegisterViewState extends State<RegisterView> {
                     formData['password'] = passwordController.text;
 
                     Navigator.push(
-                      context,
+                      showAlertDialog(context),
                       MaterialPageRoute(
                         builder: (_) => LoginPage(
                           data: formData,

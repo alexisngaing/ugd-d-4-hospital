@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:ugd_4_hospital/View/login.dart';
+import 'package:ugd_4_hospital/View/register.dart';
 
 showAlertDialog(BuildContext context) {
   // pengaturan tombol alert
   Widget cancelButton = TextButton(
     child: Text("Cancel"),
-    onPressed: () {},
+    onPressed: () {
+      pushRegister(context);
+    },
   );
   Widget okButton = TextButton(
     child: Text("Ok"),
-    onPressed: () {},
+    onPressed: () {
+      pushLogin(context);
+    },
   );
 
   // isi teks alertnya
@@ -28,5 +34,23 @@ showAlertDialog(BuildContext context) {
     builder: (BuildContext context) {
       return alert;
     },
+  );
+}
+
+void pushRegister(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => const RegisterView(),
+    ),
+  );
+}
+
+void pushLogin(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => const LoginPage(),
+    ),
   );
 }
