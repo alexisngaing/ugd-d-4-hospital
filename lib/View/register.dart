@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/View/login.dart';
-import 'package:ugd_4_hospital/component/form_component';
+import 'package:ugd_4_hospital/component/form_component.dart';
 import 'package:intl/intl.dart';
-import 'package:ugd_4_hospital/dialog/alert_dialog.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -30,15 +30,15 @@ class _RegisterViewState extends State<RegisterView> {
             children: [
               inputForm((p0) {
                 if (p0 == null || p0.isEmpty) {
-                  return 'Username tidak  boleh kosong';
+                  return 'Username tidak boleh kosong';
                 }
                 if (p0.toLowerCase() == 'anjing') {
-                  return 'tidak boleh menggunakan kata kasar';
+                  return 'Tidak boleh menggunakan kata kasar';
                 }
                 return null;
               },
                   controller: usernameController,
-                  hintTxt: "Username",
+                  hinTxt: "Username",
                   helperTxt: "Ucup Surucup",
                   iconData: Icons.person),
               inputForm(((p0) {
@@ -51,12 +51,12 @@ class _RegisterViewState extends State<RegisterView> {
                 return null;
               }),
                   controller: emailController,
-                  hintTxt: "Email",
+                  hinTxt: "Email",
                   helperTxt: "ucup@gmail.com",
                   iconData: Icons.email),
               inputForm(((p0) {
                 if (p0 == null || p0.isEmpty) {
-                  return 'password tidak boleh kosong';
+                  return 'Password tidak boleh kosong';
                 }
                 if (p0.length < 5) {
                   return 'Password minimal 5 digit';
@@ -64,7 +64,7 @@ class _RegisterViewState extends State<RegisterView> {
                 return null;
               }),
                   controller: passwordController,
-                  hintTxt: "Password",
+                  hinTxt: "Password",
                   helperTxt: "xxxxxxx",
                   iconData: Icons.password,
                   password: true),
@@ -75,7 +75,7 @@ class _RegisterViewState extends State<RegisterView> {
                 return null;
               }),
                   controller: notelpController,
-                  hintTxt: "No Telp",
+                  hinTxt: "No Telp",
                   helperTxt: "082123456789",
                   iconData: Icons.phone_android),
               Container(
@@ -83,7 +83,7 @@ class _RegisterViewState extends State<RegisterView> {
                 padding: const EdgeInsets.only(left: 20, top: 10),
                 child: TextFormField(
                   controller: dateController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Tanggal Lahir',
                     helperText: 'Format: DD/MM/YYYY',
                     border: OutlineInputBorder(),
@@ -95,7 +95,6 @@ class _RegisterViewState extends State<RegisterView> {
                     if (value == null || value.isEmpty) {
                       return 'Tanggal Lahir tidak boleh kosong';
                     }
-
                     return null;
                   },
                   onTap: () async {
@@ -113,18 +112,17 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    Map<String, dynamic> formData = {};
-                    formData['username'] = usernameController.text;
-                    formData['password'] = passwordController.text;
+                    final prefs = await SharedPreferences.getInstance();
+                    prefs.setString('username', usernameController.text);
+                    prefs.setString('email', emailController.text);
+                    prefs.setString('password', passwordController.text);
 
-                    Navigator.push(
-                      showAlertDialog(context),
+                    Navigator.pushReplacement(
+                      context,
                       MaterialPageRoute(
-                        builder: (_) => LoginPage(
-                          data: formData,
-                        ),
+                        builder: (_) => LoginPage(),
                       ),
                     );
                   }
