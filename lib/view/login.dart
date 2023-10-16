@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ugd_4_hospital/View/register.dart';
-import 'package:ugd_4_hospital/view/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   final Map? data;
@@ -161,15 +162,38 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoginButton() {
     return ElevatedButton(
-      onPressed: () {
-        debugPrint("Email : ${emailController.text}");
-        debugPrint("Password : ${passwordController.text}");
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-        );
-        // Show a toast notification
-        showToast('Berhasil Login');
+      onPressed: () async {
+        final prefs = await SharedPreferences.getInstance();
+        final registeredEmail = prefs.getString('email');
+        final registeredPassword = prefs.getString('password');
+
+        final enteredEmail = emailController.text;
+        final enteredPassword = passwordController.text;
+
+        if (enteredEmail == registeredEmail &&
+            enteredPassword == registeredPassword) {
+          debugPrint("Email : $enteredEmail");
+          debugPrint("Password : $enteredPassword");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+          showToast('Berhasil Login');
+        } else {
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: const Text('Login Failed'),
+              content: const Text('Invalid email or password.'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
       },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
@@ -187,12 +211,12 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           _buildGreyText("Or Login with"),
           const SizedBox(height: 10),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Icon(FontAwesomeIcons.facebook),
-              const Icon(FontAwesomeIcons.google),
-              const Icon(FontAwesomeIcons.git),
+              Icon(FontAwesomeIcons.facebook),
+              Icon(FontAwesomeIcons.google),
+              Icon(FontAwesomeIcons.git),
             ],
           )
         ],
