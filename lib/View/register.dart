@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/component/form_component.dart';
 import 'package:intl/intl.dart';
-import 'package:ugd_4_hospital/dialog/alert_dialog.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 
 class RegisterView extends StatefulWidget {
@@ -22,31 +21,6 @@ class _RegisterViewState extends State<RegisterView> {
   TextEditingController dateController = TextEditingController();
   bool isPasswordVisible = false;
 
-  Future<void> _showRegistrationResultDialog(bool success) async {
-    String title = success ? 'Pendaftaran Berhasil' : 'Pendaftaran Gagal';
-    String message =
-        success ? 'Berhasil Register!!!' : 'Register Gagal!! Harap Coba Lagi!';
-
-    await showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(message),
-          actions: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   late SharedPreferences _sharedPreferences;
   List<String> registeredEmails = [];
 
@@ -200,7 +174,7 @@ class _RegisterViewState extends State<RegisterView> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => LoginPage(),
+                      builder: (_) => const LoginPage(),
                     ),
                   );
                 },
