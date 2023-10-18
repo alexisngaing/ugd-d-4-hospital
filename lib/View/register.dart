@@ -21,7 +21,46 @@ class _RegisterViewState extends State<RegisterView> {
   TextEditingController dateController = TextEditingController();
   bool isPasswordVisible = false;
 
+  Future<void> _showRegistrationResultDialog(bool success) async {
+    String title = success ? 'Pendaftaran Berhasil' : 'Pendaftaran Gagal';
+    String message =
+        success ? 'Berhasil Register!!!' : 'Register Gagal!! Harap Coba Lagi!';
+
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late SharedPreferences _sharedPreferences;
+  List<String> registeredEmails = [];
+
   @override
+  void initState() {
+    super.initState();
+    _initSharedPreferences();
+  }
+
+  Future<void> _initSharedPreferences() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    registeredEmails =
+        _sharedPreferences.getStringList('registered_emails') ?? [];
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -49,6 +88,9 @@ class _RegisterViewState extends State<RegisterView> {
                 }
                 if (!p0.contains('@')) {
                   return 'Email harus menggunakan @';
+                }
+                if (registeredEmails.contains(p0)) {
+                  return 'Email sudah terdaftar. Gunakan email lain.';
                 }
                 return null;
               },
@@ -136,7 +178,10 @@ class _RegisterViewState extends State<RegisterView> {
                     prefs.setString('email', emailController.text);
                     prefs.setString('password', passwordController.text);
                     prefs.setString('No telp', notelpController.text);
-
+                    registeredEmails.add(emailController.text);
+                    _sharedPreferences.setStringList(
+                        'registered_emails', registeredEmails);
+                    showToast('Register Berhasil');
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -144,10 +189,21 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     );
                   } else {
-                    showDialogGagal(context);
+                    showToast('Gagal Register');
                   }
                 },
                 child: const Text('Register'),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => LoginPage(),
+                    ),
+                  );
+                },
+                child: const Text('Cancel'),
               )
             ],
           ),
@@ -155,4 +211,3 @@ class _RegisterViewState extends State<RegisterView> {
       ),
     );
   }
-}
