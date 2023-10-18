@@ -4,6 +4,7 @@ import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/component/form_component.dart';
 import 'package:intl/intl.dart';
 import 'package:ugd_4_hospital/dialog/alert_dialog.dart';
+import 'package:ugd_4_hospital/utils/toast_util.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -211,3 +212,4 @@ class _RegisterViewState extends State<RegisterView> {
       ),
     );
   }
+}
