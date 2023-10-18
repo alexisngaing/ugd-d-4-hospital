@@ -16,7 +16,6 @@ class _GridWidgetState extends State<GridWidget> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          //changing the current expandableState
           expandableState[index] = !isExpanded;
         });
       },
