@@ -15,8 +15,7 @@ class _ChatPageState extends State<ChatPage> {
   List<Message> messages = [
     Message(
       text: 'Yes Sure!',
-      date: DateTime.now().subtract(
-          Duration(minutes: 5)), // Pesan pertama dikirim 5 menit yang lalu
+      date: DateTime.now().subtract(Duration(minutes: 5)),
       isSentByMe: false,
     ),
   ];

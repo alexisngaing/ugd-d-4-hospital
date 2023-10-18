@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/component/form_component.dart';
 import 'package:intl/intl.dart';
+import 'package:ugd_4_hospital/dialog/alert_dialog.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _RegisterViewState extends State<RegisterView> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController notelpController = TextEditingController();
   TextEditingController dateController = TextEditingController();
+  bool isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class _RegisterViewState extends State<RegisterView> {
                   hinTxt: "Username",
                   helperTxt: "Ucup Surucup",
                   iconData: Icons.person),
-              inputForm(((p0) {
+              inputForm((p0) {
                 if (p0 == null || p0.isEmpty) {
                   return 'Email tidak boleh kosong';
                 }
@@ -49,31 +51,17 @@ class _RegisterViewState extends State<RegisterView> {
                   return 'Email harus menggunakan @';
                 }
                 return null;
-              }),
+              },
                   controller: emailController,
                   hinTxt: "Email",
                   helperTxt: "ucup@gmail.com",
                   iconData: Icons.email),
-              inputForm(((p0) {
-                if (p0 == null || p0.isEmpty) {
-                  return 'Password tidak boleh kosong';
-                }
-                if (p0.length < 5) {
-                  return 'Password minimal 5 digit';
-                }
-                return null;
-              }),
-                  controller: passwordController,
-                  hinTxt: "Password",
-                  helperTxt: "xxxxxxx",
-                  iconData: Icons.password,
-                  password: true),
-              inputForm(((p0) {
+              inputForm((p0) {
                 if (p0 == null || p0.isEmpty) {
                   return 'Nomor Telepon tidak boleh kosong';
                 }
                 return null;
-              }),
+              },
                   controller: notelpController,
                   hinTxt: "No Telp",
                   helperTxt: "082123456789",
@@ -111,6 +99,35 @@ class _RegisterViewState extends State<RegisterView> {
                   },
                 ),
               ),
+              Container(
+                width: 370,
+                padding: const EdgeInsets.only(left: 20, top: 10),
+                child: TextFormField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    hintText: 'password',
+                    helperText: '******',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.password_outlined),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isPasswordVisible = !isPasswordVisible;
+                        });
+                      },
+                      icon: Icon(
+                        isPasswordVisible
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: isPasswordVisible ? Colors.grey : Colors.blue,
+                      ),
+                    ),
+                  ),
+                  obscureText: isPasswordVisible,
+                  validator: (value) =>
+                      value == '' ? 'Please Enter your password' : null,
+                ),
+              ),
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
@@ -118,6 +135,7 @@ class _RegisterViewState extends State<RegisterView> {
                     prefs.setString('username', usernameController.text);
                     prefs.setString('email', emailController.text);
                     prefs.setString('password', passwordController.text);
+                    prefs.setString('No telp', notelpController.text);
 
                     Navigator.pushReplacement(
                       context,
@@ -125,6 +143,8 @@ class _RegisterViewState extends State<RegisterView> {
                         builder: (_) => LoginPage(),
                       ),
                     );
+                  } else {
+                    showDialogGagal(context);
                   }
                 },
                 child: const Text('Register'),
