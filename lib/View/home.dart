@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:ugd_4_hospital/View/pasienPage.dart';
-import 'package:ugd_4_hospital/view/grid.dart';
-import 'package:ugd_4_hospital/View/profile_kelompok.dart';
+import 'package:ugd_4_hospital/View/grid.dart';
 import 'package:ugd_4_hospital/View/chat.dart';
+import 'package:ugd_4_hospital/View/setting.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.local_hospital_outlined), label: 'Pasien'),
           BottomNavigationBarItem(
-              icon: Icon(Ionicons.people_outline), label: 'Profile'),
+              icon: Icon(Ionicons.settings_outline), label: 'Setting'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
         );
       case 3:
         return const Center(
-          child: Profile(),
+          child: SettingView(),
         );
       default:
         return const Center(
