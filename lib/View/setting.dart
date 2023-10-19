@@ -131,7 +131,9 @@ class SettingView extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                _navigateToProfileKelompok(context);
+              },
               leading: Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -179,34 +181,7 @@ class SettingView extends StatelessWidget {
               ),
               trailing: Icon(Ionicons.arrow_forward_outline),
             ),
-            SizedBox(height: 70),
-            ListTile(
-              onTap: () {
-                _navigateToProfileKelompok(context);
-              },
-              leading: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade300,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Ionicons.person_outline,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              title: Text(
-                'Profile Kelompok',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-              trailing: Icon(Ionicons.arrow_forward_outline),
-            ),
-            SizedBox(height: 20),
+            SizedBox(height: 160),
           ],
         ),
       ),
