@@ -17,6 +17,7 @@ dependencies:
   ionicons: ^0.2.2
   shared_preferences: ^2.0.6
   grouped_list: ^4.2.0
+  sqflite: ^2.2.6
 
 dev_dependencies:
   flutter_test:
