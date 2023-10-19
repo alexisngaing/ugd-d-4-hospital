@@ -3,8 +3,8 @@ import 'package:ugd_4_hospital/utils/profile.dart';
 import 'package:ugd_4_hospital/data/dataKelompok.dart';
 import 'package:ionicons/ionicons.dart';
 
-class ProfileKelompok extends StatelessWidget {
-  const ProfileKelompok({super.key});
+class Profile extends StatelessWidget {
+  const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {

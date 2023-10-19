@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/View/login.dart';
-// import 'package:ugd_4_hospital/View/profile.dart';
 import 'package:ugd_4_hospital/component/form_component.dart';
 import 'package:intl/intl.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
