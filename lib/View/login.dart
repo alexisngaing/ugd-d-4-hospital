@@ -170,10 +170,19 @@ class _LoginPageState extends State<LoginPage> {
         final enteredEmail = emailController.text;
         final enteredPassword = passwordController.text;
 
+        final registeredUsername = prefs.getString('username');
+        final registeredNotelp = prefs.getString('No telp');
+        // final registeredDate = prefs.getString('date');
+
         if (enteredEmail == registeredEmail &&
             enteredPassword == registeredPassword) {
           debugPrint("Email : $enteredEmail");
           debugPrint("Password : $enteredPassword");
+
+          prefs.setString('username', registeredUsername!);
+          prefs.setString('email', registeredEmail!);
+          prefs.setString('notelp', registeredNotelp!);
+          // prefs.setString('date', registeredDate!);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const HomePage()),
