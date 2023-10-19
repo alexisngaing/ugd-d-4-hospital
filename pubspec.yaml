@@ -17,6 +17,12 @@ dependencies:
   ionicons: ^0.2.2
   shared_preferences: ^2.0.6
   grouped_list: ^4.2.0
+  sqflite: ^2.2.6
+  google_nav_bar: ^5.0.6
+  image_picker: ^1.0.4
+  animated_text_kit: ^4.2.2
+  photo_view: ^0.14.0
+  file_picker: ^4.0.0
 
 dev_dependencies:
   flutter_test:

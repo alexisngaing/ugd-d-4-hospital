@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:ugd_4_hospital/View/pasienPage.dart';
 import 'package:ugd_4_hospital/view/grid.dart';
 import 'package:ugd_4_hospital/View/profile_kelompok.dart';
 import 'package:ugd_4_hospital/View/chat.dart';
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
               icon: Icon(Ionicons.chatbubble_ellipses_outline), label: 'Chat'),
           BottomNavigationBarItem(
-              icon: Icon(Ionicons.calendar_outline), label: 'Schedule'),
+              icon: Icon(Icons.local_hospital_outlined), label: 'Pasien'),
           BottomNavigationBarItem(
               icon: Icon(Ionicons.people_outline), label: 'Profile'),
         ],
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         );
       case 2:
         return const Center(
-          child: Text('Index 2: Schedule'),
+          child: PasienView(),
         );
       case 3:
         return const Center(
