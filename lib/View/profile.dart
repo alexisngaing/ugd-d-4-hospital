@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
+import 'package:ugd_4_hospital/utils/toast_util.dart';
+import 'package:ugd_4_hospital/View/home.dart';
 
 class Profile extends StatefulWidget {
-  final String? name;
-  final String? date;
-  final String? email;
-  final String? notelp;
-
-  const Profile({Key? key, this.name, this.date, this.email, this.notelp})
-      : super(key: key);
-
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  late TextEditingController usernameController;
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+  late TextEditingController noTelpController;
+  bool isPasswordVisible = false;
+  @override
+  void initState() {
+    super.initState();
+    usernameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    noTelpController = TextEditingController();
+    loadUserData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,41 +82,106 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
-              buildTextField("Nama", "${widget.name}"),
-              buildTextField("Email", "${widget.email}"),
-              buildTextField("Tanggal Lahir", "${widget.date}"),
-              buildTextField("No Telp", "${widget.notelp}"),
-              SizedBox(height: 30),
+              Center(
+                child: Text(
+                  "Dodi FirmanSyahhhhhhh",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black.withOpacity(0.7),
+                  ),
+                ),
+              ),
+              TextField(
+                controller: usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Username',
+                  prefixIcon: Icon(Icons.person),
+                ),
+              ),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  prefixIcon: Icon(Icons.person),
+                ),
+                enabled: false,
+              ),
+              TextField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.lock),
+                    labelText: 'Password',
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isPasswordVisible = !isPasswordVisible;
+                        });
+                      },
+                      icon: Icon(
+                        isPasswordVisible
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: isPasswordVisible ? Colors.grey : Colors.blue,
+                      ),
+                    )),
+                obscureText: isPasswordVisible,
+              ),
+              TextField(
+                controller: noTelpController,
+                decoration: const InputDecoration(
+                  labelText: 'No. Telp',
+                  prefixIcon: Icon(Icons.person),
+                ),
+              ),
+              const SizedBox(height: 30),
+              const SizedBox(height: 30),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
-                    child: Text("SAVE",
-                        style: TextStyle(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: Colors.white,
-                        )),
+                    onPressed: () {
+                      _updateUserData();
+                      showToast('Berhasil Ubah Data');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const HomePage(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "SAVE",
+                      style: const TextStyle(
+                        fontSize: 15,
+                        letterSpacing: 2,
+                        color: Colors.white,
+                      ),
+                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
-                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const HomePage(),
+                        ),
+                      );
+                    },
                     child: Text("CANCEL",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                           letterSpacing: 2,
                           color: Colors.black,
                         )),
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -122,10 +198,10 @@ class _ProfileState extends State<Profile> {
 
   Widget buildTextField(String labelText, String placeholder) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.only(bottom: 30),
       child: TextField(
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(bottom: 5),
+          contentPadding: const EdgeInsets.only(bottom: 5),
           labelText: labelText,
           labelStyle: TextStyle(
             fontSize: 20,
@@ -141,6 +217,38 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> loadUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      emailController.text = prefs.getString('email') ?? '';
+    });
+    final userData = await _getUserData();
+    if (userData != null) {
+      usernameController.text = userData['username'] ?? '';
+      emailController.text = userData['email'] ?? '';
+      passwordController.text = userData['password'] ?? '';
+      noTelpController.text = userData['noTelp'] ?? '';
+    }
+  }
+
+  Future<Map<String, dynamic>?> _getUserData() async {
+    return await SQLHelperProfile.getUserByEmail(emailController.text);
+  }
+
+  Future<void> _updateUserData() async {
+    String updatedUsername = usernameController.text;
+    String updatedEmail = emailController.text;
+    String updatedPassword = passwordController.text;
+    String updatedNoTelp = noTelpController.text;
+
+    await SQLHelperProfile.editUserByUsername(
+      updatedUsername,
+      updatedEmail,
+      updatedPassword,
+      updatedNoTelp,
     );
   }
 }
