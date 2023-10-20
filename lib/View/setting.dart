@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/View/profile_kelompok.dart';
 import 'package:ugd_4_hospital/View/profile.dart';
 
@@ -9,7 +10,7 @@ class SettingView extends StatelessWidget {
   void _navigateToProfile(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Profile(), // Replace with your actual page
+        builder: (context) => Profile(),
       ),
     );
   }
@@ -18,6 +19,14 @@ class SettingView extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ProfileKelompok(),
+      ),
+    );
+  }
+
+  void _navigateToLogin(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
       ),
     );
   }
@@ -44,7 +53,7 @@ class SettingView extends StatelessWidget {
                 backgroundImage: AssetImage('images/profile.png'),
               ),
               title: Text(
-                'Zenny Makrya',
+                'Dodi FirmanSyahhhhhhh',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Poppins',
@@ -158,7 +167,9 @@ class SettingView extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                _navigateToLogin(context);
+              },
               leading: Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
