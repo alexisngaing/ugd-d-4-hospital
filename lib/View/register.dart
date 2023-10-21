@@ -133,6 +133,9 @@ class _RegisterViewState extends State<RegisterView> {
                         if (p0 == null || p0.isEmpty) {
                           return 'Nomor Telepon tidak boleh kosong!';
                         }
+                        if (p0.length < 5) {
+                          return 'No Telpon Minimal 5 digit';
+                        }
                         return null;
                       },
                     ),
@@ -181,6 +184,9 @@ class _RegisterViewState extends State<RegisterView> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Masukkan tanggal lahir!';
+                        }
+                        if (bawahUmur(value)) {
+                          return 'Minimal 7 Tahun!';
                         }
                         return null;
                       },
@@ -235,5 +241,18 @@ class _RegisterViewState extends State<RegisterView> {
     setState(() {
       isEmailUniqueValidator = isUnique;
     });
+  }
+
+  bool bawahUmur(String selectedDate) {
+    DateTime picked;
+    try {
+      picked = DateFormat('yyyy-MM-dd').parse(selectedDate);
+    } catch (e) {
+      throw "Format salah";
+    }
+    if ((DateTime.now().year - picked.year) < 7) {
+      return true;
+    }
+    return false;
   }
 }
