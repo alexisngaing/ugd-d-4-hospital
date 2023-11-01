@@ -5,7 +5,7 @@ class CheckInPage extends StatefulWidget {
   const CheckInPage({Key? key}) : super(key: key);
 
   @override
-  _CheckInPageState createState() => _CheckInPageState();
+  State<CheckInPage> createState() => _CheckInPageState();
 }
 
 class _CheckInPageState extends State<CheckInPage> {
