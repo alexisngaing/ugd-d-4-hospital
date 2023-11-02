@@ -6,10 +6,10 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<file_picker/FilePickerPlugin.h>)
-#import <file_picker/FilePickerPlugin.h>
+#if __has_include(<flutter_tts/FlutterTtsPlugin.h>)
+#import <flutter_tts/FlutterTtsPlugin.h>
 #else
-@import file_picker;
+@import flutter_tts;
 #endif
 
 #if __has_include(<fluttertoast/FluttertoastPlugin.h>)
@@ -45,7 +45,7 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [FilePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FilePickerPlugin"]];
+  [FlutterTtsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterTtsPlugin"]];
   [FluttertoastPlugin registerWithRegistrar:[registry registrarForPlugin:@"FluttertoastPlugin"]];
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
   [SharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"SharedPreferencesPlugin"]];
