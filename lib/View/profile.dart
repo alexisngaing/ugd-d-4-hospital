@@ -102,7 +102,7 @@ class _ProfileState extends State<Profile> {
                 controller: emailController,
                 decoration: const InputDecoration(
                   labelText: 'Email',
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: Icon(Icons.email),
                 ),
                 enabled: false,
               ),
@@ -130,7 +130,7 @@ class _ProfileState extends State<Profile> {
                 controller: noTelpController,
                 decoration: const InputDecoration(
                   labelText: 'No. Telp',
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: Icon(Icons.numbers),
                 ),
               ),
               const SizedBox(height: 30),
