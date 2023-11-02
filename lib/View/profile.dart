@@ -1,3 +1,5 @@
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,6 +28,38 @@ class _ProfileState extends State<Profile> {
     loadUserData();
   }
 
+  Future<void> _showImageSourceBottomSheet() async {
+    await showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Gallery'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // _getImageFromGallery();
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.camera_alt),
+                title: Text('Camera'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // _getImageFromCamera();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // Method Camera and Gallery
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +74,10 @@ class _ProfileState extends State<Profile> {
               Center(
                 child: Stack(
                   children: [
+                    CircleAvatar(
+                      radius: 65,
+                      backgroundImage: AssetImage('images/profile.png'),
+                    ),
                     Container(
                       width: 130,
                       height: 130,
@@ -56,10 +94,7 @@ class _ProfileState extends State<Profile> {
                             ),
                           ],
                           shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage('images/profile.png'),
-                            fit: BoxFit.cover,
-                          )),
+                          ),
                     ),
                     Positioned(
                         bottom: 0,
@@ -70,14 +105,17 @@ class _ProfileState extends State<Profile> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                width: 4,
+                                width: 0,
                                 color: Colors.grey.shade300,
                               ),
                               color: Colors.green),
-                          child: Icon(
-                            Ionicons.pencil_sharp,
-                            color: Colors.white,
-                          ),
+                          child: IconButton(
+                            icon: Icon(
+                              Ionicons.pencil_sharp,
+                              color: Colors.white,
+                            ),
+                            onPressed: _showImageSourceBottomSheet,
+                          )
                         ))
                   ],
                 ),
