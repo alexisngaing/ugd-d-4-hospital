@@ -47,7 +47,7 @@ class _GeoLocationState extends State<GeoLocationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Temukan Lokasi Saya'),
+        title: const Text('Get Location'),
       ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -66,7 +66,7 @@ class _GeoLocationState extends State<GeoLocationPage> {
                 print(_currentLoc);
                 print(_currentAddress);
               },
-              child: const Text('Temukan Lokasi'),
+              child: const Text('Temukan Lokasi Saya'),
             ),
           ],
         ),
