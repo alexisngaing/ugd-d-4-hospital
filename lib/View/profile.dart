@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:ugd_4_hospital/View/home.dart';
+import 'dart:typed_data';
+import 'package:image_picker/image_picker.dart';
 
 class Profile extends StatefulWidget {
+  const Profile({super.key});
   @override
   State<Profile> createState() => _ProfileState();
 }
@@ -16,14 +18,18 @@ class _ProfileState extends State<Profile> {
   late TextEditingController passwordController;
   late TextEditingController noTelpController;
   bool isPasswordVisible = false;
+  Key imageKey = UniqueKey();
+  Uint8List? imageFile;
+  final imagePicker = ImagePicker();
   @override
   void initState() {
+    loadUserData();
+    _reloadProfile();
     super.initState();
     usernameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     noTelpController = TextEditingController();
-    loadUserData();
   }
 
   @override
@@ -37,50 +43,26 @@ class _ProfileState extends State<Profile> {
           },
           child: ListView(
             children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 4,
-                            color: Colors.grey.shade300,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
-                            ),
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage('images/profile.png'),
-                            fit: BoxFit.cover,
-                          )),
-                    ),
-                    Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                width: 4,
-                                color: Colors.grey.shade300,
-                              ),
-                              color: Colors.green),
-                          child: Icon(
-                            Ionicons.pencil_sharp,
-                            color: Colors.white,
-                          ),
-                        ))
-                  ],
-                ),
+              GestureDetector(
+                onTap: () {
+                  showPictureDialog();
+                },
+                child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage:
+                        imageFile != null ? MemoryImage(imageFile!) : null,
+                    child: const Align(
+                      alignment: Alignment.bottomRight,
+                      child: CircleAvatar(
+                        radius: 15,
+                        backgroundColor: Colors.blue,
+                        child: Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                          size: 18,
+                        ),
+                      ),
+                    )),
               ),
               Center(
                 child: Text(
@@ -140,8 +122,10 @@ class _ProfileState extends State<Profile> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      loadUserData();
                       _updateUserData();
                       showToast('Berhasil Ubah Data');
+                      _reloadProfile();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -167,6 +151,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   OutlinedButton(
                     onPressed: () {
+                      loadUserData();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -231,6 +216,7 @@ class _ProfileState extends State<Profile> {
       emailController.text = userData['email'] ?? '';
       passwordController.text = userData['password'] ?? '';
       noTelpController.text = userData['noTelp'] ?? '';
+      imageFile = userData['foto'] ?? '';
     }
   }
 
@@ -243,12 +229,72 @@ class _ProfileState extends State<Profile> {
     String updatedEmail = emailController.text;
     String updatedPassword = passwordController.text;
     String updatedNoTelp = noTelpController.text;
+    Uint8List? foto = imageFile;
 
     await SQLHelperProfile.editUserByUsername(
-      updatedUsername,
-      updatedEmail,
-      updatedPassword,
-      updatedNoTelp,
+        updatedUsername, updatedEmail, updatedPassword, updatedNoTelp, foto!);
+  }
+
+  Future<void> showPictureDialog() async {
+    await showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Silahkan Pilih Foto anda'),
+            children: [
+              SimpleDialogOption(
+                onPressed: () {
+                  getCamera();
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Camera'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  getGallery();
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Gallery'),
+              ),
+            ],
+          );
+        });
+  }
+
+  getGallery() async {
+    final pickedFile = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
     );
+    if (pickedFile != null) {
+      Uint8List imageBytes = await pickedFile.readAsBytes();
+
+      setState(() {
+        imageFile = imageBytes;
+        imageKey = UniqueKey();
+      });
+    }
+  }
+
+  getCamera() async {
+    final pickedFile = await imagePicker.pickImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      Uint8List imageBytes = await pickedFile.readAsBytes();
+
+      setState(() {
+        imageFile = imageBytes;
+        imageKey = UniqueKey();
+      });
+    }
+  }
+
+  Future<void> _reloadProfile() async {
+    await loadUserData();
+    setState(() {});
   }
 }

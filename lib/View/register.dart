@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/View/login.dart';
@@ -22,7 +24,7 @@ class _RegisterViewState extends State<RegisterView> {
   TextEditingController noTelpController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   bool isEmailUniqueValidator = false;
-
+  Uint8List? imageFile;
   bool _isObscure = true;
 
   void _toggleObscure() {
@@ -228,12 +230,12 @@ class _RegisterViewState extends State<RegisterView> {
     String formattedDate =
         DateFormat('yyyy-MM-dd').format(DateTime.parse(dateController.text));
     await SQLHelperProfile.addUser(
-      usernameController.text,
-      emailController.text,
-      passwordController.text,
-      noTelpController.text,
-      formattedDate,
-    );
+        usernameController.text,
+        emailController.text,
+        passwordController.text,
+        noTelpController.text,
+        formattedDate,
+        Uint8List(0));
   }
 
   Future<void> checkEmailUniqueness(String email) async {

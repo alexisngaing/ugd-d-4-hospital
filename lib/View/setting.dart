@@ -59,21 +59,6 @@ class SettingView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            const ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage('images/profile.png'),
-              ),
-              title: Text(
-                'Dodi FirmanSyahhhhhhh',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            const Divider(height: 50),
             ListTile(
               onTap: () {
                 _navigateToProfile(context);
