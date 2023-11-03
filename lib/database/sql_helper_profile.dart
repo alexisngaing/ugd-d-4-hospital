@@ -11,7 +11,7 @@ class SQLHelperProfile {
         password TEXT,
         noTelp TEXT,
         tanggal TEXT,
-        picture BLOB
+        foto TEXT
       )
     ''');
   }
@@ -34,21 +34,21 @@ class SQLHelperProfile {
   }
 
   static Future<int> editUserByUsername(String username, String email,
-      String password, String noTelp, Uint8List? picture) async {
+      String password, String noTelp, Uint8List foto) async {
     final db = await SQLHelperProfile.db();
     final data = {
       'username': username,
       'email': email,
       'password': password,
       'noTelp': noTelp,
-      'picture': picture,
+      'foto': foto
     };
     return await db
         .update('daftar', data, where: 'email = ?', whereArgs: [email]);
   }
 
   static Future<int> addUser(String username, String email, String password,
-      String noTelp, String tanggal) async {
+      String noTelp, String tanggal, Uint8List foto) async {
     final db = await SQLHelperProfile.db();
     final data = {
       'username': username,
@@ -56,6 +56,7 @@ class SQLHelperProfile {
       'password': password,
       'noTelp': noTelp,
       'tanggal': tanggal,
+      'foto': foto
     };
     return await db.insert('daftar', data);
   }
@@ -67,7 +68,6 @@ class SQLHelperProfile {
     String password,
     String noTelp,
     String tanggal,
-    Uint8List? picture,
   ) async {
     final db = await SQLHelperProfile.db();
     final data = {
@@ -76,7 +76,6 @@ class SQLHelperProfile {
       'password': password,
       'noTelp': noTelp,
       'tanggal': tanggal,
-      'picture': picture,
     };
     return await db.update('daftar', data, where: 'id = ?', whereArgs: [id]);
   }
