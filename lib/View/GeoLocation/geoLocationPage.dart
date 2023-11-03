@@ -16,7 +16,7 @@ class _GeoLocationState extends State<GeoLocationPage> {
   late bool servicePermission = false;
   late LocationPermission permission;
 
-  String _currentAddress = "Address";
+  String _currentAddress = "";
   Future<Position> _getCurrentLocation() async {
     servicePermission = await Geolocator.isLocationServiceEnabled();
     if (!servicePermission) {
@@ -49,16 +49,24 @@ class _GeoLocationState extends State<GeoLocationPage> {
       appBar: AppBar(
         title: const Text('Get Location'),
       ),
-      body: Align(
-        alignment: Alignment.topCenter,
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 20),
-            const Text("Lokasi Terkini"),
-            const SizedBox(height: 6),
+            Text(
+              "Lokasi Anda",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 6,
+            ),
             Text(_currentAddress),
-            const SizedBox(height: 20),
+            const SizedBox(
+              height: 30,
+            ),
             ElevatedButton(
               onPressed: () async {
                 _currentLoc = await _getCurrentLocation();
