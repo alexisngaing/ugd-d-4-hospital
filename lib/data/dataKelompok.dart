@@ -23,4 +23,15 @@ const isi = [
     programStudi: 'Informatika',
     npm: 210711202,
   ),
+  Kelompok(
+    id: '3',
+    profile: 'images/AAA.jpeg',
+    nama: 'Axel',
+    gender: 'M',
+    email: 'Axel@gmail.com',
+    umur: 20,
+    universitas: 'Atma Jaya Yogyakarta',
+    programStudi: 'Informatika',
+    npm: 210711114,
+  ),
 ];

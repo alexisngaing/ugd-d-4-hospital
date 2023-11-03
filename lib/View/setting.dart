@@ -4,6 +4,7 @@ import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/View/profile_kelompok.dart';
 import 'package:ugd_4_hospital/View/profile.dart';
 import 'package:ugd_4_hospital/View/TextSpeech/textSpeechPage.dart';
+import 'package:ugd_4_hospital/View/GeoLocation/geoLocationPage.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
@@ -35,6 +36,11 @@ class SettingView extends StatelessWidget {
   void _navigateToTTS(BuildContext context) {
     Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => const TextToSpeechPage()));
+  }
+
+  void _navigateToGeoLocation(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const GeoLocationPage()));
   }
 
   @override
@@ -190,6 +196,33 @@ class SettingView extends StatelessWidget {
               ),
               title: const Text(
                 'Text To Speech',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                  fontSize: 16,
+                ),
+              ),
+              trailing: const Icon(Ionicons.arrow_forward_outline),
+            ),
+            const SizedBox(height: 20),
+            ListTile(
+              onTap: () {
+                _navigateToGeoLocation(context);
+              },
+              leading: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade300,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Ionicons.location,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
+              title: const Text(
+                'Get Location',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Poppins',
