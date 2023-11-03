@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:ugd_4_hospital/View/checkin_berhasil.dart';
 
 class CheckInPage extends StatefulWidget {
   const CheckInPage({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class _CheckInPageState extends State<CheckInPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Check-In'),
+        backgroundColor: Colors.green,
       ),
       body: Column(
         children: [
@@ -41,17 +43,9 @@ class _CheckInPageState extends State<CheckInPage> {
                   _qrController.toggleFlash();
                 },
                 child: const Text('Toggle Flash'),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: ElevatedButton(
-                onPressed: () async {
-                  _qrController.flipCamera();
-                },
-                child: const Text('Flip Camera'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green, // Atur warna tombol menjadi hijau
+                ),
               ),
             ),
           ),
@@ -64,8 +58,12 @@ class _CheckInPageState extends State<CheckInPage> {
     _qrController = controller;
     controller.scannedDataStream.listen((scanData) {
       if (scanData.code != null && scanData.code!.isNotEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('QR code found: ${scanData.code}')),
+        // Lakukan peralihan ke halaman berhasil check-in
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HalamanBerhasilCheckIn(),
+          ),
         );
       }
     });
