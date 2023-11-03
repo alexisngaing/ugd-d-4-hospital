@@ -1,3 +1,8 @@
+import 'dart:typed_data';
+
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +20,11 @@ class _ProfileState extends State<Profile> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController noTelpController;
+
+  File? _profileImageFile;
+  // late PickedFile _imageFile;
+  final ImagePicker _picker = ImagePicker();
+
   bool isPasswordVisible = false;
   @override
   void initState() {
@@ -24,6 +34,51 @@ class _ProfileState extends State<Profile> {
     passwordController = TextEditingController();
     noTelpController = TextEditingController();
     loadUserData();
+  }
+
+  Future<void> _showImageSourceBottomSheet() async {
+    await showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Gallery'),
+                onTap: () async {
+                  // Navigator.pop(context);
+                  final pickedFile =
+                      await _picker.pickImage(source: ImageSource.gallery);
+                  if (pickedFile != null) {
+                    _handleImageFile(File(pickedFile.path));
+                  }
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.camera_alt),
+                title: Text('Camera'),
+                onTap: () async {
+                  // Navigator.pop(context);
+                  final pickedFile =
+                      await _picker.pickImage(source: ImageSource.camera);
+                  if (pickedFile != null) {
+                    _handleImageFile(File(pickedFile.path));
+                  }
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // Method Camera and Gallery
+  void _handleImageFile(File imageFile) {
+    setState(() {
+      _profileImageFile = imageFile;
+    });
   }
 
   @override
@@ -40,45 +95,51 @@ class _ProfileState extends State<Profile> {
               Center(
                 child: Stack(
                   children: [
+                    CircleAvatar(
+                      radius: 65,
+                      backgroundImage: _profileImageFile == null
+                          ? const AssetImage('images/profile.png')
+                          : FileImage(File(_profileImageFile!.path))
+                              as ImageProvider,
+                    ),
                     Container(
                       width: 130,
                       height: 130,
                       decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 4,
-                            color: Colors.grey.shade300,
+                        border: Border.all(
+                          width: 4,
+                          color: Colors.grey.shade300,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.1),
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
-                            ),
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage('images/profile.png'),
-                            fit: BoxFit.cover,
-                          )),
+                        ],
+                        shape: BoxShape.circle,
+                      ),
                     ),
                     Positioned(
                         bottom: 0,
                         right: 0,
                         child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                width: 4,
-                                color: Colors.grey.shade300,
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  width: 0,
+                                  color: Colors.grey.shade300,
+                                ),
+                                color: Colors.green),
+                            child: IconButton(
+                              icon: Icon(
+                                Ionicons.pencil_sharp,
+                                color: Colors.white,
                               ),
-                              color: Colors.green),
-                          child: Icon(
-                            Ionicons.pencil_sharp,
-                            color: Colors.white,
-                          ),
-                        ))
+                              onPressed: _showImageSourceBottomSheet,
+                            )))
                   ],
                 ),
               ),
@@ -243,12 +304,17 @@ class _ProfileState extends State<Profile> {
     String updatedEmail = emailController.text;
     String updatedPassword = passwordController.text;
     String updatedNoTelp = noTelpController.text;
+    List<int>? imageBytes;
+    if (_profileImageFile != null) {
+      imageBytes = _profileImageFile?.readAsBytesSync();
+    }
 
     await SQLHelperProfile.editUserByUsername(
       updatedUsername,
       updatedEmail,
       updatedPassword,
       updatedNoTelp,
+      imageBytes as Uint8List?,
     );
   }
 }
