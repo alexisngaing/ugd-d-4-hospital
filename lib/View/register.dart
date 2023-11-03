@@ -35,7 +35,7 @@ class _RegisterViewState extends State<RegisterView> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', false);
 
-    Navigator.pushReplacementNamed(context, 'LoginView');
+    Navigator.pop(context);
   }
 
   @override

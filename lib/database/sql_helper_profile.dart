@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart' as sql;
+import 'dart:typed_data';
 
 class SQLHelperProfile {
   static Future<void> createTables(sql.Database database) async {
@@ -9,7 +10,8 @@ class SQLHelperProfile {
         email TEXT,
         password TEXT,
         noTelp TEXT,
-        tanggal TEXT
+        tanggal TEXT,
+        picture BLOB
       )
     ''');
   }
@@ -31,14 +33,15 @@ class SQLHelperProfile {
     return result.isNotEmpty ? result[0] : {};
   }
 
-  static Future<int> editUserByUsername(
-      String username, String email, String password, String noTelp) async {
+  static Future<int> editUserByUsername(String username, String email,
+      String password, String noTelp, Uint8List? picture) async {
     final db = await SQLHelperProfile.db();
     final data = {
       'username': username,
       'email': email,
       'password': password,
       'noTelp': noTelp,
+      'picture': picture,
     };
     return await db
         .update('daftar', data, where: 'email = ?', whereArgs: [email]);
@@ -64,6 +67,7 @@ class SQLHelperProfile {
     String password,
     String noTelp,
     String tanggal,
+    Uint8List? picture,
   ) async {
     final db = await SQLHelperProfile.db();
     final data = {
@@ -72,6 +76,7 @@ class SQLHelperProfile {
       'password': password,
       'noTelp': noTelp,
       'tanggal': tanggal,
+      'picture': picture,
     };
     return await db.update('daftar', data, where: 'id = ?', whereArgs: [id]);
   }
