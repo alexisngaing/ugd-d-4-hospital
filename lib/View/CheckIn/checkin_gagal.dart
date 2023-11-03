@@ -22,15 +22,15 @@ class HalamanGagalCheckIn extends StatelessWidget {
               'Checkin Gagal!',
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
                 pushToCheck(context);
               },
-              child: const Text('CheckIn Kembali'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.green,
               ),
+              child: const Text('CheckIn Kembali'),
             ),
           ],
         ),

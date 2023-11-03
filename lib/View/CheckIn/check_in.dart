@@ -51,10 +51,10 @@ class _CheckInPageState extends State<CheckInPage> {
                 onPressed: () async {
                   _qrController.toggleFlash();
                 },
-                child: const Text('Toggle Flash'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.green,
                 ),
+                child: const Text('Toggle Flash'),
               ),
             ),
           ),

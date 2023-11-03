@@ -19,18 +19,18 @@ class HalamanBerhasilCheckIn extends StatelessWidget {
               color: Colors.green,
             ),
             const Text(
-              'CHeckin Berhasil!',
+              'Checkin Berhasil!',
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
                 pushToHome(context);
               },
-              child: const Text('Kembali'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.green,
               ),
+              child: const Text('Kembali'),
             ),
           ],
         ),
