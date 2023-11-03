@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:ugd_4_hospital/View/setting.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 
@@ -48,19 +46,20 @@ class _GeoLocationState extends State<GeoLocationPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Get Location'),
+        backgroundColor: Colors.green,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "Lokasi Anda",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 6,
             ),
             Text(_currentAddress),
@@ -74,8 +73,21 @@ class _GeoLocationState extends State<GeoLocationPage> {
                 print(_currentLoc);
                 print(_currentAddress);
               },
-              child: const Text('Temukan Lokasi Saya'),
-            ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Icon(Icons.location_pin),
+                  SizedBox(width: 8), // Spasi antara ikon dan teks
+                  Text('Temukan Lokasi Saya'),
+                ],
+              ),
+            )
           ],
         ),
       ),

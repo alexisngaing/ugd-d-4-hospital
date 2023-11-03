@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ugd_4_hospital/View/home.dart';
 
 class HalamanBerhasilCheckIn extends StatelessWidget {
   @override
@@ -18,23 +19,29 @@ class HalamanBerhasilCheckIn extends StatelessWidget {
               color: Colors.green,
             ),
             const Text(
-              'Login Berhasil!',
+              'Checkin Berhasil!',
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // Kembali ke halaman sebelumnya (Check-In)
-                Navigator.pop(context);
+                pushToHome(context);
               },
-              child: const Text('Kembali'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.green,
               ),
+              child: const Text('Kembali'),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+void pushToHome(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (_) => const HomePage()),
+  );
 }
