@@ -472,6 +472,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.6"
+
   sensors_plus:
     dependency: "direct main"
     description:
