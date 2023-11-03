@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:ugd_4_hospital/View/pasienPage.dart';
-import 'package:ugd_4_hospital/View/grid.dart';
+
 import 'package:ugd_4_hospital/View/chat.dart';
 import 'package:ugd_4_hospital/View/setting.dart';
 
@@ -47,8 +47,6 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildBody() {
     switch (_selectedIndex) {
-      case 0:
-        return const GridWidget();
       case 1:
         return const Center(
           child: ChatPage(),
