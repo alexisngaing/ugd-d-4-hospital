@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:ugd_4_hospital/View/check_in.dart';
+import 'package:ugd_4_hospital/View/CheckIn/check_in.dart';
 import 'package:ugd_4_hospital/View/pasienPage.dart';
 
 import 'package:ugd_4_hospital/View/chat.dart';
@@ -38,8 +38,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.local_hospital_outlined), label: 'Pasien'),
           BottomNavigationBarItem(
               icon: Icon(Ionicons.settings_outline), label: 'Setting'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.check), label: 'Check-In'),
+          BottomNavigationBarItem(icon: Icon(Icons.check), label: 'Check-In'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:ugd_4_hospital/View/checkin_berhasil.dart';
+import 'package:ugd_4_hospital/View/CheckIn/checkin_berhasil.dart';
+import 'package:ugd_4_hospital/View/CheckIn/checkin_gagal.dart';
+import 'package:ugd_4_hospital/View/home.dart';
 
 class CheckInPage extends StatefulWidget {
   const CheckInPage({Key? key}) : super(key: key);
@@ -12,7 +14,6 @@ class CheckInPage extends StatefulWidget {
 class _CheckInPageState extends State<CheckInPage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   late QRViewController _qrController;
-
   @override
   void dispose() {
     _qrController.dispose();
@@ -25,6 +26,14 @@ class _CheckInPageState extends State<CheckInPage> {
       appBar: AppBar(
         title: const Text('Check-In'),
         backgroundColor: Colors.green,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+          },
+        ),
       ),
       body: Column(
         children: [
@@ -44,7 +53,7 @@ class _CheckInPageState extends State<CheckInPage> {
                 },
                 child: const Text('Toggle Flash'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green, // Atur warna tombol menjadi hijau
+                  primary: Colors.green,
                 ),
               ),
             ),
@@ -58,14 +67,29 @@ class _CheckInPageState extends State<CheckInPage> {
     _qrController = controller;
     controller.scannedDataStream.listen((scanData) {
       if (scanData.code != null && scanData.code!.isNotEmpty) {
-        // Lakukan peralihan ke halaman berhasil check-in
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HalamanBerhasilCheckIn(),
-          ),
-        );
+        if (isQRCodeValid(scanData.code)) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HalamanBerhasilCheckIn(),
+            ),
+          );
+        } else {
+          // QR code tidak sesuai, tampilkan pesan kesalahan
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HalamanGagalCheckIn(),
+            ),
+          );
+        }
       }
     });
+  }
+
+  bool isQRCodeValid(String? qrCodeData) {
+    String expectedURL =
+        'https://www.qrcode-monkey.com'; // Sesuaikan dengan URL yang diharapkan
+    return qrCodeData == expectedURL;
   }
 }
