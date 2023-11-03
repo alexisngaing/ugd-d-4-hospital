@@ -49,18 +49,16 @@ class _GeoLocationState extends State<GeoLocationPage> {
       appBar: AppBar(
         title: const Text('Temukan Lokasi Saya'),
       ),
-      body: Center(
+      body: Align(
+        alignment: Alignment.topCenter,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Location Address"),
-            const SizedBox(
-              height: 6,
-            ),
+            const SizedBox(height: 20),
+            const Text("Lokasi Terkini"),
+            const SizedBox(height: 6),
             Text(_currentAddress),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
                 _currentLoc = await _getCurrentLocation();
