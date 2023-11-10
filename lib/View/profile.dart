@@ -5,6 +5,7 @@ import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -68,7 +69,7 @@ class _ProfileState extends State<Profile> {
                 child: Text(
                   "Dodi FirmanSyahhhhhhh",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: Colors.black.withOpacity(0.7),
                   ),
                 ),
@@ -115,8 +116,8 @@ class _ProfileState extends State<Profile> {
                   prefixIcon: Icon(Icons.numbers),
                 ),
               ),
-              const SizedBox(height: 30),
-              const SizedBox(height: 30),
+              SizedBox(height: 3.h),
+              SizedBox(height: 3.h),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -135,15 +136,15 @@ class _ProfileState extends State<Profile> {
                     },
                     child: Text(
                       "SAVE",
-                      style: const TextStyle(
-                        fontSize: 15,
+                      style: TextStyle(
+                        fontSize: 15.sp,
                         letterSpacing: 2,
                         color: Colors.white,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
-                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      padding: EdgeInsets.symmetric(horizontal: 5.h),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -160,13 +161,13 @@ class _ProfileState extends State<Profile> {
                       );
                     },
                     child: Text("CANCEL",
-                        style: const TextStyle(
-                          fontSize: 15,
+                        style: TextStyle(
+                          fontSize: 15.sp,
                           letterSpacing: 2,
                           color: Colors.black,
                         )),
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      padding: EdgeInsets.symmetric(horizontal: 5.h),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -189,14 +190,14 @@ class _ProfileState extends State<Profile> {
           contentPadding: const EdgeInsets.only(bottom: 5),
           labelText: labelText,
           labelStyle: TextStyle(
-            fontSize: 20,
+            fontSize: 20.sp,
             fontWeight: FontWeight.bold,
             color: Colors.black.withOpacity(0.6),
           ),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           hintText: placeholder,
           hintStyle: TextStyle(
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.bold,
             color: Colors.black.withOpacity(0.7),
           ),
