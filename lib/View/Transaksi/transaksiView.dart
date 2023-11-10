@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ugd_4_hospital/database/sql_helper_transaksi.dart';
 import 'package:ugd_4_hospital/page/transaksi_input_page.dart';
 import 'package:ugd_4_hospital/View/home.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TransaksiView extends StatefulWidget {
   const TransaksiView({super.key});
@@ -67,20 +68,19 @@ class _TransaksiViewState extends State<TransaksiView> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     color: Color.fromARGB(255, 225, 225, 225),
-                    width: 0.5,
+                    width: 0.5.w,
                   ),
                 ),
               ),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
                 child: SizedBox(
                   width: double.infinity,
-                  height: 50,
+                  height: 5.h,
                   child: TextFormField(
                     onChanged: (value) {
                       refresh(value);
@@ -125,7 +125,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                             child: Column(
                               children: <Widget>[
                                 Padding(
-                                  padding: const EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
@@ -133,20 +133,20 @@ class _TransaksiViewState extends State<TransaksiView> {
                                         alignment: Alignment.topLeft,
                                         child: Text(
                                           transaksiData[index]['nama'],
-                                          style: const TextStyle(
-                                            fontSize: 24,
+                                          style: TextStyle(
+                                            fontSize: 24.sp,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: 25),
+                                      SizedBox(height: 2.h),
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
                                           transaksiData[index]['deskripsi'],
                                         ),
                                       ),
-                                      const SizedBox(height: 8),
+                                      SizedBox(height: 2.h),
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
