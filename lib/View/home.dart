@@ -5,6 +5,7 @@ import 'package:ugd_4_hospital/View/pasienPage.dart';
 
 import 'package:ugd_4_hospital/View/chat.dart';
 import 'package:ugd_4_hospital/View/setting.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -50,23 +51,23 @@ class _HomePageState extends State<HomePage> {
   Widget _buildBody() {
     switch (_selectedIndex) {
       case 1:
-        return const Center(
+        return Center(
           child: ChatPage(),
         );
       case 2:
-        return const Center(
+        return Center(
           child: PasienView(),
         );
       case 3:
-        return const Center(
+        return Center(
           child: SettingView(),
         );
       case 4:
-        return const Center(
+        return Center(
           child: CheckInPage(),
         );
       default:
-        return const Center(
+        return Center(
           child: Text('Not Implemented'),
         );
     }

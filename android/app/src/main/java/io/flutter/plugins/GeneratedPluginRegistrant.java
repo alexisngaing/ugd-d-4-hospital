@@ -47,7 +47,7 @@ public final class GeneratedPluginRegistrant {
     }
     try {
       flutterEngine.getPlugins().add(new net.nfet.flutter.printing.PrintingPlugin());
-    } catch(Exception e) {
+    } catch (Exception e) {
       Log.e(TAG, "Error registering plugin printing, net.nfet.flutter.printing.PrintingPlugin", e);
     }
     try {
