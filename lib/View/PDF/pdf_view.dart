@@ -72,12 +72,12 @@ Future<void> createPdf(
                   children: [
                 pw.Container(
                     margin: pw.EdgeInsets.symmetric(
-                        horizontal: 2.h, vertical: 2.h)),
+                        horizontal: 2.h, vertical: 0.h)),
                 personalDataFromInput(
                     nameController, deskripsiController, addressController),
-                pw.SizedBox(height: 10.h),
+                pw.SizedBox(height: 1.h),
                 barcodeGaris(id),
-                pw.SizedBox(height: 5.h),
+                pw.SizedBox(height: 1.h),
                 contentOfInvoice(table, imageFile),
                 barcodeKotak(id),
                 pw.SizedBox(height: 1.h),
@@ -131,7 +131,7 @@ pw.Padding personalDataFromInput(
   TextEditingController addressController,
 ) {
   return pw.Padding(
-    padding: pw.EdgeInsets.symmetric(horizontal: 5.h, vertical: 1.h),
+    padding: pw.EdgeInsets.symmetric(horizontal: 1.h, vertical: 1.h),
     child: pw.Table(
       border: pw.TableBorder.all(),
       children: [
@@ -143,7 +143,7 @@ pw.Padding personalDataFromInput(
                 'Name',
                 style: pw.TextStyle(
                   fontWeight: pw.FontWeight.bold,
-                  fontSize: 10.sp,
+                  fontSize: 12.sp,
                 ),
               ),
             ),
@@ -153,7 +153,7 @@ pw.Padding personalDataFromInput(
                 nameController.text,
                 style: pw.TextStyle(
                   fontWeight: pw.FontWeight.bold,
-                  fontSize: 10.sp,
+                  fontSize: 12.sp,
                 ),
               ),
             ),
@@ -167,7 +167,7 @@ pw.Padding personalDataFromInput(
                 'Deskripsi',
                 style: pw.TextStyle(
                   fontWeight: pw.FontWeight.bold,
-                  fontSize: 1.sp,
+                  fontSize: 12.sp,
                 ),
               ),
             ),
@@ -177,7 +177,7 @@ pw.Padding personalDataFromInput(
                 deskripsiController.text,
                 style: pw.TextStyle(
                   fontWeight: pw.FontWeight.bold,
-                  fontSize: 10.sp,
+                  fontSize: 12.sp,
                 ),
               ),
             ),
@@ -191,7 +191,7 @@ pw.Padding personalDataFromInput(
                 'Address',
                 style: pw.TextStyle(
                   fontWeight: pw.FontWeight.bold,
-                  fontSize: 1.sp,
+                  fontSize: 12.sp,
                 ),
               ),
             ),
@@ -201,7 +201,7 @@ pw.Padding personalDataFromInput(
                 addressController.text,
                 style: pw.TextStyle(
                   fontWeight: pw.FontWeight.bold,
-                  fontSize: 10.sp,
+                  fontSize: 12.sp,
                 ),
               ),
             ),
@@ -271,15 +271,15 @@ pw.Padding topOfInvoice(pw.MemoryImage imageInvoice) {
 pw.Padding contentOfInvoice(pw.Widget table, Uint8List? imageFile) {
   final List<pw.Widget> content = [
     pw.Text("Foto Pembeli"),
-    pw.SizedBox(height: 3.h),
-    if (imageFile != null) pw.Image(pw.MemoryImage(imageFile), width: 200.w),
+    pw.SizedBox(height: 1.h),
+    if (imageFile != null) pw.Image(pw.MemoryImage(imageFile), width: 35.w),
     table,
     pw.Text("Makasih udah belanja tengs yah bro/sis"),
-    pw.SizedBox(height: 3.h),
+    pw.SizedBox(height: 1.h),
     pw.Text("Terima kasih aja lah ya, sampe next time. "),
-    pw.SizedBox(height: 3.h),
+    pw.SizedBox(height: 1.h),
     pw.Text("Kind regards"),
-    pw.SizedBox(height: 3.h),
+    pw.SizedBox(height: 1.h),
     pw.Text("Kelompok 4"),
   ];
 
@@ -299,7 +299,7 @@ pw.Padding barcodeKotak(String id) {
         ),
         data: id,
         width: 15.w,
-        height: 15.h,
+        height: 5.h,
       ),
     ),
   );
