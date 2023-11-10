@@ -138,6 +138,7 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
             SizedBox(
               height: 2.h,
             ),
+            inputProduct(),
             buttonCreatePDF(context),
             ElevatedButton(
               onPressed: () async {
@@ -147,7 +148,6 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
                     loadData();
                   } else {
                     await addTransaksi();
-                    loadData();
                   }
                   Navigator.pop(context);
                 }
@@ -157,7 +157,6 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
               ),
               child: const Text('Save'),
             ),
-            inputProduct(),
           ],
         ),
       ),
