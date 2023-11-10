@@ -4,6 +4,7 @@ import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:ugd_4_hospital/View/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LoginPage extends StatefulWidget {
   final Map? data;
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       required IconData iconData,
     }) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.sp),
         child: TextFormField(
           controller: controller,
           validator: validator,
@@ -53,16 +54,14 @@ class _LoginPageState extends State<LoginPage> {
                         if (controller.text.isEmpty) {
                           _isObscured = !_isObscured;
                         } else {
-                          if (_isObscured) {
-                            _isObscured = false;
-                          } else {
-                            _isObscured = true;
-                          }
+                          _isObscured = !_isObscured;
                         }
                       });
                     },
                     icon: Icon(
-                        _isObscured ? Icons.visibility : Icons.visibility_off),
+                      _isObscured ? Icons.visibility : Icons.visibility_off,
+                      size: 24.sp,
+                    ),
                   )
                 : null,
           ),
@@ -77,20 +76,20 @@ class _LoginPageState extends State<LoginPage> {
           key: _formKey,
           child: Center(
             child: Container(
-              margin: const EdgeInsets.all(16.0),
-              padding: const EdgeInsets.all(16.0),
-              height: 350,
+              margin: EdgeInsets.all(16.sp),
+              padding: EdgeInsets.all(16.sp),
+              height: 350.sp,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10.sp),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Login',
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -150,13 +149,13 @@ class _LoginPageState extends State<LoginPage> {
                         foregroundColor: Colors.white,
                         backgroundColor: const Color.fromARGB(255, 2, 168, 223),
                       ),
-                      child: const Text('Login'),
+                      child: Text('Login'),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('dont have an account?'),
+                      Text('dont have an account?'),
                       TextButton(
                         onPressed: () {
                           Map<String, dynamic> formData = {};
@@ -164,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                           formData['password'] = passwordController.text;
                           pushRegister(context);
                         },
-                        child: const Text(
+                        child: Text(
                           'Register',
                           style: TextStyle(
                               color: Color.fromARGB(255, 1, 182, 202)),

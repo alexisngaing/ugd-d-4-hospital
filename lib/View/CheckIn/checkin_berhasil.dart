@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ugd_4_hospital/View/home.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HalamanBerhasilCheckIn extends StatelessWidget {
   @override
@@ -18,11 +19,18 @@ class HalamanBerhasilCheckIn extends StatelessWidget {
               size: 100.0,
               color: Colors.green,
             ),
-            const Text(
-              'Checkin Berhasil!',
-              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            DefaultTextStyle(
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+              ),
+              child: const Text('Checkin Berhasil!'),
             ),
-            const SizedBox(height: 20.0),
+            ResponsiveSizer(
+              builder: (context, sizingInformation, orientation) {
+                return SizedBox(height: 20.0);
+              },
+            ),
             ElevatedButton(
               onPressed: () {
                 pushToHome(context);
