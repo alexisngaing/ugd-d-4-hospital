@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:ugd_4_hospital/View/CheckIn/check_in.dart';
 import 'package:ugd_4_hospital/View/pasienPage.dart';
 
 import 'package:ugd_4_hospital/View/chat.dart';
 import 'package:ugd_4_hospital/View/setting.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
