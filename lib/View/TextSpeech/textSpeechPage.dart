@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:ugd_4_hospital/View/setting.dart';
 import 'package:logger/logger.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TextToSpeechPage extends StatefulWidget {
   const TextToSpeechPage({super.key});
@@ -308,7 +308,7 @@ class _TextToSpeechPageState extends State<TextToSpeechPage> {
               margin: const EdgeInsets.only(top: 8.0),
               child: Text(label,
                   style: TextStyle(
-                      fontSize: 12.0,
+                      fontSize: 12.h,
                       fontWeight: FontWeight.w400,
                       color: color)))
         ]);

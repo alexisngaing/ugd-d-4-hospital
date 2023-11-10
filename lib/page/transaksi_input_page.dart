@@ -7,6 +7,7 @@ import 'package:ugd_4_hospital/View/PDF/pdf_view.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TransaksiInputPage extends StatefulWidget {
   const TransaksiInputPage({
@@ -84,18 +85,18 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
                 showPictureDialog();
               },
               child: CircleAvatar(
-                  radius: 50,
+                  radius: 7.h,
                   backgroundImage:
                       imageFile != null ? MemoryImage(imageFile!) : null,
-                  child: const Align(
+                  child: Align(
                     alignment: Alignment.bottomRight,
                     child: CircleAvatar(
-                      radius: 15,
+                      radius: 2.h,
                       backgroundColor: Colors.grey,
                       child: Icon(
                         Icons.edit,
                         color: Colors.white,
-                        size: 18,
+                        size: 2.h,
                       ),
                     ),
                   )),
@@ -111,8 +112,8 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
                 hintText: 'Isikan Nama anda...',
               ),
             ),
-            const SizedBox(
-              height: 24,
+            SizedBox(
+              height: 2.h,
             ),
             TextFormField(
               controller: controllerDeskripsi,
@@ -134,8 +135,8 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
                   hintText: 'Masukan Alamat anda..',
                   prefixIcon: Icon(Icons.location_city_outlined)),
             ),
-            const SizedBox(
-              height: 48,
+            SizedBox(
+              height: 2.h,
             ),
             buttonCreatePDF(context),
             ElevatedButton(
@@ -166,12 +167,12 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
 //input barang
   Padding inputProduct() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 2),
+      padding: EdgeInsets.symmetric(horizontal: 1.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: 180,
+            height: 30.h,
             child: ListView.builder(
               shrinkWrap: true,
               itemBuilder: (context, index) {
@@ -227,7 +228,7 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
 
   Container buttonCreatePDF(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 2),
+      margin: EdgeInsets.symmetric(vertical: 1.h),
       child: ElevatedButton(
         onPressed: () {
           if (imageFile == null ||
@@ -259,9 +260,9 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,
-          textStyle: const TextStyle(
+          textStyle: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 15,
+            fontSize: 16.sp,
           ),
         ),
         child: const Text('Create PDF'),
