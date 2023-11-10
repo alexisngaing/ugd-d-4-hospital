@@ -63,7 +63,7 @@ class _GeoLocationState extends State<GeoLocationPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 2.0.h,
                 ),
                 Text(
@@ -72,7 +72,7 @@ class _GeoLocationState extends State<GeoLocationPage> {
                     fontSize: 3.5.sp,
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 3.0.h,
                 ),
                 ElevatedButton(
