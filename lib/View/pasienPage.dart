@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ugd_4_hospital/database/sql_helper.dart';
 import 'package:ugd_4_hospital/page/pasien_input_page.dart';
 import 'package:ugd_4_hospital/View/home.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PasienView extends StatefulWidget {
   const PasienView({super.key});
@@ -67,20 +68,20 @@ class _PasienViewState extends State<PasienView> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     color: Color.fromARGB(255, 225, 225, 225),
-                    width: 0.5,
+                    width: 0.5.w,
                   ),
                 ),
               ),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
                 child: SizedBox(
                   width: double.infinity,
-                  height: 50,
+                  height: 50.h,
                   child: TextFormField(
                     onChanged: (value) {
                       refresh(value);
@@ -126,7 +127,7 @@ class _PasienViewState extends State<PasienView> {
                               children: <Widget>[
                                 Container(
                                   width: double.infinity,
-                                  height: 150,
+                                  height: 150.h,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -144,24 +145,24 @@ class _PasienViewState extends State<PasienView> {
                                         alignment: Alignment.topLeft,
                                         child: Text(
                                           pasienPasien[index]['nama'],
-                                          style: const TextStyle(
-                                            fontSize: 24,
+                                          style: TextStyle(
+                                            fontSize: 24.sp,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: 8),
+                                      SizedBox(height: 8.h),
                                       Align(
                                         alignment: Alignment.bottomLeft,
                                         child: Text(
                                           'Umur:  ${pasienPasien[index]['umur']}',
-                                          style: const TextStyle(
-                                            fontSize: 16,
+                                          style: TextStyle(
+                                            fontSize: 16.sp,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: 25),
+                                      SizedBox(height: 25.h),
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
