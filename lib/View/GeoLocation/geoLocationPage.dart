@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class GeoLocationPage extends StatefulWidget {
-  const GeoLocationPage({super.key});
+  const GeoLocationPage({Key? key}) : super(key: key);
 
   @override
   State<GeoLocationPage> createState() => _GeoLocationState();
@@ -15,6 +16,7 @@ class _GeoLocationState extends State<GeoLocationPage> {
   late LocationPermission permission;
 
   String _currentAddress = "";
+
   Future<Position> _getCurrentLocation() async {
     servicePermission = await Geolocator.isLocationServiceEnabled();
     if (!servicePermission) {
@@ -43,54 +45,63 @@ class _GeoLocationState extends State<GeoLocationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Get Location'),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Lokasi Anda",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 6,
-            ),
-            Text(_currentAddress),
-            const SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                _currentLoc = await _getCurrentLocation();
-                await _getAddressLocation();
-                print(_currentLoc);
-                print(_currentAddress);
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.green,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Get Location'),
+            backgroundColor: Colors.green,
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Lokasi Anda",
+                  style: TextStyle(
+                    fontSize: 5.5.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              child: const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Icon(Icons.location_pin),
-                  SizedBox(width: 8), // Spasi antara ikon dan teks
-                  Text('Temukan Lokasi Saya'),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+                SizedBox(
+                  height: 2.0.h,
+                ),
+                Text(
+                  _currentAddress,
+                  style: TextStyle(
+                    fontSize: 3.5.sp,
+                  ),
+                ),
+                SizedBox(
+                  height: 3.0.h,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    _currentLoc = await _getCurrentLocation();
+                    await _getAddressLocation();
+                    print(_currentLoc);
+                    print(_currentAddress);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(1.5.h),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(Icons.location_pin, size: 4.0.h),
+                      SizedBox(width: 1.0.w),
+                      Text('Temukan Lokasi Saya', style: TextStyle(fontSize: 2.5.sp)),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

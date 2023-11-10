@@ -3,6 +3,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:ugd_4_hospital/View/CheckIn/checkin_berhasil.dart';
 import 'package:ugd_4_hospital/View/CheckIn/checkin_gagal.dart';
 import 'package:ugd_4_hospital/View/home.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CheckInPage extends StatefulWidget {
   const CheckInPage({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class CheckInPage extends StatefulWidget {
 class _CheckInPageState extends State<CheckInPage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   late QRViewController _qrController;
+
   @override
   void dispose() {
     _qrController.dispose();
@@ -24,7 +26,16 @@ class _CheckInPageState extends State<CheckInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Check-In'),
+        title: ResponsiveSizer(
+          builder: (context, sizingInformation, orientation) {
+            return Text(
+              'Check-In',
+              style: TextStyle(
+                fontSize: 16.sp,
+              ),
+            );
+          },
+        ),
         backgroundColor: Colors.green,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -39,24 +50,28 @@ class _CheckInPageState extends State<CheckInPage> {
         children: [
           Expanded(
             flex: 5,
-            child: QRView(
-              key: qrKey,
-              onQRViewCreated: _onQRViewCreated,
-            ),
+            child: ResponsiveSizer(builder: (context, orientation, deviceType) {
+              return QRView(
+                key: qrKey,
+                onQRViewCreated: _onQRViewCreated,
+              );
+            }),
           ),
           Expanded(
             flex: 1,
-            child: Center(
-              child: ElevatedButton(
-                onPressed: () async {
-                  _qrController.toggleFlash();
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+            child: ResponsiveSizer(builder: (context, orientation, deviceType) {
+              return Center(
+                child: ElevatedButton(
+                  onPressed: () async {
+                    _qrController.toggleFlash();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                  ),
+                  child: const Text('Toggle Flash'),
                 ),
-                child: const Text('Toggle Flash'),
-              ),
-            ),
+              );
+            }),
           ),
         ],
       ),
