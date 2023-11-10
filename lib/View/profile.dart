@@ -116,8 +116,8 @@ class _ProfileState extends State<Profile> {
                   prefixIcon: Icon(Icons.numbers),
                 ),
               ),
-              SizedBox(height: 30.h),
-              SizedBox(height: 30.h),
+              SizedBox(height: 3.h),
+              SizedBox(height: 3.h),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -144,7 +144,7 @@ class _ProfileState extends State<Profile> {
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
-                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      padding: EdgeInsets.symmetric(horizontal: 5.h),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -167,7 +167,7 @@ class _ProfileState extends State<Profile> {
                           color: Colors.black,
                         )),
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      padding: EdgeInsets.symmetric(horizontal: 5.h),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
