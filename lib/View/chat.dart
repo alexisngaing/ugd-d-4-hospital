@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:ugd_4_hospital/component/pesan.dart';
 import 'package:intl/intl.dart';
+import 'package:ugd_4_hospital/component/pesan.dart';
 import 'package:ugd_4_hospital/View/home.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key});
@@ -24,7 +25,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat Dokter'),
+        title: Text('Chat Dokter'),
         backgroundColor: Colors.green,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -39,7 +40,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(
             child: GroupedListView<Message, DateTime>(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(8.sp), // Use sp (responsive size) here
               reverse: true,
               order: GroupedListOrder.DESC,
               elements: messages,
@@ -49,15 +50,16 @@ class _ChatPageState extends State<ChatPage> {
                 message.date.day,
               ),
               groupHeaderBuilder: (Message message) => SizedBox(
-                height: 40,
+                height: 40.sp, // Use sp (responsive size) here
                 child: Center(
                   child: Card(
                     color: Colors.green,
                     child: Padding(
-                      padding: const EdgeInsets.all(8),
+                      padding:
+                          EdgeInsets.all(8.sp), // Use sp (responsive size) here
                       child: Text(
                         DateFormat.yMMMd().format(message.date),
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
@@ -103,23 +105,22 @@ class MessageBubble extends StatelessWidget {
     return Align(
       alignment: isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Card(
-        elevation: 8,
+        elevation: 8.sp, // Use sp (responsive size) here
         color: isSentByMe ? Colors.green : Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: isSentByMe
-              ? BorderRadius.only(
-                  topLeft: Radius.circular(16.0),
-                  topRight: Radius.circular(16.0),
-                  bottomLeft: Radius.circular(16.0),
-                )
-              : BorderRadius.only(
-                  topLeft: Radius.circular(16.0),
-                  topRight: Radius.circular(16.0),
-                  bottomRight: Radius.circular(16.0),
-                ),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.sp), // Use sp (responsive size) here
+            topRight: Radius.circular(16.sp), // Use sp (responsive size) here
+            bottomLeft: isSentByMe
+                ? Radius.circular(16.sp) // Use sp (responsive size) here
+                : Radius.zero,
+            bottomRight: isSentByMe
+                ? Radius.zero
+                : Radius.circular(16.sp), // Use sp (responsive size) here
+          ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(12.sp), // Use sp (responsive size) here
           child: Text(
             message.text,
             style: TextStyle(
@@ -147,26 +148,28 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(255, 255, 255, 255),
+      color: Color.fromARGB(255, 255, 255, 255),
       child: Row(
         children: [
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(
+                    20.sp), // Use sp (responsive size) here
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
                     offset: Offset(0, 4),
-                    blurRadius: 6,
+                    blurRadius: 6.sp, // Use sp (responsive size) here
                   ),
                 ],
               ),
               child: TextField(
                 controller: _controller,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(12),
+                  contentPadding:
+                      EdgeInsets.all(12.sp), // Use sp (responsive size) here
                   hintText: 'Masukkan Pesan Anda',
                   border: InputBorder.none,
                 ),
@@ -179,11 +182,11 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
           ),
           IconButton(
             icon: Container(
-              width: 40,
-              height: 40,
+              width: 40.sp,
+              height: 40.sp,
               child: CircleAvatar(
                 backgroundColor: Colors.green,
-                radius: 70,
+                radius: 70.sp,
                 child: Icon(Icons.send, color: Colors.white),
               ),
             ),

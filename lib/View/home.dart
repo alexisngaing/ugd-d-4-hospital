@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:ugd_4_hospital/View/CheckIn/check_in.dart';
 import 'package:ugd_4_hospital/View/pasienPage.dart';
 
@@ -50,23 +51,23 @@ class _HomePageState extends State<HomePage> {
   Widget _buildBody() {
     switch (_selectedIndex) {
       case 1:
-        return const Center(
+        return Center(
           child: ChatPage(),
         );
       case 2:
-        return const Center(
+        return Center(
           child: PasienView(),
         );
       case 3:
-        return const Center(
+        return Center(
           child: SettingView(),
         );
       case 4:
-        return const Center(
+        return Center(
           child: CheckInPage(),
         );
       default:
-        return const Center(
+        return Center(
           child: Text('Not Implemented'),
         );
     }
