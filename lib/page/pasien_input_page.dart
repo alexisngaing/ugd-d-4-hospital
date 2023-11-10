@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:ugd_4_hospital/database/sql_helper.dart';
 import 'package:ugd_4_hospital/data/pasien.dart';
 import 'package:ugd_4_hospital/View/home.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PasienInputPage extends StatefulWidget {
   const PasienInputPage({
@@ -70,8 +71,8 @@ class _PasienInputPageState extends State<PasienInputPage> {
                 hintText: 'Isikan Nama anda...',
               ),
             ),
-            const SizedBox(
-              height: 24,
+            SizedBox(
+              height: 1.h,
             ),
             TextFormField(
               controller: controllerUmur,
@@ -106,8 +107,8 @@ class _PasienInputPageState extends State<PasienInputPage> {
                   hintText: 'Masukan Nama Dokter anda..',
                   prefixIcon: Icon(Icons.picture_in_picture_outlined)),
             ),
-            const SizedBox(
-              height: 48,
+            SizedBox(
+              height: 2.h,
             ),
             ElevatedButton(
               onPressed: () async {
