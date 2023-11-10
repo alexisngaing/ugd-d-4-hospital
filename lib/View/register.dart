@@ -6,9 +6,10 @@ import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
 import 'package:intl/intl.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class RegisterView extends StatefulWidget {
-  const RegisterView({super.key});
+  const RegisterView({Key? key});
 
   @override
   _RegisterViewState createState() => _RegisterViewState();
@@ -47,22 +48,22 @@ class _RegisterViewState extends State<RegisterView> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(8.sp),
             child: Form(
               key: _formKey,
               child: Container(
-                margin: const EdgeInsets.all(16.0),
-                padding: const EdgeInsets.all(16.0),
-                height: 550,
+                margin: EdgeInsets.all(16.sp),
+                padding: EdgeInsets.all(16.sp),
+                height: 550.sp,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(10.sp),
                 ),
                 child: Column(
                   children: [
                     TextFormField(
                       controller: usernameController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Username',
                         hintText: 'dodi',
                         prefixIcon: Icon(Icons.person),
@@ -79,7 +80,7 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     TextFormField(
                       controller: emailController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Email',
                         hintText: '@',
                         prefixIcon: Icon(Icons.email),
@@ -105,11 +106,11 @@ class _RegisterViewState extends State<RegisterView> {
                       decoration: InputDecoration(
                         labelText: 'Password',
                         hintText: '*****',
-                        prefixIcon: const Icon(Icons.lock),
+                        prefixIcon: Icon(Icons.lock),
                         suffixIcon: IconButton(
                           icon: _isObscure
-                              ? const Icon(Icons.visibility)
-                              : const Icon(Icons.visibility_off),
+                              ? Icon(Icons.visibility)
+                              : Icon(Icons.visibility_off),
                           onPressed: _toggleObscure,
                         ),
                       ),
@@ -126,7 +127,7 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     TextFormField(
                       controller: noTelpController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'No Telp',
                         hintText: '090090',
                         prefixIcon: Icon(Icons.phone_android),
@@ -160,10 +161,10 @@ class _RegisterViewState extends State<RegisterView> {
                       },
                       readOnly: true,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.calendar_today),
+                        prefixIcon: Icon(Icons.calendar_today),
                         labelText: 'Tanggal',
                         suffixIcon: IconButton(
-                          icon: const Icon(Icons.date_range),
+                          icon: Icon(Icons.date_range),
                           onPressed: () async {
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
@@ -214,7 +215,7 @@ class _RegisterViewState extends State<RegisterView> {
                         foregroundColor: Colors.white,
                         backgroundColor: Color.fromARGB(255, 0, 149, 235),
                       ),
-                      child: const Text('Register'),
+                      child: Text('Register'),
                     ),
                   ],
                 ),

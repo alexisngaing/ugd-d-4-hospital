@@ -60,7 +60,6 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     icon: Icon(
                       _isObscured ? Icons.visibility : Icons.visibility_off,
-                      // Add the following line to set height explicitly
                       size: 24.sp,
                     ),
                   )

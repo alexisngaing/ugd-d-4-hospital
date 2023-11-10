@@ -40,7 +40,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(
             child: GroupedListView<Message, DateTime>(
-              padding: EdgeInsets.all(8.sp), // Use sp (responsive size) here
+              padding: EdgeInsets.all(8.sp),
               reverse: true,
               order: GroupedListOrder.DESC,
               elements: messages,
@@ -50,13 +50,12 @@ class _ChatPageState extends State<ChatPage> {
                 message.date.day,
               ),
               groupHeaderBuilder: (Message message) => SizedBox(
-                height: 40.sp, // Use sp (responsive size) here
+                height: 40.sp,
                 child: Center(
                   child: Card(
                     color: Colors.green,
                     child: Padding(
-                      padding:
-                          EdgeInsets.all(8.sp), // Use sp (responsive size) here
+                      padding: EdgeInsets.all(8.sp),
                       child: Text(
                         DateFormat.yMMMd().format(message.date),
                         style: TextStyle(color: Colors.white),
@@ -154,22 +153,20 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                    20.sp), // Use sp (responsive size) here
+                borderRadius: BorderRadius.circular(20.sp),
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
                     offset: Offset(0, 4),
-                    blurRadius: 6.sp, // Use sp (responsive size) here
+                    blurRadius: 6.sp,
                   ),
                 ],
               ),
               child: TextField(
                 controller: _controller,
                 decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.all(12.sp), // Use sp (responsive size) here
+                  contentPadding: EdgeInsets.all(12.sp),
                   hintText: 'Masukkan Pesan Anda',
                   border: InputBorder.none,
                 ),
