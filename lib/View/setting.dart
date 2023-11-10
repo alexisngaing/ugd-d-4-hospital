@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/View/profile_kelompok.dart';
@@ -6,6 +7,7 @@ import 'package:ugd_4_hospital/View/profile.dart';
 import 'package:ugd_4_hospital/View/TextSpeech/textSpeechPage.dart';
 import 'package:ugd_4_hospital/View/GeoLocation/geoLocationPage.dart';
 import 'package:ugd_4_hospital/View/Transaksi/transaksiView.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
@@ -51,235 +53,255 @@ class SettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Setting',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+    return ResponsiveSizer(builder: (context, orientation, deviceType){
+      Device.orientation == Orientation.portrait
+          ? Container(
+            width: 100.w,
+            height: 20.5.h,
+          )
+          : Container(
+            width: 100.w,
+            height: 12.5.h,
+          );
+        Device.screenType == ScreenType.tablet
+          ? Container(
+            width: 100.w,
+            height: 20.5.h,
+          )
+          : Container(
+            width: 100.w,
+            height: 12.5.h,
+          );
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Setting',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                ListTile(
+                  onTap: () {
+                    _navigateToProfile(context);
+                  },
+                  leading: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Ionicons.person_outline,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  title: const Text(
+                    'Profile',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                    ),
+                  ),
+                  trailing: const Icon(Ionicons.arrow_forward_outline),
+                ),
+                const SizedBox(height: 20),
+                ListTile(
+                  onTap: () {},
+                  leading: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Ionicons.settings_outline,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  title: const Text(
+                    'General',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                    ),
+                  ),
+                  trailing: const Icon(Ionicons.arrow_forward_outline),
+                ),
+                const SizedBox(height: 20),
+                ListTile(
+                  onTap: () {},
+                  leading: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Ionicons.shield_outline,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  title: const Text(
+                    'Privacy',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                    ),
+                  ),
+                  trailing: const Icon(Ionicons.arrow_forward_outline),
+                ),
+                const SizedBox(height: 20),
+                ListTile(
+                  onTap: () {
+                    _navigateToProfileKelompok(context);
+                  },
+                  leading: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Ionicons.information_circle_outline,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  title: const Text(
+                    'About Us',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                    ),
+                  ),
+                  trailing: const Icon(Ionicons.arrow_forward_outline),
+                ),
+                const SizedBox(height: 20),
+                ListTile(
+                  onTap: () {
+                    _navigateToTTS(context);
+                  },
+                  leading: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Ionicons.recording_outline,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  title: const Text(
+                    'Text To Speech',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                    ),
+                  ),
+                  trailing: const Icon(Ionicons.arrow_forward_outline),
+                ),
+                const SizedBox(height: 20),
+                ListTile(
+                  onTap: () {
+                    _navigateToGeoLocation(context);
+                  },
+                  leading: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Ionicons.location,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  title: const Text(
+                    'Get Location',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                    ),
+                  ),
+                  trailing: const Icon(Ionicons.arrow_forward_outline),
+                ),
+                const SizedBox(height: 20),
+                ListTile(
+                  onTap: () {
+                    _navigateToTransaksi(context);
+                  },
+                  leading: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Ionicons.cart_outline,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  title: const Text(
+                    'Transaksi',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                    ),
+                  ),
+                  trailing: const Icon(Ionicons.arrow_forward_outline),
+                ),
+                const SizedBox(height: 20),
+                ListTile(
+                  onTap: () {
+                    _navigateToLogin(context);
+                  },
+                  leading: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.red.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Ionicons.log_out_outline,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  title: const Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                    ),
+                  ),
+                  trailing: const Icon(Ionicons.arrow_forward_outline),
+                ),
+                const SizedBox(height: 160),
+              ],
             ),
-            const SizedBox(height: 30),
-            ListTile(
-              onTap: () {
-                _navigateToProfile(context);
-              },
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade300,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Ionicons.person_outline,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              title: const Text(
-                'Profile',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-              trailing: const Icon(Ionicons.arrow_forward_outline),
-            ),
-            const SizedBox(height: 20),
-            ListTile(
-              onTap: () {},
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade300,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Ionicons.settings_outline,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              title: const Text(
-                'General',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-              trailing: const Icon(Ionicons.arrow_forward_outline),
-            ),
-            const SizedBox(height: 20),
-            ListTile(
-              onTap: () {},
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade300,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Ionicons.shield_outline,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              title: const Text(
-                'Privacy',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-              trailing: const Icon(Ionicons.arrow_forward_outline),
-            ),
-            const SizedBox(height: 20),
-            ListTile(
-              onTap: () {
-                _navigateToProfileKelompok(context);
-              },
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade300,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Ionicons.information_circle_outline,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              title: const Text(
-                'About Us',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-              trailing: const Icon(Ionicons.arrow_forward_outline),
-            ),
-            const SizedBox(height: 20),
-            ListTile(
-              onTap: () {
-                _navigateToTTS(context);
-              },
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade300,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Ionicons.recording_outline,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              title: const Text(
-                'Text To Speech',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-              trailing: const Icon(Ionicons.arrow_forward_outline),
-            ),
-            const SizedBox(height: 20),
-            ListTile(
-              onTap: () {
-                _navigateToGeoLocation(context);
-              },
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade300,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Ionicons.location,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              title: const Text(
-                'Get Location',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-              trailing: const Icon(Ionicons.arrow_forward_outline),
-            ),
-            const SizedBox(height: 20),
-            ListTile(
-              onTap: () {
-                _navigateToTransaksi(context);
-              },
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade300,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Ionicons.cart_outline,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              title: const Text(
-                'Transaksi',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-              trailing: const Icon(Ionicons.arrow_forward_outline),
-            ),
-            const SizedBox(height: 20),
-            ListTile(
-              onTap: () {
-                _navigateToLogin(context);
-              },
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.red.shade300,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Ionicons.log_out_outline,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              title: const Text(
-                'Logout',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-              trailing: const Icon(Ionicons.arrow_forward_outline),
-            ),
-            const SizedBox(height: 160),
-          ],
-        ),
-      ),
-    );
-  }
+          ),
+        );
+      });
+    } 
 }
