@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ugd_4_hospital/View/login.dart';
 // import 'package:ugd_4_hospital/view/login.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ProviderScope(child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -31,7 +32,8 @@ class MainApp extends StatelessWidget {
               width: 100.w,
               height: 12.5.h,
             );
-      return const MaterialApp(
+      return MaterialApp(
+        title: 'UGD 4 Hospital',
         home: LoginPage(),
       );
     });
