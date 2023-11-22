@@ -1,16 +1,18 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:ugd_4_hospital/data/User.dart';
+import 'package:ugd_4_hospital/database/API/UserClient.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class RegisterView extends StatefulWidget {
-  const RegisterView({Key? key});
-
+  const RegisterView({Key? key, this.id});
+  final int? id;
   @override
   _RegisterViewState createState() => _RegisterViewState();
 }
@@ -25,6 +27,7 @@ class _RegisterViewState extends State<RegisterView> {
   TextEditingController noTelpController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   bool isEmailUniqueValidator = false;
+  bool isLoading = false;
   Uint8List? imageFile;
   bool _isObscure = true;
 
@@ -198,6 +201,15 @@ class _RegisterViewState extends State<RegisterView> {
                       onPressed: () async {
                         checkEmailUniqueness(emailController.text);
                         if (_formKey.currentState!.validate()) {
+                          User input = User(
+                            id: widget.id ?? 0,
+                            username: usernameController.text,
+                            email: emailController.text,
+                            password: passwordController.text,
+                            noTelp: noTelpController.text,
+                            tanggal: dateController.text,
+                          );
+                          UserClient.create(input);
                           await addUser();
                           _handleLogout();
                           showToast('Register Berhasil');
