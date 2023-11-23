@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:ugd_4_hospital/View/CheckIn/check_in.dart';
-import 'package:ugd_4_hospital/View/pasienPage.dart';
-
+import 'package:ugd_4_hospital/View/Pasien/pasienPage.dart';
 import 'package:ugd_4_hospital/View/chat.dart';
 import 'package:ugd_4_hospital/View/setting.dart';
 
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         );
       case 2:
         return Center(
-          child: PasienView(),
+          child: ProviderScope(child: PasienView()),
         );
       case 3:
         return Center(
