@@ -210,7 +210,6 @@ class _RegisterViewState extends State<RegisterView> {
                             tanggal: dateController.text,
                           );
                           UserClient.create(input);
-                          await addUser();
                           _handleLogout();
                           showToast('Register Berhasil');
                           Navigator.pushReplacement(
