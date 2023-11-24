@@ -6,8 +6,8 @@ class UserClient {
   static final String url = '10.0.2.2:8000';
   static final String endpoint = 'api/user';
 
-  // static final String url = '192.168.18.26';
-  // static final String endpoint = 'ugd-d-4-hospital/public/api/user';
+  // static final String url = '192.168.18.13';
+  // static final String endpoint = '/ugd-d-4-hospital/public/api/user';
 
   static Future<List<User>> fetchAll() async {
     try {
@@ -51,7 +51,6 @@ class UserClient {
 
   static Future<Response> update(User user) async {
     try {
-      print(user.toRawJson());
       var response = await put(Uri.http(url, '$endpoint/${user.email}'),
           headers: {"Content-Type": "application/json"},
           body: user.toRawJson());

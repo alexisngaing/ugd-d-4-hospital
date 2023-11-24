@@ -12,7 +12,9 @@ void main() {
 
 final userProvider = StateProvider<User>((ref) {
   return User(
-      username: "", email: "", password: "", noTelp: "", tanggal: "", foto: "");
+    username: "", email: "", password: "", noTelp: "", tanggal: "",
+    // foto: ""
+  );
 });
 
 class MainApp extends StatelessWidget {

@@ -59,7 +59,8 @@ class _ProfileState extends ConsumerState<Profile> {
                 child: CircleAvatar(
                     radius: 50,
                     backgroundImage:
-                        imageFile != null ? MemoryImage(imageFile!) : null,
+                        // imageFile != null ? MemoryImage(imageFile!) : null,
+                        const AssetImage('images/josh.jpg'),
                     child: const Align(
                       alignment: Alignment.bottomRight,
                       child: CircleAvatar(
@@ -243,13 +244,13 @@ class _ProfileState extends ConsumerState<Profile> {
   }
 
   Future<void> _updateUserData() async {
-    Uint8List? foto = imageFile;
+    // Uint8List? foto = imageFile;
     User input = User(
       username: usernameController.text,
       email: emailController.text,
       password: passwordController.text,
       noTelp: noTelpController.text,
-      foto: foto != null ? base64Encode(foto) : "",
+      // foto: foto != null ? base64Encode(foto) : "",
     );
     try {
       await UserClient.update(input); // update db

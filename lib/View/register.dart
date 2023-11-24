@@ -207,7 +207,7 @@ class _RegisterViewState extends State<RegisterView> {
                             password: passwordController.text,
                             noTelp: noTelpController.text,
                             tanggal: dateController.text,
-                            foto: 'empty',
+                            // foto: 'empty',
                           );
                           UserClient.create(input);
                           _handleLogout();
