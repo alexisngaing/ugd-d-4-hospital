@@ -1,41 +1,38 @@
-import 'package:ugd_4_hospital/data/Booking.dart';
-import 'package:ugd_4_hospital/database/API/BookingClient.dart';
-import 'package:ugd_4_hospital/page/booking_input_page.dart';
+import 'package:ugd_4_hospital/data/Belanja.dart';
+import 'package:ugd_4_hospital/database/API/BelanjaClient.dart';
+import 'package:ugd_4_hospital/page/belanja_input_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PasienView extends ConsumerWidget {
-  PasienView({super.key});
+class BelanjaView extends ConsumerWidget {
+  BelanjaView({super.key});
 
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, dynamic>> searchResults = [];
 
-  final listPasien = FutureProvider<List<Booking>>((ref) async {
-    return await BookingClient.fetchAll();
+  final listPasien = FutureProvider<List<Belanja>>((ref) async {
+    return await BelanjaClient.fetchAll();
   });
 
   void onAdd(context, ref) {
     Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const PasienInputPage()))
+            MaterialPageRoute(builder: (context) => const TransaksiInputPage()))
         .then((value) {
-      _searchController.clear(); // Clear search when adding a new item
+      _searchController.clear();
       ref.refresh(listPasien);
     });
   }
 
   void onSearch(context, ref, String query) async {
-    var results = await BookingClient.search(query);
-    searchResults = results
-        .map((booking) =>
-            booking.toJson()) // Convert to List<Map<String, dynamic>>
-        .toList();
+    var results = await BelanjaClient.search(query);
+    searchResults = results.map((booking) => booking.toJson()).toList();
     ref.refresh(listPasien);
   }
 
   void onDelete(id, context, ref) async {
     try {
-      await BookingClient.destroy(id);
+      await BelanjaClient.destroy(id);
       ref.refresh(listPasien);
       showSnackBar(context, "Delete Success", Colors.green);
     } catch (e) {
@@ -43,27 +40,44 @@ class PasienView extends ConsumerWidget {
     }
   }
 
-  Card scrollViewItem(Booking b, context, ref) => Card(
-        child: ListTile(
-          title: Text(b.nama),
-          subtitle: Text(b.deskripsi),
-          leading: Image.asset('images/${b.picture}.jpeg'),
+  Card scrollViewItem(Belanja b, context, ref) => Card(
+        child: InkWell(
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PasienInputPage(id: b.id),
+              builder: (context) => TransaksiInputPage(id: b.id),
             ),
           ).then((value) => ref.refresh(listPasien)),
-          trailing: IconButton(
-            onPressed: () => onDelete(b.id, context, ref),
-            icon: const Icon(Icons.delete),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(b.nama,
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(b.deskripsi),
+                      Text(b.alamat),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => onDelete(b.id, context, ref),
+                  icon: const Icon(Icons.delete),
+                ),
+              ],
+            ),
           ),
         ),
       );
 
   List<Card> buildSearchResults(context, ref) {
     return searchResults
-        .map((result) => scrollViewItem(Booking.fromJson(result), context, ref))
+        .map((result) => scrollViewItem(Belanja.fromJson(result), context, ref))
         .toList();
   }
 
@@ -73,7 +87,7 @@ class PasienView extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Data Booking"),
+        title: const Text("Data Belanja"),
         backgroundColor: Colors.green,
       ),
       floatingActionButton: FloatingActionButton(
