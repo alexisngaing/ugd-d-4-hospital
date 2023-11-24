@@ -1,19 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
+import 'package:ugd_4_hospital/main.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Profile extends StatefulWidget {
+class Profile extends ConsumerStatefulWidget {
   const Profile({super.key});
   @override
-  State<Profile> createState() => _ProfileState();
+  _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileState extends ConsumerState<Profile> {
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -24,13 +28,13 @@ class _ProfileState extends State<Profile> {
   final imagePicker = ImagePicker();
   @override
   void initState() {
-    loadUserData();
     _reloadProfile();
     super.initState();
     usernameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     noTelpController = TextEditingController();
+    loadUserData(ref);
   }
 
   @override
@@ -123,7 +127,7 @@ class _ProfileState extends State<Profile> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      loadUserData();
+                      loadUserData(ref);
                       _updateUserData();
                       showToast('Berhasil Ubah Data');
                       _reloadProfile();
@@ -152,7 +156,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   OutlinedButton(
                     onPressed: () {
-                      loadUserData();
+                      loadUserData(ref);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -206,18 +210,15 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Future<void> loadUserData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      emailController.text = prefs.getString('email') ?? '';
-    });
+  Future<void> loadUserData(WidgetRef ref) async {
+    var user = ref.read(userProvider.notifier).state;
     final userData = await _getUserData();
     if (userData != null) {
-      usernameController.text = userData['username'] ?? '';
-      emailController.text = userData['email'] ?? '';
-      passwordController.text = userData['password'] ?? '';
-      noTelpController.text = userData['noTelp'] ?? '';
-      imageFile = userData['foto'] ?? '';
+      usernameController.text = user.username;
+      emailController.text = user.email;
+      passwordController.text = user.password;
+      noTelpController.text = user.noTelp;
+      // imageFile = const Base64Decoder().convert(user.foto);
     }
   }
 
@@ -295,7 +296,7 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<void> _reloadProfile() async {
-    await loadUserData();
+    await loadUserData(ref);
     setState(() {});
   }
 }

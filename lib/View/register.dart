@@ -202,12 +202,12 @@ class _RegisterViewState extends State<RegisterView> {
                         checkEmailUniqueness(emailController.text);
                         if (_formKey.currentState!.validate()) {
                           User input = User(
-                            id: widget.id ?? 0,
                             username: usernameController.text,
                             email: emailController.text,
                             password: passwordController.text,
                             noTelp: noTelpController.text,
                             tanggal: dateController.text,
+                            foto: 'empty',
                           );
                           UserClient.create(input);
                           _handleLogout();
