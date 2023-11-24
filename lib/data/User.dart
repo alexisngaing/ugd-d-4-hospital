@@ -6,7 +6,7 @@ class User {
   String email;
   String password;
   String noTelp;
-  String tanggal;
+  String? tanggal;
 
   User(
       {required this.id,
@@ -14,7 +14,7 @@ class User {
       required this.email,
       required this.password,
       required this.noTelp,
-      required this.tanggal});
+      this.tanggal});
 
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
   factory User.fromJson(Map<String, dynamic> json) => User(
