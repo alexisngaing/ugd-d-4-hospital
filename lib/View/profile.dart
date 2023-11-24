@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ugd_4_hospital/data/User.dart';
+import 'package:ugd_4_hospital/database/API/UserClient.dart';
 import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
 import 'package:ugd_4_hospital/main.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
@@ -22,7 +24,10 @@ class _ProfileState extends ConsumerState<Profile> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController noTelpController;
+  int? idUser;
   bool isPasswordVisible = false;
+  bool isLoading = false;
+  final _formKey = GlobalKey<FormState>();
   Key imageKey = UniqueKey();
   Uint8List? imageFile;
   final imagePicker = ImagePicker();
@@ -210,6 +215,18 @@ class _ProfileState extends ConsumerState<Profile> {
     );
   }
 
+  void showSnackBar(BuildContext context, String msg, Color bg) {
+    final Scaffold = ScaffoldMessenger.of(context);
+    Scaffold.showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        backgroundColor: bg,
+        action: SnackBarAction(
+            label: 'hide', onPressed: Scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
+
   Future<void> loadUserData(WidgetRef ref) async {
     var user = ref.read(userProvider.notifier).state;
     final userData = await _getUserData();
@@ -227,14 +244,25 @@ class _ProfileState extends ConsumerState<Profile> {
   }
 
   Future<void> _updateUserData() async {
-    String updatedUsername = usernameController.text;
-    String updatedEmail = emailController.text;
-    String updatedPassword = passwordController.text;
-    String updatedNoTelp = noTelpController.text;
+    if (!_formKey.currentState!.validate()) return;
     Uint8List? foto = imageFile;
+    User input = User(
+      id: idUser!,
+      username: usernameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+      noTelp: noTelpController.text,
+    );
 
-    await SQLHelperProfile.editUserByUsername(
-        updatedUsername, updatedEmail, updatedPassword, updatedNoTelp, foto!);
+    try {
+      await UserClient.update(input);
+
+      showSnackBar(context, 'Success', Colors.green);
+      Navigator.pop(context);
+    } catch (err) {
+      showSnackBar(context, err.toString(), Colors.red);
+      Navigator.pop(context);
+    }
   }
 
   Future<void> showPictureDialog() async {
