@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/data/User.dart';
@@ -24,9 +23,9 @@ class _ProfileState extends ConsumerState<Profile> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController noTelpController;
-  int? idUser;
+  // int? idUser;
   bool isPasswordVisible = false;
-  bool isLoading = false;
+  // bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   Key imageKey = UniqueKey();
   Uint8List? imageFile;
@@ -132,7 +131,7 @@ class _ProfileState extends ConsumerState<Profile> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      loadUserData(ref);
+                      // loadUserData(ref);
                       _updateUserData();
                       showToast('Berhasil Ubah Data');
                       _reloadProfile();
@@ -244,19 +243,17 @@ class _ProfileState extends ConsumerState<Profile> {
   }
 
   Future<void> _updateUserData() async {
-    if (!_formKey.currentState!.validate()) return;
     Uint8List? foto = imageFile;
     User input = User(
-      id: idUser!,
       username: usernameController.text,
       email: emailController.text,
       password: passwordController.text,
       noTelp: noTelpController.text,
+      foto: foto != null ? base64Encode(foto) : "",
     );
-
     try {
-      await UserClient.update(input);
-
+      await UserClient.update(input); // update db
+      ref.read(userProvider.notifier).state = input; //update state
       showSnackBar(context, 'Success', Colors.green);
       Navigator.pop(context);
     } catch (err) {

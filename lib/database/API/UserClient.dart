@@ -51,6 +51,7 @@ class UserClient {
 
   static Future<Response> update(User user) async {
     try {
+      print(user.toRawJson());
       var response = await put(Uri.http(url, '$endpoint/${user.email}'),
           headers: {"Content-Type": "application/json"},
           body: user.toRawJson());
