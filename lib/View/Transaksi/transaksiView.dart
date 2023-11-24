@@ -6,7 +6,7 @@ import 'package:ugd_4_hospital/View/home.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TransaksiView extends StatefulWidget {
-  const TransaksiView({super.key});
+  const TransaksiView({Key? key}) : super(key: key);
 
   @override
   State<TransaksiView> createState() => _TransaksiViewState();

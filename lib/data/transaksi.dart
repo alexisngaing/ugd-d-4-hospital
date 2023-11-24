@@ -1,13 +1,35 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 class Transaksi {
-  final int? id;
-  String? nama, deskripsi, alamat;
+  int id;
+  String nama;
+  String deskripsi;
+  String alamat;
   Uint8List? foto;
-  Transaksi({this.id, this.nama, this.deskripsi, this.alamat, this.foto});
 
-  @override
-  String toString() {
-    return 'Nama {nama: $nama}';
-  }
+  Transaksi(
+      {required this.id,
+      required this.nama,
+      required this.deskripsi,
+      required this.alamat,
+      this.foto});
+  
+  factory Transaksi.fromRawJson(String str) => Transaksi.fromJson(json.decode(str));
+  factory Transaksi.fromJson(Map<String, dynamic> json) => Transaksi(
+        id: json["id"],
+        nama: json["nama"],
+        deskripsi: json["deskripsi"],
+        alamat: json["alamat"],
+        foto: json["foto"],
+  );
+
+  String toRawJson() => json.encode(toJson());
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "nama": nama,
+        "deskripsi": deskripsi,
+        "alamat": alamat,
+        "foto": foto,
+  };
 }

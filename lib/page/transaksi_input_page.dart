@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ugd_4_hospital/database/sql_helper_transaksi.dart';
+// import 'package:ugd_4_hospital/database/sql_helper_transaksi.dart';
 import 'package:ugd_4_hospital/data/transaksi.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/data/product.dart';
@@ -8,6 +8,7 @@ import 'package:uuid/uuid.dart';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:ugd_4_hospital/request/TransaksiRequest.dart';
 
 class TransaksiInputPage extends StatefulWidget {
   const TransaksiInputPage({
@@ -270,62 +271,99 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
   }
 
   Future<void> addTransaksi() async {
-    await SQLHelper.addTransaksi(Transaksi(
+    try {
+      final response = await TransaksiRequest.create(Transaksi(
+        id: 0,
         nama: controllerNama.text,
         deskripsi: controllerDeskripsi.text,
         alamat: controllerAlamat.text,
-        foto: imageFile));
+        foto: imageFile,
+      ));
+
+      if (response.statusCode == 200) {
+        await loadData();
+      } else {
+        throw Exception('Failed to create transaction');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   Future<void> editTransaksi(int id) async {
-    await SQLHelper.editTransaksi(
-        id,
-        Transaksi(
-            nama: controllerNama.text,
-            deskripsi: controllerDeskripsi.text,
-            alamat: controllerAlamat.text,
-            foto: imageFile));
+    try {
+      final response = await TransaksiRequest.update(Transaksi(
+        id: id,
+        nama: controllerNama.text,
+        deskripsi: controllerDeskripsi.text,
+        alamat: controllerAlamat.text,
+        foto: imageFile,
+      ));
+
+      if (response.statusCode == 200) {
+        await loadData();
+      } else {
+        throw Exception('Failed to update transaction');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   Future<void> loadData() async {
-    final transaksi = await SQLHelper.getTransaksiById(widget.id!);
-    if (transaksi != null) {
-      setState(() {
-        controllerNama.text = transaksi.nama!;
-        controllerDeskripsi.text = transaksi.deskripsi!;
-        controllerAlamat.text = transaksi.alamat!;
-        imageFile = transaksi.foto;
-      });
+    try {
+      final transaksi = await TransaksiRequest.fetchAll();
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> deleteData(int id) async {
+    try {
+      final response = await TransaksiRequest.destroy(id);
+      if (response.statusCode == 200) {
+        await loadData();
+      } else {
+        throw Exception('Failed to delete transaction');
+      }
+    } catch (e) {
+      print('Error: $e');
     }
   }
 
   Future<void> showPictureDialog() async {
     await showDialog<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-            title: const Text('Silahkan Pilih Foto anda'),
-            children: [
-              SimpleDialogOption(
-                onPressed: () {
-                  getCamera();
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Camera'),
-              ),
-              SimpleDialogOption(
-                onPressed: () {
-                  getGallery();
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Gallery'),
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Silahkan Pilih Foto anda'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    await getCamera();
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Camera'),
+                ),
+                const SizedBox(height: 8),
+                GestureDetector(
+                  onTap: () async {
+                    await getGallery();
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Gallery'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
-  getGallery() async {
+  Future<void> getGallery() async {
     final pickedFile = await imagePicker.pickImage(
       source: ImageSource.gallery,
       maxWidth: 1800,
@@ -341,7 +379,7 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
     }
   }
 
-  getCamera() async {
+  Future<void> getCamera() async {
     final pickedFile = await imagePicker.pickImage(
       source: ImageSource.camera,
       maxWidth: 1800,
