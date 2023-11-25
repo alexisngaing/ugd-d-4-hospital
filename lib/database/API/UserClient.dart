@@ -23,9 +23,9 @@ class UserClient {
     }
   }
 
-  static Future<User> find(id) async {
+  static Future<User> find(email) async {
     try {
-      var response = await get(Uri.http(url, '$endpoint/$id'));
+      var response = await get(Uri.http(url, '$endpoint/$email'));
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 
       return User.fromJson(json.decode(response.body)['data']);
@@ -62,9 +62,9 @@ class UserClient {
     }
   }
 
-  static Future<Response> destroy(id) async {
+  static Future<Response> destroy(email) async {
     try {
-      var response = await delete(Uri.http(url, '$endpoint/$id'));
+      var response = await delete(Uri.http(url, '$endpoint/$email'));
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
       return response;
     } catch (e) {

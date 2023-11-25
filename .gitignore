@@ -45,3 +45,4 @@ app.*.map.json
 android/local.properties
 android/local.properties
 android/local.properties
+pubspec.lock
