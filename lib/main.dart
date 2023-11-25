@@ -32,11 +32,10 @@ class MainApp extends StatelessWidget {
               width: 100.w,
               height: 12.5.h,
             );
-      return const MaterialApp(
-        home: //LoginPage()
-            //klo mau nyoba aktifin ini
-            HomePage(),
-      );
+      return const MaterialApp(home: LoginPage()
+          //klo mau nyoba aktifin ini
+          // HomePage(),
+          );
     });
   }
 }

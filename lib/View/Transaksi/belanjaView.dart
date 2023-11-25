@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugd_4_hospital/data/Belanja.dart';
 import 'package:ugd_4_hospital/database/API/BelanjaClient.dart';
 import 'package:ugd_4_hospital/page/belanja_input_page.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BelanjaView extends ConsumerWidget {
   BelanjaView({super.key});
@@ -75,10 +74,23 @@ class BelanjaView extends ConsumerWidget {
         ),
       );
 
-  List<Card> buildSearchResults(context, ref) {
-    return searchResults
-        .map((result) => scrollViewItem(Belanja.fromJson(result), context, ref))
-        .toList();
+  List<Widget> buildSearchResults(context, ref) {
+    if (searchResults.isEmpty && _searchController.text.isNotEmpty) {
+      return [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            "Data Tidak Ditemukan",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ];
+    } else {
+      return searchResults
+          .map((result) =>
+              scrollViewItem(Belanja.fromJson(result), context, ref))
+          .toList();
+    }
   }
 
   @override
@@ -108,25 +120,25 @@ class BelanjaView extends ConsumerWidget {
               ),
             ),
           ),
-          if (_searchController.text.isNotEmpty)
-            SingleChildScrollView(
-              child: Column(
-                children: buildSearchResults(context, ref),
-              ),
-            )
-          else
-            listener.when(
-              data: (bookings) => SingleChildScrollView(
-                child: Column(
-                    children: bookings
-                        .map((book) => scrollViewItem(book, context, ref))
-                        .toList()),
-              ),
-              error: (err, s) => Center(child: Text(err.toString())),
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
+          SingleChildScrollView(
+            child: Column(
+              children: _searchController.text.isNotEmpty
+                  ? buildSearchResults(context, ref)
+                  : listener.when(
+                      data: (bookings) => bookings
+                          .map((book) => scrollViewItem(book, context, ref))
+                          .toList(),
+                      error: (err, s) => [
+                        Center(child: Text(err.toString())),
+                      ],
+                      loading: () => [
+                        const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ],
+                    ),
             ),
+          ),
         ],
       ),
     );

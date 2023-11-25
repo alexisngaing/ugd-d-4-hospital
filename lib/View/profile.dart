@@ -21,6 +21,7 @@ class _ProfileState extends State<Profile> {
   late TextEditingController passwordController;
   late TextEditingController noTelpController;
   int? idUser;
+  String? email;
   bool isPasswordVisible = false;
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
@@ -232,14 +233,15 @@ class _ProfileState extends State<Profile> {
 
   Future<void> loadUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    idUser = prefs.getInt('id_user');
+    email = prefs.getString('email');
     setState(() {
       isLoading = true;
     });
     try {
-      User res = await UserClient.find(idUser);
+      User res = await UserClient.find(email);
       setState(() {
         isLoading = false;
+
         usernameController.value = TextEditingValue(text: res.username);
         emailController.value = TextEditingValue(text: res.email);
         passwordController.value = TextEditingValue(text: res.password);
@@ -255,7 +257,6 @@ class _ProfileState extends State<Profile> {
     if (!_formKey.currentState!.validate()) return;
     Uint8List? foto = imageFile;
     User input = User(
-      id: idUser!,
       username: usernameController.text,
       email: emailController.text,
       password: passwordController.text,
