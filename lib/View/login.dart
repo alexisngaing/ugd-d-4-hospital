@@ -131,23 +131,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           String email = emailController.text;
                           String password = passwordController.text;
 
-                          User user = await UserClient.login(email);
-
-                          if (user.email != "" && user.password == password) {
-                            showToast('Login SUkses');
+                          try {
+                            var response =
+                                await UserClient.login(email, password);
+                            if (response["status"]) {
+                              showToast("Login Sukses");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const HomePage()),
+                              );
+                            }
 
                             await saveEmail(email);
-
-                            ref.read(userProvider.notifier).state = user;
-                            print(
-                                "Logged in with email: ${ref.read(userProvider.notifier).state.email})}");
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const HomePage()),
-                            );
-                          } else {
-                            showToast('Gagal Login');
+                          } catch (e) {
+                            showToast("Login Gagal");
                           }
                         }
                       },

@@ -72,17 +72,34 @@ class UserClient {
     }
   }
 
-  static Future<User> login(String email) async {
+  static Future<Map<String, dynamic>> login(
+      String email, String password) async {
     try {
-      var response = await get(Uri.http(url, '$endpoint/$email'));
+      var response = await post(
+        Uri.http(url, '/api/login'),
+        headers: {"Content-type": "application/json"},
+        body: jsonEncode({"email": email, "password": password}),
+      );
 
-      if (response.statusCode != 200) {
-        throw Exception(response.reasonPhrase);
+      if (response.statusCode == 200) {
+        return {
+          "status": true,
+          "message": "Login Berhasil",
+          "data": jsonDecode(response.body)['data'],
+        };
+      } else {
+        return {
+          "status": false,
+          "message": "Login Gagal",
+          "data": null,
+        };
       }
-
-      return User.fromJson(json.decode(response.body)['data']);
     } catch (e) {
-      return Future.error(e.toString());
+      return {
+        "status": false,
+        "message": e.toString(),
+        "data": null,
+      };
     }
   }
 }

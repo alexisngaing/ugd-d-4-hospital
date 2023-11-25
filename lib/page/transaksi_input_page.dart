@@ -249,8 +249,8 @@ class _TransaksiInputPageState extends State<TransaksiInputPage> {
             );
             return;
           } else {
-            createPdf(controllerNama, controllerDeskripsi, controllerAlamat,
-                imageFile!, id2, context, products);
+            //createPdf(controllerNama, controllerDeskripsi, controllerAlamat,
+            //  imageFile!, id2, context, products);
             setState(() {
               const uuid = Uuid();
               id2 = uuid.v1();

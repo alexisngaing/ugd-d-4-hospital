@@ -23,9 +23,10 @@ class _ProfileState extends ConsumerState<Profile> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController noTelpController;
-  // int? idUser;
+  int? idUser;
+  String? email;
   bool isPasswordVisible = false;
-  // bool isLoading = false;
+  bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   Key imageKey = UniqueKey();
   Uint8List? imageFile;
@@ -38,7 +39,7 @@ class _ProfileState extends ConsumerState<Profile> {
     emailController = TextEditingController();
     passwordController = TextEditingController();
     noTelpController = TextEditingController();
-    loadUserData(ref);
+    loadUserData();
   }
 
   @override
@@ -161,7 +162,7 @@ class _ProfileState extends ConsumerState<Profile> {
                   ),
                   OutlinedButton(
                     onPressed: () {
-                      loadUserData(ref);
+                      loadUserData();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -227,20 +228,26 @@ class _ProfileState extends ConsumerState<Profile> {
     );
   }
 
-  Future<void> loadUserData(WidgetRef ref) async {
-    var user = ref.read(userProvider.notifier).state;
-    final userData = await _getUserData();
-    if (userData != null) {
-      usernameController.text = user.username;
-      emailController.text = user.email;
-      passwordController.text = user.password;
-      noTelpController.text = user.noTelp;
-      // imageFile = const Base64Decoder().convert(user.foto);
-    }
-  }
+  Future<void> loadUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    email = prefs.getString('email');
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      User res = await UserClient.find(email);
+      setState(() {
+        isLoading = false;
 
-  Future<Map<String, dynamic>?> _getUserData() async {
-    return await SQLHelperProfile.getUserByEmail(emailController.text);
+        usernameController.value = TextEditingValue(text: res.username);
+        emailController.value = TextEditingValue(text: res.email);
+        passwordController.value = TextEditingValue(text: res.password);
+        noTelpController.value = TextEditingValue(text: res.noTelp);
+      });
+    } catch (err) {
+      showSnackBar(context, err.toString(), Colors.red);
+      Navigator.pop(context);
+    }
   }
 
   Future<void> _updateUserData() async {
@@ -322,7 +329,7 @@ class _ProfileState extends ConsumerState<Profile> {
   }
 
   Future<void> _reloadProfile() async {
-    await loadUserData(ref);
+    await loadUserData();
     setState(() {});
   }
 }

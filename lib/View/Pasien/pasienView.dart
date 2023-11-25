@@ -19,7 +19,7 @@ class PasienView extends ConsumerWidget {
     Navigator.push(context,
             MaterialPageRoute(builder: (context) => const PasienInputPage()))
         .then((value) {
-      _searchController.clear(); // Clear search when adding a new item
+      _searchController.clear();
       ref.refresh(listPasien);
     });
   }
