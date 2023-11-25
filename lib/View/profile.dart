@@ -23,6 +23,7 @@ class _ProfileState extends ConsumerState<Profile> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController noTelpController;
+  late TextEditingController dateController;
   int? idUser;
   String? email;
   bool isPasswordVisible = false;
@@ -39,6 +40,7 @@ class _ProfileState extends ConsumerState<Profile> {
     emailController = TextEditingController();
     passwordController = TextEditingController();
     noTelpController = TextEditingController();
+    dateController = TextEditingController();
     loadUserData();
   }
 
@@ -124,6 +126,47 @@ class _ProfileState extends ConsumerState<Profile> {
                 decoration: const InputDecoration(
                   labelText: 'No. Telp',
                   prefixIcon: Icon(Icons.numbers),
+                ),
+              ),
+              TextField(
+                controller: dateController,
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (pickedDate != null) {
+                    setState(() {
+                      dateController.text =
+                          pickedDate.toLocal().toString().split(' ')[0];
+                    });
+                  }
+                },
+                readOnly: true,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.calendar_today),
+                  labelText: 'Tanggal',
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.date_range),
+                    onPressed: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                      );
+
+                      if (pickedDate != null) {
+                        setState(() {
+                          dateController.text =
+                              pickedDate.toLocal().toString().split(' ')[0];
+                        });
+                      }
+                    },
+                  ),
                 ),
               ),
               SizedBox(height: 3.h),
@@ -239,11 +282,11 @@ class _ProfileState extends ConsumerState<Profile> {
       User res = await UserClient.find(email);
       setState(() {
         isLoading = false;
-
         usernameController.value = TextEditingValue(text: res.username);
         emailController.value = TextEditingValue(text: res.email);
         passwordController.value = TextEditingValue(text: res.password);
         noTelpController.value = TextEditingValue(text: res.noTelp);
+        dateController.value = TextEditingValue(text: res.tanggal);
       });
     } catch (err) {
       showSnackBar(context, err.toString(), Colors.red);
@@ -254,12 +297,13 @@ class _ProfileState extends ConsumerState<Profile> {
   Future<void> _updateUserData() async {
     // Uint8List? foto = imageFile;
     User input = User(
-      username: usernameController.text,
-      email: emailController.text,
-      password: passwordController.text,
-      noTelp: noTelpController.text,
-      // foto: foto != null ? base64Encode(foto) : "",
-    );
+        username: usernameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+        noTelp: noTelpController.text,
+        tanggal: dateController.text
+        // foto: foto != null ? base64Encode(foto) : "",
+        );
     try {
       await UserClient.update(input); // update db
       // ref.read(userProvider.notifier).state = input; //update state
