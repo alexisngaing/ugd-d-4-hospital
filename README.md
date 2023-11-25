@@ -12,11 +12,11 @@
 ### Deskripsi 
 Project masih prototype dan percobaan.
 
-### UGD 8 (Library)
+### UGD 11 (API)
 Pembagian Tugas 
-- Zidane Izur Risqallah (200710902) : Responsive Sizer profile, profile_kelompok, setting, pasienPage
-- Axel Christian Nugroho (210711114) : Responsive Sizer chat, home, register, login, main
-- Vigo Made Prastyo (210711303) : Library intl, barcode, image_picker, transaksi ke database, pdf, printing
-- Alexis Divasonda Sigat Ngaing (210711407) : Responsive sizer PDF, TextSpeech, Transaksi, page pasien_input, page transaksi_input, main
-- Amanda Ayu Titising Wijaya (210711486) : Responsive Sizer CheckIn (check_in, checkin_berhasil, checkin_gagal), Geolocation
+- Zidane Izur Risqallah (200710902) : CRUDS Transaksi
+- Axel Christian Nugroho (210711114) : Update Profile
+- Vigo Made Prastyo (210711303) : CRUDS Booking, Login, Register
+- Alexis Divasonda Sigat Ngaing (210711407) : Login, Tampil Profile
+- Amanda Ayu Titising Wijaya (210711486) : CRUDS Transaksi
 
