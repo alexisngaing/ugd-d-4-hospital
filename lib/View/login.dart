@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/database/API/UserClient.dart';
 import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
@@ -6,17 +7,19 @@ import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:ugd_4_hospital/View/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:ugd_4_hospital/data/User.dart';
+import 'package:ugd_4_hospital/main.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   final Map? data;
 
   const LoginPage({super.key, this.data});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   bool _isObscured = true;
   TextEditingController emailController = TextEditingController();
@@ -25,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    ref.read(userProvider);
   }
 
   @override

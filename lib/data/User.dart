@@ -5,14 +5,15 @@ class User {
   String email;
   String password;
   String noTelp;
-  String? tanggal;
+  String tanggal;
+  // String foto;
 
   User(
       {required this.username,
       required this.email,
       required this.password,
       required this.noTelp,
-      this.tanggal});
+      required this.tanggal});
 
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -21,6 +22,7 @@ class User {
         password: json["password"],
         noTelp: json["noTelp"],
         tanggal: json["tanggal"],
+        // foto: json["foto"],
       );
 
   String toRawJson() => json.encode(toJson());
@@ -30,5 +32,6 @@ class User {
         "password": password,
         "noTelp": noTelp,
         "tanggal": tanggal,
+        // "foto": foto,
       };
 }

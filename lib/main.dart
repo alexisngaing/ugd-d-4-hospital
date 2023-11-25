@@ -3,13 +3,22 @@ import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/View/login.dart';
 // import 'package:ugd_4_hospital/view/login.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ugd_4_hospital/data/User.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ProviderScope(child: MainApp()));
 }
 
+final userProvider = StateProvider<User>((ref) {
+  return User(
+    username: "", email: "", password: "", noTelp: "", tanggal: "",
+    // foto: ""
+  );
+});
+
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
