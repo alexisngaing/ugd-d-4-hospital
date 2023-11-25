@@ -134,6 +134,7 @@ class _ProfileState extends ConsumerState<Profile> {
                   ElevatedButton(
                     onPressed: () {
                       // loadUserData(ref);
+                      // if (_formKey.currentState!.validate()) return;
                       _updateUserData();
                       showToast('Berhasil Ubah Data');
                       _reloadProfile();
@@ -261,7 +262,7 @@ class _ProfileState extends ConsumerState<Profile> {
     );
     try {
       await UserClient.update(input); // update db
-      ref.read(userProvider.notifier).state = input; //update state
+      // ref.read(userProvider.notifier).state = input; //update state
       showSnackBar(context, 'Success', Colors.green);
       Navigator.pop(context);
     } catch (err) {
