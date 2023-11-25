@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:ugd_4_hospital/View/home.dart';
+import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/View/login.dart';
 // import 'package:ugd_4_hospital/view/login.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -32,10 +32,11 @@ class MainApp extends StatelessWidget {
               width: 100.w,
               height: 12.5.h,
             );
-      return const MaterialApp(home: LoginPage()
-          //klo mau nyoba aktifin ini
-          //HomePage(),
-          );
+      return const MaterialApp(
+        home: //LoginPage()
+            //klo mau nyoba aktifin ini
+            HomePage(),
+      );
     });
   }
 }
