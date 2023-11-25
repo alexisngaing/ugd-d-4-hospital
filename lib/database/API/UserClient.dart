@@ -20,9 +20,9 @@ class UserClient {
     }
   }
 
-  static Future<User> find(id) async {
+  static Future<User> find(email) async {
     try {
-      var response = await get(Uri.http(url, '$endpoint/$id'));
+      var response = await get(Uri.http(url, '$endpoint/$email'));
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 
       return User.fromJson(json.decode(response.body)['data']);
@@ -46,7 +46,7 @@ class UserClient {
 
   static Future<Response> update(User user) async {
     try {
-      var response = await put(Uri.http(url, '$endpoint/${user.id}'),
+      var response = await put(Uri.http(url, '$endpoint/${user.email}'),
           headers: {"Content-Type": "application/json"},
           body: user.toRawJson());
 
@@ -67,21 +67,34 @@ class UserClient {
     }
   }
 
-  static Future<Response> login(String email, String password) async {
+  static Future<Map<String, dynamic>> login(
+      String email, String password) async {
     try {
-      var user = {"email": email, "password": password};
+      var response = await post(
+        Uri.http(url, '/api/login'),
+        headers: {"Content-type": "application/json"},
+        body: jsonEncode({"email": email, "password": password}),
+      );
 
-      var response = await post(Uri.http(url, endpoint),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode(user));
-
-      if (response.statusCode != 200) {
-        throw Exception(response.reasonPhrase);
+      if (response.statusCode == 200) {
+        return {
+          "status": true,
+          "message": "Login Berhasil",
+          "data": jsonDecode(response.body)['data'],
+        };
+      } else {
+        return {
+          "status": false,
+          "message": "Login Gagal",
+          "data": null,
+        };
       }
-
-      return response;
     } catch (e) {
-      return Future.error(e.toString());
+      return {
+        "status": false,
+        "message": e.toString(),
+        "data": null,
+      };
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ugd_4_hospital/View/home.dart';
+import 'package:ugd_4_hospital/database/API/UserClient.dart';
 import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:ugd_4_hospital/View/register.dart';
@@ -126,22 +127,21 @@ class _LoginPageState extends State<LoginPage> {
                           String email = emailController.text;
                           String password = passwordController.text;
 
-                          List<Map<String, dynamic>> user =
-                              await SQLHelperProfile.getUser(email);
-
-                          if (user.isNotEmpty &&
-                              user[0]['password'] == password) {
-                            showToast('Login SUkses');
+                          try {
+                            var response =
+                                await UserClient.login(email, password);
+                            if (response["status"]) {
+                              showToast("Login Sukses");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const HomePage()),
+                              );
+                            }
 
                             await saveEmail(email);
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const HomePage()),
-                            );
-                          } else {
-                            showToast('Gagal Login');
+                          } catch (e) {
+                            showToast("Login Gagal");
                           }
                         }
                       },
