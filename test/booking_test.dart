@@ -55,11 +55,11 @@ void main() {
     when(mockBookingClient.fetchAll())
         .thenAnswer((_) async => Future.value(fakeData));
 
-   // when(mockBookingClient.create(any))
-   //     .thenAnswer((_) async => Future.value(Response('Success', 200)));
+    when(mockBookingClient.create(any))
+        .thenAnswer((_) async => Future.value(Response('Success', 200)));
 
-   // when(mockBookingClient.update(any))
-     //   .thenAnswer((_) async => Future.value(Response('Success', 200)));
+    when(mockBookingClient.update(any))
+        .thenAnswer((_) async => Future.value(Response('Success', 200)));
 
     when(mockBookingClient.destroy(any))
         .thenAnswer((_) async => Future.value(Response('Success', 200)));
@@ -115,6 +115,7 @@ void main() {
     await tester.tap(find.byIcon(Icons.delete));
     await tester.pump();
 
+    
     expect(find.text('Success'), findsWidgets);
   });
 }
