@@ -20,3 +20,11 @@ Pembagian Tugas
 - Alexis Divasonda Sigat Ngaing (210711407) : Login, Tampil Profile
 - Amanda Ayu Titising Wijaya (210711486) : CRUDS Transaksi
 
+### UGD 12 (UNIT TEST)
+Pembagian Tugas 
+- Zidane Izur Risqallah (200710902) : CRUDS 
+- Axel Christian Nugroho (210711114) : CRUDS
+- Vigo Made Prastyo (210711303) : CRUDS ,Login, Register
+- Alexis Divasonda Sigat Ngaing (210711407) :CRUDS
+- Amanda Ayu Titising Wijaya (210711486) : CRUDS
+
