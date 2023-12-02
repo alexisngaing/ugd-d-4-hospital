@@ -60,7 +60,8 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
         alamatController.value = TextEditingValue(text: res.alamat);
       });
     } catch (err) {
-      showSnackBar(context, err.toString(), Colors.red);
+      showSnackBar(
+          context, err.toString(), Colors.red, const Duration(seconds: 1));
       Navigator.pop(context);
     }
   }
@@ -88,10 +89,12 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
         } else {
           await BelanjaClient.update(input);
         }
-        showSnackBar(context, 'Success', Colors.green);
+        showSnackBar(
+            context, 'Success', Colors.green, const Duration(seconds: 1));
         Navigator.pop(context);
       } catch (err) {
-        showSnackBar(context, err.toString(), Colors.red);
+        showSnackBar(
+            context, err.toString(), Colors.red, const Duration(seconds: 1));
         Navigator.pop(context);
       }
     }

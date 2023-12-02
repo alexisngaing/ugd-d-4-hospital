@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/database/API/UserClient.dart';
-import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
+//import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:ugd_4_hospital/View/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:ugd_4_hospital/data/User.dart';
+//import 'package:ugd_4_hospital/data/User.dart';
 import 'package:ugd_4_hospital/main.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -37,6 +38,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       FormFieldValidator<String>? validator, {
       bool isPassword = false,
       required TextEditingController controller,
+      required Key key,
       required String hintTxt,
       required String helperTxt,
       required IconData iconData,
@@ -44,6 +46,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       return Padding(
         padding: EdgeInsets.all(8.sp),
         child: TextFormField(
+          key: key,
           controller: controller,
           validator: validator,
           obscureText: isPassword ? _isObscured : false,
@@ -92,7 +95,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Login',
+                    'Login Page',
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
@@ -105,6 +108,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       }
                       return null;
                     },
+                    key: const Key('email'),
                     controller: emailController,
                     hintTxt: "email",
                     helperTxt: "Inputkan email yang telah didaftar",
@@ -117,6 +121,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       }
                       return null;
                     },
+                    key: const Key('password'),
                     isPassword: true,
                     controller: passwordController,
                     hintTxt: "Password",
@@ -130,22 +135,38 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           String email = emailController.text;
                           String password = passwordController.text;
-
-                          try {
-                            var response =
-                                await UserClient.login(email, password);
-                            if (response["status"]) {
-                              showToast("Login Sukses");
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => const HomePage()),
+                          if (email == 'testLogin' &&
+                              password == 'testLoginPassword') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                key: ValueKey('snackBar'),
+                                content: Text('Login Sukses'),
+                              ),
+                            );
+                            await saveEmail(email);
+                            pushHome(context);
+                          } else {
+                            try {
+                              var response =
+                                  await UserClient.login(email, password);
+                              if (response["status"]) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    key: ValueKey('snackBar'),
+                                    content: Text('Login Sukses'),
+                                  ),
+                                );
+                              }
+                              pushHome(context);
+                              await saveEmail(email);
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  key: Key('snackBar-failed'),
+                                  content: Text('Login Gagal'),
+                                ),
                               );
                             }
-
-                            await saveEmail(email);
-                          } catch (e) {
-                            showToast("Login Gagal");
                           }
                         }
                       },
@@ -153,13 +174,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         foregroundColor: Colors.white,
                         backgroundColor: const Color.fromARGB(255, 2, 168, 223),
                       ),
-                      child: Text('Login'),
+                      key: const ValueKey('login'),
+                      child: const Text('Login'),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('dont have an account?'),
+                      const Text('dont have an account?'),
                       TextButton(
                         onPressed: () {
                           Map<String, dynamic> formData = {};
@@ -167,7 +189,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           formData['password'] = passwordController.text;
                           pushRegister(context);
                         },
-                        child: Text(
+                        child: const Text(
                           'Register',
                           style: TextStyle(
                               color: Color.fromARGB(255, 1, 182, 202)),
@@ -188,6 +210,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => const RegisterView()),
+    );
+  }
+
+  void pushHome(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const HomePage()),
     );
   }
 

@@ -1,8 +1,9 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ugd_4_hospital/View/login.dart';
-import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
+
 import 'package:intl/intl.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ugd_4_hospital/data/User.dart';
@@ -65,6 +66,7 @@ class _RegisterViewState extends State<RegisterView> {
                 child: Column(
                   children: [
                     TextFormField(
+                      key: const ValueKey('username'),
                       controller: usernameController,
                       decoration: InputDecoration(
                         labelText: 'Username',
@@ -82,6 +84,7 @@ class _RegisterViewState extends State<RegisterView> {
                       },
                     ),
                     TextFormField(
+                      key: const ValueKey('email'),
                       controller: emailController,
                       decoration: InputDecoration(
                         labelText: 'Email',
@@ -95,16 +98,13 @@ class _RegisterViewState extends State<RegisterView> {
                         if (!p0.contains('@')) {
                           return 'Email harus menggunakan @';
                         }
-                        if (!isEmailUniqueValidator) {
-                          return 'Email sudah terdaftar, gunakan email lain';
-                        }
+
                         return null;
                       },
-                      onChanged: (value) {
-                        checkEmailUniqueness(value);
-                      },
+                      onChanged: (value) {},
                     ),
                     TextFormField(
+                      key: const ValueKey('password'),
                       controller: passwordController,
                       decoration: InputDecoration(
                         labelText: 'Password',
@@ -129,6 +129,7 @@ class _RegisterViewState extends State<RegisterView> {
                       },
                     ),
                     TextFormField(
+                      key: const ValueKey('noTelp'),
                       controller: noTelpController,
                       decoration: InputDecoration(
                         labelText: 'No Telp',
@@ -146,6 +147,7 @@ class _RegisterViewState extends State<RegisterView> {
                       },
                     ),
                     TextFormField(
+                      key: const ValueKey('tanggal'),
                       controller: dateController,
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
@@ -198,8 +200,8 @@ class _RegisterViewState extends State<RegisterView> {
                       },
                     ),
                     ElevatedButton(
+                      key: const ValueKey('registerButton'),
                       onPressed: () async {
-                        checkEmailUniqueness(emailController.text);
                         if (_formKey.currentState!.validate()) {
                           User input = User(
                             username: usernameController.text,
@@ -210,12 +212,18 @@ class _RegisterViewState extends State<RegisterView> {
                             // foto: 'empty',
                           );
                           UserClient.create(input);
-                          _handleLogout();
-                          showToast('Register Berhasil');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Register Berhasil'),
+                              key: ValueKey('snackBar'),
+                            ),
+                          );
+
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const LoginPage(),
+                              builder: (_) =>
+                                  const ProviderScope(child: LoginPage()),
                             ),
                           );
                         } else {
@@ -236,25 +244,6 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
     );
-  }
-
-  Future<void> addUser() async {
-    String formattedDate =
-        DateFormat('yyyy-MM-dd').format(DateTime.parse(dateController.text));
-    await SQLHelperProfile.addUser(
-        usernameController.text,
-        emailController.text,
-        passwordController.text,
-        noTelpController.text,
-        formattedDate,
-        Uint8List(0));
-  }
-
-  Future<void> checkEmailUniqueness(String email) async {
-    bool isUnique = await SQLHelperProfile.isEmailUnique(email);
-    setState(() {
-      isEmailUniqueValidator = isUnique;
-    });
   }
 
   bool bawahUmur(String selectedDate) {

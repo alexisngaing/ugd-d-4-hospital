@@ -34,7 +34,8 @@ class _PasienInputPageState extends State<PasienInputPage> {
         pictureController.value = TextEditingValue(text: res.picture);
       });
     } catch (err) {
-      showSnackBar(context, err.toString(), Colors.red);
+      showSnackBar(
+          context, err.toString(), Colors.red, const Duration(seconds: 1));
       Navigator.pop(context);
     }
   }
@@ -65,10 +66,12 @@ class _PasienInputPageState extends State<PasienInputPage> {
           await BookingClient.update(input);
         }
 
-        showSnackBar(context, 'Success', Colors.green);
+        showSnackBar(
+            context, 'Success', Colors.green, const Duration(seconds: 2));
         Navigator.pop(context);
       } catch (err) {
-        showSnackBar(context, err.toString(), Colors.red);
+        showSnackBar(
+            context, err.toString(), Colors.red, const Duration(seconds: 2));
         Navigator.pop(context);
       }
     }
@@ -97,6 +100,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
                             border: UnderlineInputBorder(),
                             labelText: 'Masukkan Nama',
                           ),
+                          key: ValueKey('nama'),
                           controller: nameController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -115,6 +119,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
                             border: UnderlineInputBorder(),
                             labelText: 'Masukkan Deskripsi',
                           ),
+                          key: ValueKey('deskripsi'),
                           controller: descController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -134,6 +139,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
                             border: UnderlineInputBorder(),
                             labelText: 'Masukkan Umur',
                           ),
+                          key: ValueKey('umur'),
                           controller: umurController,
                         ),
                       ),
@@ -146,6 +152,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
                             suffixIcon: Icon(Icons.local_hospital_sharp),
                             labelText: 'Masukkan Nama Dokter',
                           ),
+                          key: ValueKey('dokter'),
                           controller: pictureController,
                         ),
                       ),

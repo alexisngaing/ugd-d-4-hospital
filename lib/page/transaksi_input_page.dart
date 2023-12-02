@@ -3,7 +3,7 @@ import 'package:ugd_4_hospital/database/sql_helper_transaksi.dart';
 import 'package:ugd_4_hospital/data/transaksi.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/data/product.dart';
-import 'package:ugd_4_hospital/View/PDF/pdf_view.dart';
+//import 'package:ugd_4_hospital/View/PDF/pdf_view.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
