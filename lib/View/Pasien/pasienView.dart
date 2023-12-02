@@ -26,10 +26,7 @@ class PasienView extends ConsumerWidget {
 
   void onSearch(context, ref, String query) async {
     var results = await BookingClient.search(query);
-    searchResults = results
-        .map((booking) =>
-            booking.toJson()) // Convert to List<Map<String, dynamic>>
-        .toList();
+    searchResults = results.map((booking) => booking.toJson()).toList();
     ref.refresh(listPasien);
   }
 
@@ -37,14 +34,17 @@ class PasienView extends ConsumerWidget {
     try {
       await BookingClient.destroy(id);
       ref.refresh(listPasien);
-      showSnackBar(context, "Delete Success", Colors.green);
+      showSnackBar(
+          context, "Delete Success", Colors.green, const Duration(seconds: 2));
     } catch (e) {
-      showSnackBar(context, "Delete Failed", Colors.red);
+      showSnackBar(
+          context, "Delete Failed", Colors.red, const Duration(seconds: 2));
     }
   }
 
   Card scrollViewItem(Booking b, context, ref) => Card(
         child: ListTile(
+          key: ValueKey('pasien_${b.id}'),
           title: Text(b.nama),
           subtitle: Text(b.deskripsi),
           leading: Image.asset('images/${b.picture}.jpeg'),
@@ -119,7 +119,7 @@ class PasienView extends ConsumerWidget {
   }
 }
 
-void showSnackBar(BuildContext context, String msg, Color bg) {
+void showSnackBar(BuildContext context, String msg, Color bg, Duration dr) {
   final scaffold = ScaffoldMessenger.of(context);
 
   scaffold.showSnackBar(
@@ -128,6 +128,7 @@ void showSnackBar(BuildContext context, String msg, Color bg) {
       backgroundColor: bg,
       action: SnackBarAction(
           label: 'hide', onPressed: scaffold.hideCurrentSnackBar),
+      duration: dr,
     ),
   );
 }
