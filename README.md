@@ -14,9 +14,9 @@ Project masih prototype dan percobaan.
 
 ### UGD 11 (API)
 Pembagian Tugas 
-- Zidane Izur Risqallah (200710902) : CRUDS Transaksi
-- Axel Christian Nugroho (210711114) : Update Profile
-- Vigo Made Prastyo (210711303) : CRUDS Booking, Login, Register
-- Alexis Divasonda Sigat Ngaing (210711407) : Login, Tampil Profile
-- Amanda Ayu Titising Wijaya (210711486) : CRUDS Transaksi
+- Zidane Izur Risqallah (200710902) : CRUDS
+- Axel Christian Nugroho (210711114) : Login & CRUDS
+- Vigo Made Prastyo (210711303) : Login & Register
+- Alexis Divasonda Sigat Ngaing (210711407) : CRUDS
+- Amanda Ayu Titising Wijaya (210711486) : CRUDS
 
