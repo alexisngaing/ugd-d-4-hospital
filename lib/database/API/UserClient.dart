@@ -6,8 +6,13 @@ class UserClient {
   static final String url = '10.0.2.2:8000';
   static final String endpoint = 'api/user';
   static Client? _httpClient;
+
   // static final String url = '192.168.18.13';
   // static final String endpoint = '/ugd-d-4-hospital/public/api/user';
+
+  // For Linux
+  // static final String url = '127.0.0.1:8000';
+  // static final String endpoint = 'api/user';
 
   static Client get httpClient {
     if (_httpClient == null) {

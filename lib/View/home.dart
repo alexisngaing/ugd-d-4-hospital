@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        selectedItemColor: const Color(0xff15C73C),
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Ionicons.home_outline), label: 'Home'),

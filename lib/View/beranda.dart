@@ -5,8 +5,13 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:ugd_4_hospital/View/profile.dart';
 import 'package:ugd_4_hospital/View/CheckIn/check_in.dart';
+import 'package:ugd_4_hospital/View/Dokter/doctor.dart';
 import 'package:ugd_4_hospital/View/chat.dart';
+import 'package:ugd_4_hospital/View/Pelayanan/konsultasi.dart';
+import 'package:ugd_4_hospital/View/Pelayanan/obat_obatan.dart';
+import 'package:ugd_4_hospital/View/Pelayanan/ambulance.dart';
 
 class BerandaView extends StatelessWidget {
   List imgs = [
@@ -57,13 +62,22 @@ class BerandaView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      "images/gus.jpg",
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Profile(),
+                          ));
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        "images/gus.jpg",
+                        width: 30.sp,
+                        height: 30.sp,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Row(
@@ -140,13 +154,14 @@ class BerandaView extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                SizedBox(height: 4.h),
+                                SizedBox(height: 5.h),
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => CheckInPage(),
+                                          builder: (context) =>
+                                              const CheckInPage(),
                                         ));
                                   },
                                   child: Container(
@@ -180,7 +195,7 @@ class BerandaView extends StatelessWidget {
                                 )
                               ],
                             ),
-                            SizedBox(width: 5.w),
+                            SizedBox(width: 7.w),
                             Positioned(
                               bottom: 0,
                               right: 0,
@@ -218,99 +233,127 @@ class BerandaView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: const Color(0xff15C73C),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 4,
-                              spreadRadius: 2,
-                            ),
-                          ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const KonsultasiView(),
                         ),
-                        child: FaIcon(
-                          FontAwesomeIcons.stethoscope,
-                          size: 22.sp,
-                          color: Colors.white,
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            color: const Color(0xff15C73C),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 4,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: FaIcon(
+                            FontAwesomeIcons.stethoscope,
+                            size: 22.sp,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 1.h),
-                      Text(
-                        "Konsultasi",
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: Colors.black,
+                        SizedBox(height: 1.h),
+                        Text(
+                          "Konsultasi",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: const Color(0xff15C73C),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 4,
-                              spreadRadius: 2,
-                            ),
-                          ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ObatView(),
+                          ));
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            color: const Color(0xff15C73C),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 4,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: FaIcon(
+                            FontAwesomeIcons.pills,
+                            size: 22.sp,
+                            color: Colors.white,
+                          ),
                         ),
-                        child: FaIcon(
-                          FontAwesomeIcons.pills,
-                          size: 22.sp,
-                          color: Colors.white,
+                        SizedBox(height: 1.h),
+                        Text(
+                          "Obat-obatan",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 1.h),
-                      Text(
-                        "Obat-obatan",
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: const Color(0xff15C73C),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 4,
-                              spreadRadius: 2,
-                            ),
-                          ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AmbulanceView(),
+                          ));
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            color: const Color(0xff15C73C),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 4,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: FaIcon(
+                            FontAwesomeIcons.truckMedical,
+                            size: 22.sp,
+                            color: Colors.white,
+                          ),
                         ),
-                        child: FaIcon(
-                          FontAwesomeIcons.truckMedical,
-                          size: 22.sp,
-                          color: Colors.white,
+                        SizedBox(height: 1.h),
+                        Text(
+                          "Ambulance",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 1.h),
-                      Text(
-                        "Ambulance",
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -337,11 +380,11 @@ class BerandaView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => ,
-                    //     ));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DoctorView(),
+                        ));
                   },
                   child: Container(
                     margin: const EdgeInsets.all(10),
@@ -368,7 +411,7 @@ class BerandaView extends StatelessWidget {
                           "${doctorName[index]}",
                           style: TextStyle(
                             fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
                             color: Colors.black,
                           ),
                         ),
