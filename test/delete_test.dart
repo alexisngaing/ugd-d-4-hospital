@@ -23,7 +23,7 @@ void main() {
           builder: (context, orientation, deviceType) {
             return MaterialApp(
               home: Container(
-                width: 500.0, // Adjust the width as needed
+                width: 500.0,
                 height: 1000.0,
                 child: ProviderScope(child: PasienView()),
               ),
@@ -32,8 +32,8 @@ void main() {
         ),
       );
       await tester.pumpAndSettle(Duration(seconds: 5));
-      await tester.pump(Duration(seconds: 5));
-
+      await tester.pump(Duration(seconds: 3));
+      await tester.tapAt(Offset(358.5, 203.0));
       await tester.pumpAndSettle();
     });
   });
