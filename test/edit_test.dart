@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ugd_4_hospital/View/Pasien/pasienView.dart';
+
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
@@ -32,7 +33,7 @@ void main() {
       );
       await tester.pumpAndSettle(Duration(seconds: 5));
       await tester.pumpAndSettle();
-      await tester.tapAt(Offset(365.3, 828.2));
+      await tester.tapAt(Offset(181.7, 207.2));
       await tester.pumpAndSettle();
 
       expect(find.byKey(const ValueKey('nama')), findsOneWidget);
@@ -40,16 +41,16 @@ void main() {
       expect(find.byKey(const ValueKey('umur')), findsOneWidget);
       expect(find.byKey(const ValueKey('dokter')), findsOneWidget);
 
-      await tester.enterText(find.byKey(const ValueKey('nama')), 'Dodi');
+      await tester.enterText(find.byKey(const ValueKey('nama')), 'Test Pasien');
       await tester.enterText(
-          find.byKey(const ValueKey('deskripsi')), 'HAhahahaha');
-      await tester.enterText(find.byKey(const ValueKey('umur')), '23');
-      await tester.enterText(find.byKey(const ValueKey('dokter')), 'arren');
+          find.byKey(const ValueKey('deskripsi')), 'Deskripsi Pasien');
+      await tester.enterText(find.byKey(const ValueKey('umur')), '25');
+      await tester.enterText(find.byKey(const ValueKey('dokter')), 'gambar');
 
       await tester.pumpAndSettle();
       await tester.pump(Duration(seconds: 5));
 
-      final editButton = find.widgetWithText(ElevatedButton, 'Tambah');
+      final editButton = find.widgetWithText(ElevatedButton, 'Edit');
       expect(editButton, findsOneWidget);
       await tester.tap(editButton);
       await tester.pumpAndSettle();
