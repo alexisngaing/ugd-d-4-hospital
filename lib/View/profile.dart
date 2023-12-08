@@ -63,7 +63,7 @@ class _ProfileState extends ConsumerState<Profile> {
                     radius: 50,
                     backgroundImage:
                         // imageFile != null ? MemoryImage(imageFile!) : null,
-                        const AssetImage('images/josh.jpg'),
+                        const AssetImage('images/gus.jpg'),
                     child: const Align(
                       alignment: Alignment.bottomRight,
                       child: CircleAvatar(

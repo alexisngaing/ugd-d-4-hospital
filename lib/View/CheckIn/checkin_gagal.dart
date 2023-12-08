@@ -8,7 +8,7 @@ class HalamanGagalCheckIn extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Check-In'),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xff15C73C),
       ),
       body: Center(
         child: Column(
@@ -16,8 +16,8 @@ class HalamanGagalCheckIn extends StatelessWidget {
           children: <Widget>[
             const Icon(
               Icons.dangerous_rounded,
-              size: 100.0,
-              color: Colors.green,
+              size: 150.0,
+              color: Colors.red,
             ),
             DefaultTextStyle(
               style: TextStyle(
@@ -36,9 +36,9 @@ class HalamanGagalCheckIn extends StatelessWidget {
                 pushToCheck(context);
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.green,
+                backgroundColor: const Color(0xff15C73C),
               ),
-              child: const Text('Checkin Kembali'),
+              child: const Text('Check-in Kembali'),
             ),
           ],
         ),
