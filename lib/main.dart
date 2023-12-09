@@ -9,7 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/data/User.dart';
 
-
 void main() {
   runApp(ProviderScope(child: MainApp()));
 }

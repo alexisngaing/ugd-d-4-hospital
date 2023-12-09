@@ -222,7 +222,7 @@ class BerandaView extends StatelessWidget {
                 "Pelayanan Kami",
                 style: TextStyle(
                   fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
@@ -364,7 +364,7 @@ class BerandaView extends StatelessWidget {
                 "Dokter Terpopuler",
                 style: TextStyle(
                   fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),

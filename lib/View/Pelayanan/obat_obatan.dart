@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:ugd_4_hospital/View/home.dart';
-import 'package:ugd_4_hospital/View/Pelayanan/checkout1.dart';
+import 'package:ugd_4_hospital/View/Pelayanan/Transaksi/list_obat.dart';
 
 class ObatView extends StatefulWidget {
   const ObatView({super.key});
@@ -36,77 +36,78 @@ class _ObatViewState extends State<ObatView> {
       ),
       body: Center(
         child: SingleChildScrollView(
-          
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(15),
             child: Column(
               children: [
                 GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Checkout1()),
-            );
-          },
-          child:Container(
-                  width: 80.w,
-                  height: 87,
-                  padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 4,
-                        spreadRadius: 2,
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                              color: const Color(0xff15C73C),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 4,
-                                  spreadRadius: 2,
-                                ),
-                              ],
-                            ),
-                            child: FaIcon(
-                              FontAwesomeIcons.headSideVirus,
-                              size: 22.sp,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(width: 20,),
-                          Container(
-                            child: Text(
-                              "Sakit Kepala",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Checkout1()),
+                    );
+                  },
+                  child: Container(
+                    width: 90.w,
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 4,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                color: const Color(0xff15C73C),
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 4,
+                                    spreadRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: FaIcon(
+                                FontAwesomeIcons.headSideVirus,
+                                size: 22.sp,
+                                color: Colors.white,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              child: Text(
+                                "Sakit Kepala",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
                 // First Section
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -142,7 +143,9 @@ class _ObatViewState extends State<ObatView> {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: 20,),
+                          SizedBox(
+                            width: 20,
+                          ),
                           Container(
                             child: Text(
                               "Antibiotik",
@@ -157,10 +160,11 @@ class _ObatViewState extends State<ObatView> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -196,7 +200,9 @@ class _ObatViewState extends State<ObatView> {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: 20,),
+                          SizedBox(
+                            width: 20,
+                          ),
                           Container(
                             child: Text(
                               "Sakit Gigi",
@@ -211,10 +217,11 @@ class _ObatViewState extends State<ObatView> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -250,7 +257,9 @@ class _ObatViewState extends State<ObatView> {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: 20,),
+                          SizedBox(
+                            width: 20,
+                          ),
                           Container(
                             child: Text(
                               "Demam",
@@ -265,10 +274,11 @@ class _ObatViewState extends State<ObatView> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -305,7 +315,7 @@ class _ObatViewState extends State<ObatView> {
                             ),
                           ),
                           SizedBox(width: 20),
-                          Expanded( 
+                          Expanded(
                             child: Container(
                               child: Text(
                                 "Pilek & Hidung Tersumbat",
@@ -321,10 +331,11 @@ class _ObatViewState extends State<ObatView> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -360,7 +371,9 @@ class _ObatViewState extends State<ObatView> {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: 20,),
+                          SizedBox(
+                            width: 20,
+                          ),
                           Container(
                             child: Text(
                               "Penurun Berat Badan",

@@ -26,7 +26,7 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Chat Dokter'),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xff15C73C),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -53,9 +53,12 @@ class _ChatPageState extends State<ChatPage> {
                 height: 40.sp,
                 child: Center(
                   child: Card(
-                    color: Colors.green,
+                    color: const Color(0xff15C73C),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Padding(
-                      padding: EdgeInsets.all(8.sp),
+                      padding: EdgeInsets.all(12.sp),
                       child: Text(
                         DateFormat.yMMMd().format(message.date),
                         style: TextStyle(color: Colors.white),
@@ -105,7 +108,7 @@ class MessageBubble extends StatelessWidget {
       alignment: isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Card(
         elevation: 8.sp, // Use sp (responsive size) here
-        color: isSentByMe ? Colors.green : Colors.white,
+        color: isSentByMe ? const Color(0xff15C73C) : Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(16.sp), // Use sp (responsive size) here
@@ -182,7 +185,7 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
               width: 40.sp,
               height: 40.sp,
               child: CircleAvatar(
-                backgroundColor: Colors.green,
+                backgroundColor: const Color(0xff15C73C),
                 radius: 70.sp,
                 child: Icon(Icons.send, color: Colors.white),
               ),
