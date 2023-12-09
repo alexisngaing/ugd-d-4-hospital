@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:ugd_4_hospital/View/Pelayanan/Transaksi/checkout_berhasil.dart';
 
 class CheckoutObat extends StatefulWidget {
   const CheckoutObat({super.key});
@@ -563,7 +564,12 @@ class _CheckoutObatState extends State<CheckoutObat> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (context) => const Checkout3()),
+                    );
+                  },
                   child: Text(
                     'Checkout',
                     style: TextStyle(
