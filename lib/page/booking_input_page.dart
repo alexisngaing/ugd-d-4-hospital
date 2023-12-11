@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ugd_4_hospital/View/Pasien/pasienView.dart';
-import 'package:ugd_4_hospital/data/Booking.dart';
+import 'package:ugd_4_hospital/model/Booking.dart';
 import 'package:ugd_4_hospital/database/API/BookingClient.dart';
 
 class PasienInputPage extends StatefulWidget {

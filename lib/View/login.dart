@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/database/API/UserClient.dart';
 //import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
-import 'package:ugd_4_hospital/utils/toast_util.dart';
+// import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:ugd_4_hospital/View/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -135,38 +135,44 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           String email = emailController.text;
                           String password = passwordController.text;
-                          if (email == 'testLogin' &&
-                              password == 'testLoginPassword') {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                key: ValueKey('snackBar'),
-                                content: Text('Login Sukses'),
-                              ),
-                            );
-                            await saveEmail(email);
-                            pushHome(context);
-                          } else {
-                            try {
-                              var response =
-                                  await UserClient.login(email, password);
-                              if (response["status"]) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    key: ValueKey('snackBar'),
-                                    content: Text('Login Sukses'),
-                                  ),
-                                );
-                              }
-                              pushHome(context);
-                              await saveEmail(email);
-                            } catch (e) {
+                          // if (email == 'testLogin' &&
+                          //     password == 'testLoginPassword') {
+                          //   ScaffoldMessenger.of(context).showSnackBar(
+                          //     const SnackBar(
+                          //       key: ValueKey('snackBar'),
+                          //       content: Text('Login Sukses'),
+                          //     ),
+                          //   );
+                          //   await saveEmail(email);
+                          //   pushHome(context);
+                          // } else {
+                          try {
+                            var response =
+                                await UserClient.login(email, password);
+                            if (response["status"] == true) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  key: Key('snackBar-failed'),
+                                  key: ValueKey('snackBar'),
+                                  content: Text('Login Sukses'),
+                                ),
+                              );
+                              pushHome(context);
+                              await saveEmail(email);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  key: ValueKey('snackBar-failed'),
                                   content: Text('Login Gagal'),
                                 ),
                               );
                             }
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                key: Key('snackBar-failed'),
+                                content: Text('Login Gagal'),
+                              ),
+                            );
                           }
                         }
                       },

@@ -1,4 +1,4 @@
-import 'package:ugd_4_hospital/data/Booking.dart';
+import 'package:ugd_4_hospital/model/Booking.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart';

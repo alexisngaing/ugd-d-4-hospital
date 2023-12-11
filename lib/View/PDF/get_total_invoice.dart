@@ -1,4 +1,4 @@
-import 'package:ugd_4_hospital/data/product.dart';
+import 'package:ugd_4_hospital/model/product.dart';
 
 String getSubTotal(List<Product> products) {
   return products

@@ -1,12 +1,15 @@
-import 'package:ugd_4_hospital/data/User.dart';
+import 'package:ugd_4_hospital/model/User.dart';
 import 'dart:convert';
-import 'package:http/http.dart';
+// import 'package:ugd_4_hospital/database/API/api_Client.dart';
+import 'package:http/http.dart' as http;
 
 class UserClient {
   static final String url = '10.0.2.2:8000';
   static final String endpoint = 'api/user';
-  static Client? _httpClient;
+  static http.Client? _httpClient;
 
+  // static final String url = '172.16.98.59';
+  // static final String endpoint = 'api/user';
   // static final String url = '192.168.18.13';
   // static final String endpoint = '/ugd-d-4-hospital/public/api/user';
 
@@ -14,20 +17,20 @@ class UserClient {
   // static final String url = '127.0.0.1:8000';
   // static final String endpoint = 'api/user';
 
-  static Client get httpClient {
+  static http.Client get httpClient {
     if (_httpClient == null) {
-      _httpClient = Client();
+      _httpClient = http.Client();
     }
     return _httpClient!;
   }
 
-  static set httpClient(Client client) {
+  static set httpClient(http.Client client) {
     _httpClient = client;
   }
 
   static Future<List<User>> fetchAll() async {
     try {
-      var response = await get(Uri.http(url, endpoint));
+      var response = await http.get(Uri.http(url, endpoint));
 
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 
@@ -41,7 +44,7 @@ class UserClient {
 
   static Future<User> find(email) async {
     try {
-      var response = await get(Uri.http(url, '$endpoint/$email'));
+      var response = await http.get(Uri.http(url, '$endpoint/$email'));
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 
       return User.fromJson(json.decode(response.body)['data']);
@@ -50,39 +53,15 @@ class UserClient {
     }
   }
 
-  static Future<Response> create(User user) async {
+  static Future<http.Response> create(User user) async {
     try {
       print(user.toRawJson());
-      var response = await post(Uri.http(url, endpoint),
-          headers: {"Content-Type": "application/json"},
-          body: user.toRawJson());
-
-      if (response.statusCode != 200) throw Exception(response.reasonPhrase);
-      print("Register success!!");
-      return response;
-    } catch (e) {
-      return Future.error(e.toString());
-    }
-  }
-
-  static Future<Response> update(User user) async {
-    try {
-      var response = await put(Uri.http(url, '$endpoint/${user.email}'),
+      var response = await http.post(Uri.http(url, endpoint),
           headers: {"Content-Type": "application/json"},
           body: user.toRawJson());
       print(response.body);
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
-
-      return response;
-    } catch (e) {
-      return Future.error(e.toString());
-    }
-  }
-
-  static Future<Response> destroy(email) async {
-    try {
-      var response = await delete(Uri.http(url, '$endpoint/$email'));
-      if (response.statusCode != 200) throw Exception(response.reasonPhrase);
+      print("Register success!!");
       return response;
     } catch (e) {
       return Future.error(e.toString());
@@ -92,8 +71,8 @@ class UserClient {
   static Future<Map<String, dynamic>> login(
       String email, String password) async {
     try {
-      var response = await post(
-        Uri.http(url, '/api/login'),
+      var response = await http.post(
+        Uri.http(url, '/api/login/$email/$password'),
         headers: {"Content-type": "application/json"},
         body: jsonEncode({"email": email, "password": password}),
       );
@@ -126,7 +105,7 @@ class UserClient {
   }) async {
     String apiURL = 'http://127.0.0.1:8000/api/login';
     try {
-      var apiResult = await post(
+      var apiResult = await http.post(
         Uri.parse(apiURL),
         body: {'email': email, 'password': password},
       );
@@ -140,4 +119,59 @@ class UserClient {
       return null;
     }
   }
+
+  static Future<http.Response> update(User user) async {
+    try {
+      var response = await http.put(
+        Uri.http(url, 'api/update/${user.email}'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "username": user.username,
+          "email": user.email,
+          "password": user.password,
+          "noTelp": user.noTelp,
+          "tanggal": user.tanggal,
+          "image": user.image,
+        }),
+      );
+      print(response.body);
+      if (response.statusCode != 200) throw Exception(response.reasonPhrase);
+
+      return response;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  // Future<User> update(User user) async {
+  //   try {
+  //     var response = await http.post(
+  //       Uri.http(url, 'api/update/${user.email}'),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: jsonEncode({
+  //         "username": user.username,
+  //         "email": user.email,
+  //         "password": user.password,
+  //         "noTelp": user.noTelp,
+  //         "tanggal": user.tanggal,
+  //         "image": user.image,
+  //       }),
+  //     );
+  //     print(response.body);
+  //     if (response.statusCode == 200) {
+  //       var json = response.body;
+  //       var jsonData = jsonDecode(json);
+  //       var userJson = jsonData['data'];
+  //       return User.fromJson(userJson);
+  //     } else {
+  //       var json = response.body;
+  //       var jsonData = jsonDecode(json);
+  //       throw (jsonData['message'] ?? 'Update Failed');
+  //     }
+  //   } finally {
+  //     //client.close();
+  //   }
+  // }
 }
