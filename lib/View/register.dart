@@ -6,7 +6,7 @@ import 'package:ugd_4_hospital/View/login.dart';
 
 import 'package:intl/intl.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:ugd_4_hospital/data/User.dart';
+import 'package:ugd_4_hospital/model/User.dart';
 import 'package:ugd_4_hospital/database/API/UserClient.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -209,7 +209,7 @@ class _RegisterViewState extends State<RegisterView> {
                             password: passwordController.text,
                             noTelp: noTelpController.text,
                             tanggal: dateController.text,
-                            // foto: 'empty',
+                            image: "none",
                           );
                           UserClient.create(input);
                           ScaffoldMessenger.of(context).showSnackBar(

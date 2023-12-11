@@ -1,4 +1,4 @@
-import 'package:ugd_4_hospital/data/custom_row_invoice.dart';
+import 'package:ugd_4_hospital/model/custom_row_invoice.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 

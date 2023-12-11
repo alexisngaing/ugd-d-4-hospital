@@ -1,16 +1,18 @@
 //import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ugd_4_hospital/data/User.dart';
-import 'package:ugd_4_hospital/database/API/UserClient.dart';
+import 'package:ugd_4_hospital/model/User.dart';
 //import 'package:ugd_4_hospital/database/sql_helper_profile.dart';
 //import 'package:ugd_4_hospital/main.dart';
 import 'package:ugd_4_hospital/utils/toast_util.dart';
 import 'package:ugd_4_hospital/View/home.dart';
-import 'dart:typed_data';
+import 'package:ugd_4_hospital/database/convert/string_to_image.dart';
+import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ugd_4_hospital/database/API/api_Client.dart';
+import 'package:ugd_4_hospital/database/API/UserClient.dart';
 
 class Profile extends ConsumerStatefulWidget {
   const Profile({super.key});
@@ -19,18 +21,22 @@ class Profile extends ConsumerStatefulWidget {
 }
 
 class _ProfileState extends ConsumerState<Profile> {
+  // final UserClient _userClient = UserClient();
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController noTelpController;
   late TextEditingController dateController;
   int? idUser;
+  String? image;
+  String? path;
   String? email;
   bool isPasswordVisible = false;
   bool isLoading = false;
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   Key imageKey = UniqueKey();
-  Uint8List? imageFile;
+  File? imageFile;
+  User? user;
   final imagePicker = ImagePicker();
   @override
   void initState() {
@@ -60,22 +66,21 @@ class _ProfileState extends ConsumerState<Profile> {
                   showPictureDialog();
                 },
                 child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage:
-                        // imageFile != null ? MemoryImage(imageFile!) : null,
-                        const AssetImage('images/gus.jpg'),
-                    child: const Align(
-                      alignment: Alignment.bottomRight,
-                      child: CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Colors.blue,
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 18,
-                        ),
-                      ),
-                    )),
+                  radius: 50,
+                  backgroundImage: imageFile != null
+                      ? Image.file(imageFile!).image
+                      : Image.network(
+                          '${ApiClient().domainName}${image}',
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'images/josh.jpg',
+                              fit: BoxFit.cover,
+                              width: 128,
+                              height: 128,
+                            );
+                          },
+                        ).image,
+                ),
               ),
               Center(
                 child: Text(
@@ -181,6 +186,7 @@ class _ProfileState extends ConsumerState<Profile> {
                       _updateUserData();
                       showToast('Berhasil Ubah Data');
                       _reloadProfile();
+                      loadUserData();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -261,13 +267,13 @@ class _ProfileState extends ConsumerState<Profile> {
   }
 
   void showSnackBar(BuildContext context, String msg, Color bg) {
-    final Scaffold = ScaffoldMessenger.of(context);
-    Scaffold.showSnackBar(
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
       SnackBar(
         content: Text(msg),
         backgroundColor: bg,
         action: SnackBarAction(
-            label: 'hide', onPressed: Scaffold.hideCurrentSnackBar),
+            label: 'hide', onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
   }
@@ -287,6 +293,7 @@ class _ProfileState extends ConsumerState<Profile> {
         passwordController.value = TextEditingValue(text: res.password);
         noTelpController.value = TextEditingValue(text: res.noTelp);
         dateController.value = TextEditingValue(text: res.tanggal);
+        image = res.image;
       });
     } catch (err) {
       showSnackBar(context, err.toString(), Colors.red);
@@ -295,18 +302,18 @@ class _ProfileState extends ConsumerState<Profile> {
   }
 
   Future<void> _updateUserData() async {
-    // Uint8List? foto = imageFile;
-    User input = User(
-        username: usernameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-        noTelp: noTelpController.text,
-        tanggal: dateController.text
-        // foto: foto != null ? base64Encode(foto) : "",
-        );
+    String image = await ConvertImageToString.imgToString(imageFile!);
+    user = User(
+      username: usernameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+      noTelp: noTelpController.text,
+      tanggal: dateController.text,
+      image: image,
+    );
+
     try {
-      await UserClient.update(input); // update db
-      // ref.read(userProvider.notifier).state = input; //update state
+      await UserClient.update(user!);
       showSnackBar(context, 'Success', Colors.green);
       Navigator.pop(context);
     } catch (err) {
@@ -324,7 +331,7 @@ class _ProfileState extends ConsumerState<Profile> {
             children: [
               SimpleDialogOption(
                 onPressed: () {
-                  getCamera();
+                  getFromCamera();
                   Navigator.of(context).pop();
                 },
                 child: const Text('Camera'),
@@ -341,36 +348,35 @@ class _ProfileState extends ConsumerState<Profile> {
         });
   }
 
-  getGallery() async {
-    final pickedFile = await imagePicker.pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      Uint8List imageBytes = await pickedFile.readAsBytes();
-
-      setState(() {
-        imageFile = imageBytes;
-        imageKey = UniqueKey();
-      });
-    }
+  Future<void> getGallery() async {
+    final ImagePicker picker = ImagePicker();
+    final pickedImage = await picker.pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 720,
+        maxWidth: 720,
+        imageQuality: 50);
+    if (pickedImage == null) return;
+    setState(() {
+      imageFile = File(pickedImage.path);
+    });
   }
 
-  getCamera() async {
-    final pickedFile = await imagePicker.pickImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      Uint8List imageBytes = await pickedFile.readAsBytes();
-
-      setState(() {
-        imageFile = imageBytes;
-        imageKey = UniqueKey();
-      });
-    }
+  Future<void> getFromCamera() async {
+    final ImagePicker picker = ImagePicker();
+    final pickedImage = await picker.pickImage(
+        source: ImageSource.camera,
+        maxHeight: 720,
+        maxWidth: 720,
+        imageQuality: 50);
+    if (pickedImage == null)
+      return showSnackBar(
+        context,
+        'No image selected',
+        Colors.red,
+      );
+    setState(() {
+      imageFile = File(pickedImage.path);
+    });
   }
 
   Future<void> _reloadProfile() async {

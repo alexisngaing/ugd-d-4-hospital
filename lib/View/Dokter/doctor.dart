@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:ugd_4_hospital/View/chat.dart';
+import 'package:ugd_4_hospital/View/Chat/chat.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 
 class DoctorView extends StatefulWidget {

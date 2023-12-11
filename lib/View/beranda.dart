@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ugd_4_hospital/View/profile.dart';
 import 'package:ugd_4_hospital/View/CheckIn/check_in.dart';
 import 'package:ugd_4_hospital/View/Dokter/doctor.dart';
-import 'package:ugd_4_hospital/View/chat.dart';
+import 'package:ugd_4_hospital/View/Chat/chat.dart';
 import 'package:ugd_4_hospital/View/Pelayanan/konsultasi.dart';
 import 'package:ugd_4_hospital/View/Pelayanan/obat_obatan.dart';
 import 'package:ugd_4_hospital/View/Pelayanan/ambulance.dart';

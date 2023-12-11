@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart' as sql;
-import 'package:ugd_4_hospital/data/pasien.dart';
+import 'package:ugd_4_hospital/model/pasien.dart';
 
 class SQLHelper {
   static Future<void> createTables(sql.Database database) async {

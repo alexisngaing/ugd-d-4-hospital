@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ugd_4_hospital/data/Belanja.dart';
+import 'package:ugd_4_hospital/model/Belanja.dart';
 import 'package:ugd_4_hospital/database/API/BelanjaClient.dart';
 import 'package:ugd_4_hospital/page/belanja_input_page.dart';
 

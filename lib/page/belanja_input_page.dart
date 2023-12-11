@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:ugd_4_hospital/data/Belanja.dart';
+import 'package:ugd_4_hospital/database/API/api_Client.dart';
+import 'package:ugd_4_hospital/database/convert/string_to_image.dart';
+import 'package:ugd_4_hospital/model/Belanja.dart';
 import 'package:ugd_4_hospital/View/Pasien/pasienView.dart';
 import 'package:ugd_4_hospital/database/API/BelanjaClient.dart';
 import 'package:uuid/uuid.dart';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
-import 'package:ugd_4_hospital/data/product.dart';
+import 'package:ugd_4_hospital/model/product.dart';
 import 'package:ugd_4_hospital/View/PDF/pdf_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +29,8 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
   final alamatController = TextEditingController();
   bool isLoading = false;
   String id2 = const Uuid().v1();
-  Uint8List? imageFile;
+  File? imageFile;
+  String? image;
   Key imageKey = UniqueKey();
   final imagePicker = ImagePicker();
   List<Product> products = [
@@ -42,11 +46,6 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
           (double prev, element) => prev + (element.price * element.amount))
       .toStringAsFixed(2);
 
-  Future<Uint8List> _getImageBytesFromUrl(String imageUrl) async {
-    http.Response response = await http.get(Uri.parse(imageUrl));
-    return response.bodyBytes;
-  }
-
   void loadData() async {
     setState(() {
       isLoading = true;
@@ -58,6 +57,7 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
         nameController.value = TextEditingValue(text: res.nama);
         descController.value = TextEditingValue(text: res.deskripsi);
         alamatController.value = TextEditingValue(text: res.alamat);
+        image = res.foto;
       });
     } catch (err) {
       showSnackBar(
@@ -77,12 +77,14 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
   Widget build(BuildContext context) {
     void onSubmit() async {
       if (!_fromKey.currentState!.validate()) return;
-
+      String image = await ConvertImageToString.imgToString(imageFile!);
       Belanja input = Belanja(
-          id: widget.id ?? 0,
-          nama: nameController.text,
-          deskripsi: descController.text,
-          alamat: alamatController.text);
+        id: widget.id ?? 0,
+        nama: nameController.text,
+        deskripsi: descController.text,
+        alamat: alamatController.text,
+        foto: image,
+      );
       try {
         if (widget.id == null) {
           await BelanjaClient.create(input);
@@ -119,22 +121,21 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
                           showPictureDialog();
                         },
                         child: CircleAvatar(
-                            radius: 7.h,
-                            backgroundImage: imageFile != null
-                                ? MemoryImage(imageFile!)
-                                : null,
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: CircleAvatar(
-                                radius: 2.h,
-                                backgroundColor: Colors.grey,
-                                child: Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                  size: 2.h,
-                                ),
-                              ),
-                            )),
+                          radius: 50,
+                          backgroundImage: imageFile != null
+                              ? Image.file(imageFile!).image
+                              : Image.network(
+                                  '${ApiClient().domainName}${image}',
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset(
+                                      'images/josh.jpg',
+                                      fit: BoxFit.cover,
+                                      width: 128,
+                                      height: 128,
+                                    );
+                                  },
+                                ).image,
+                        ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -293,8 +294,8 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
             );
             return;
           } else {
-            createPdf(nameController, descController, alamatController,
-                imageFile!, id2, context, products);
+            createPdf(nameController, descController, alamatController, id2,
+                context, products);
             setState(() {
               const uuid = Uuid();
               id2 = uuid.v1();
@@ -322,7 +323,7 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
             children: [
               SimpleDialogOption(
                 onPressed: () {
-                  getCamera();
+                  getFromCamera();
                   Navigator.of(context).pop();
                 },
                 child: const Text('Camera'),
@@ -339,35 +340,29 @@ class _TransaksiInputPage extends State<TransaksiInputPage> {
         });
   }
 
-  getGallery() async {
-    final pickedFile = await imagePicker.pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      Uint8List imageBytes = await pickedFile.readAsBytes();
-
-      setState(() {
-        imageFile = imageBytes;
-        imageKey = UniqueKey();
-      });
-    }
+  Future<void> getGallery() async {
+    final ImagePicker picker = ImagePicker();
+    final pickedImage = await picker.pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 720,
+        maxWidth: 720,
+        imageQuality: 50);
+    if (pickedImage == null) return;
+    setState(() {
+      imageFile = File(pickedImage.path);
+    });
   }
 
-  getCamera() async {
-    final pickedFile = await imagePicker.pickImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      Uint8List imageBytes = await pickedFile.readAsBytes();
-
-      setState(() {
-        imageFile = imageBytes;
-        imageKey = UniqueKey();
-      });
-    }
+  Future<void> getFromCamera() async {
+    final ImagePicker picker = ImagePicker();
+    final pickedImage = await picker.pickImage(
+        source: ImageSource.camera,
+        maxHeight: 720,
+        maxWidth: 720,
+        imageQuality: 50);
+    if (pickedImage == null) return;
+    setState(() {
+      imageFile = File(pickedImage.path);
+    });
   }
 }

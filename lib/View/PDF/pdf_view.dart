@@ -4,8 +4,8 @@ import 'package:pdf/pdf.dart';
 import 'package:intl/intl.dart';
 import 'dart:typed_data';
 import 'package:ugd_4_hospital/View/PDF/get_total_invoice.dart';
-import 'package:ugd_4_hospital/data/custom_row_invoice.dart';
-import 'package:ugd_4_hospital/data/product.dart';
+import 'package:ugd_4_hospital/model/custom_row_invoice.dart';
+import 'package:ugd_4_hospital/model/product.dart';
 import 'package:ugd_4_hospital/View/PDF/preview_screen.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:ugd_4_hospital/View/PDF/item_doc.dart';
@@ -15,7 +15,6 @@ Future<void> createPdf(
     TextEditingController nameController,
     TextEditingController deskripsiController,
     TextEditingController addressController,
-    Uint8List imageFile,
     String id,
     BuildContext context,
     List<Product> soldProducts) async {
@@ -78,7 +77,7 @@ Future<void> createPdf(
                 pw.SizedBox(height: 1.h),
                 barcodeGaris(id),
                 pw.SizedBox(height: 1.h),
-                contentOfInvoice(table, imageFile),
+                contentOfInvoice(table),
                 barcodeKotak(id),
                 pw.SizedBox(height: 1.h),
               ])),
@@ -268,11 +267,10 @@ pw.Padding topOfInvoice(pw.MemoryImage imageInvoice) {
   );
 }
 
-pw.Padding contentOfInvoice(pw.Widget table, Uint8List? imageFile) {
+pw.Padding contentOfInvoice(pw.Widget table) {
   final List<pw.Widget> content = [
     pw.Text("Foto Pembeli"),
     pw.SizedBox(height: 1.h),
-    if (imageFile != null) pw.Image(pw.MemoryImage(imageFile), width: 35.w),
     table,
     pw.Text("Makasih udah belanja tengs yah bro/sis"),
     pw.SizedBox(height: 1.h),

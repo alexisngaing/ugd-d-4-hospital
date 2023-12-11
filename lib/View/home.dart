@@ -4,7 +4,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:ugd_4_hospital/View/beranda.dart';
 // import 'package:ugd_4_hospital/View/CheckIn/check_in.dart';
 import 'package:ugd_4_hospital/View/Pasien/pasienView.dart';
-import 'package:ugd_4_hospital/View/chat.dart';
+import 'package:ugd_4_hospital/View/Chat/chat.dart';
 import 'package:ugd_4_hospital/View/setting.dart';
 
 class HomePage extends StatefulWidget {

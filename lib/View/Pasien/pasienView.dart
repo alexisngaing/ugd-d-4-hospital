@@ -1,7 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:ugd_4_hospital/data/Booking.dart';
+import 'package:ugd_4_hospital/model/Booking.dart';
 import 'package:ugd_4_hospital/database/API/BookingClient.dart';
 import 'package:ugd_4_hospital/page/booking_input_page.dart';
 

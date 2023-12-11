@@ -1,4 +1,4 @@
-import 'package:ugd_4_hospital/data/Belanja.dart';
+import 'package:ugd_4_hospital/model/Belanja.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart';
@@ -42,7 +42,7 @@ class BelanjaClient {
     try {
       var response = await get(Uri.http(url, '$endpoint/$id'));
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
-
+      print(response.body);
       return Belanja.fromJson(json.decode(response.body)['data']);
     } catch (e) {
       return Future.error(e.toString());
@@ -69,6 +69,7 @@ class BelanjaClient {
           body: book.toRawJson());
 
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
+      print(response.body);
       return response;
     } catch (e) {
       return Future.error(e.toString());
