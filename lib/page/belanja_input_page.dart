@@ -7,12 +7,12 @@ import 'package:ugd_4_hospital/View/Pasien/pasienView.dart';
 import 'package:ugd_4_hospital/database/API/BelanjaClient.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:io';
-import 'dart:typed_data';
+// import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:ugd_4_hospital/model/product.dart';
 import 'package:ugd_4_hospital/View/PDF/pdf_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 
 class TransaksiInputPage extends StatefulWidget {
   const TransaksiInputPage({super.key, this.id});
