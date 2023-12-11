@@ -18,6 +18,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
   final descController = TextEditingController();
   final umurController = TextEditingController();
   final pictureController = TextEditingController();
+  String? selectedDoctor;
   bool isLoading = false;
 
   void loadData() async {
@@ -154,6 +155,18 @@ class _PasienInputPageState extends State<PasienInputPage> {
                           ),
                           key: ValueKey('dokter'),
                           controller: pictureController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Field Required';
+                            } else if (![
+                              'arren',
+                              'gush',
+                              'josh',
+                            ].contains(value.toLowerCase())) {
+                              return 'Nama Dokter tidak tersedia, silahkan pilih dokter yang tersedia namanya adalah arren, gush, josh';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       Container(
