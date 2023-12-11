@@ -42,6 +42,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.4.3
+  msix: ^3.16.7
+
+msix_config:
+  display_name: ditonton
+  publisher_display_name: axel company
+  identity_name: com.axel.ditonton
+  logo_path: C:\Users\ACER\Downloads\ic_launcher\1024.png
+  msix_version: 1.0.0.0
+  capabilities: internetClient
 
 flutter:
   uses-material-design: true
