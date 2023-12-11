@@ -10,7 +10,7 @@
 - Amanda Ayu Titising Wijaya (210711486) ([@wijayaamanda](https://github.com/wijayaamanda))
 
 ### Deskripsi 
-Project masih prototype dan percobaan.
+Atma Hospital merupakan aplikasi sederhana yang memiliki sistem login dan register serta CRUD untuk transaksi dan custom CRUD. Aplikasi ini memiliki fungsi untuk melakuan scan QR agar bisa melakukan checkin di rumah sakit yang akan di datangi, serta memiliki fitur Text-To-Speech yang dapat membantu pengguna yang tunawicara bisa berkomunikasi dengan mudah dengan pihak rumah sakit. serta memiliki invoice untuk melihat hasil invoice transakasi yang dilakukan agar dapat memiliki bukti pembelian yang dilakukan.
 
 ### UGD 11 (API)
 Pembagian Tugas 
