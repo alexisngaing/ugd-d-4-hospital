@@ -59,14 +59,14 @@ class _RegisterViewState extends State<RegisterView> {
               child: Container(
                 margin: EdgeInsets.all(16.sp),
                 padding: EdgeInsets.all(16.sp),
-                height: 60.h,
+                height: 65.h,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20.sp),
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 1.h),
                     Text(
                       'Register',
                       style: TextStyle(
