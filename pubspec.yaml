@@ -28,7 +28,7 @@ dependencies:
   logger: ^2.0.2+1
   path_provider: ^2.1.1
   pdf: ^3.10.6
-  permission_handler: ^11.1.0
+  permission_handler: ^11.0.1
   printing: ^5.11.1
   qr_code_scanner: ^1.0.1
   qr_flutter: ^4.1.0

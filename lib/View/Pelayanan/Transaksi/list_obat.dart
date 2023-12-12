@@ -100,15 +100,15 @@ class _Checkout1State extends State<Checkout1> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Container(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CheckoutObat()),
-                          );
-                        },
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CheckoutObat()),
+                        );
+                      },
+                      child: Container(
                         child: Card(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +167,7 @@ class _Checkout1State extends State<Checkout1> {
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          SizedBox(width: 95),
+                                          SizedBox(width: 50),
                                           FaIcon(
                                             FontAwesomeIcons.plus,
                                             size: 15,
@@ -187,7 +187,7 @@ class _Checkout1State extends State<Checkout1> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 2.w),
+                  SizedBox(width: 20),
                   Expanded(
                     child: Container(
                       child: Card(
@@ -246,7 +246,7 @@ class _Checkout1State extends State<Checkout1> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(width: 97),
+                                        SizedBox(width: 50),
                                         FaIcon(
                                           FontAwesomeIcons.plus,
                                           size: 15,
@@ -267,7 +267,9 @@ class _Checkout1State extends State<Checkout1> {
                   ),
                 ],
               ),
-              SizedBox(height: 1.h),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -329,7 +331,7 @@ class _Checkout1State extends State<Checkout1> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(width: 95),
+                                        SizedBox(width: 50),
                                         FaIcon(
                                           FontAwesomeIcons.plus,
                                           size: 15,
@@ -348,7 +350,7 @@ class _Checkout1State extends State<Checkout1> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 2.w),
+                  SizedBox(width: 20),
                   Expanded(
                     child: Container(
                       child: Card(
@@ -409,7 +411,7 @@ class _Checkout1State extends State<Checkout1> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(width: 97),
+                                        SizedBox(width: 50),
                                         FaIcon(
                                           FontAwesomeIcons.plus,
                                           size: 15,
@@ -430,7 +432,9 @@ class _Checkout1State extends State<Checkout1> {
                   ),
                 ],
               ),
-              SizedBox(height: 5.h),
+              SizedBox(
+                height: 150,
+              ),
               Container(
                 child: Row(
                   children: [
@@ -454,8 +458,10 @@ class _Checkout1State extends State<Checkout1> {
                       //            onTap: () {
                       //   Navigator.push(
                       //     context,
-                      //     MaterialPageRoute(builder: (context) => Checkout3(),
-                      //    ),
+                      //     MaterialPageRoute(builder: (context) => Checkout3(
+
+                      //     ),
+                      //     ),
                       //   );
                       // },
                       child: FaIcon(

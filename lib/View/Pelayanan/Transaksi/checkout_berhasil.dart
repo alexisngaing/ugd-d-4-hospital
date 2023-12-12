@@ -57,7 +57,12 @@ class _Checkout3State extends State<Checkout3> {
                     SizedBox(
                       width: 5,
                     ),
-                    Text("pembayaran kamu diterima.", style: TextStyle()),
+                    Text(
+                      "pembayaran kamu diterima.",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(

@@ -5,6 +5,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:ugd_4_hospital/View/Chat/chat.dart';
+import 'package:ugd_4_hospital/View/Pasien/pasienView.dart';
 import 'package:ugd_4_hospital/View/home.dart';
 
 class DoctorView extends StatefulWidget {
@@ -110,31 +111,39 @@ class _DoctorViewState extends State<DoctorView> {
                     ),
                   ),
                   SizedBox(height: 0.5.h),
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Colors.white38,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: IntrinsicWidth(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Ionicons.chatbubble_ellipses,
-                            color: Colors.white,
-                            size: 3.h,
-                          ),
-                          SizedBox(width: 0.5.h),
-                          Text(
-                            "Hubungi Dokter",
-                            style: TextStyle(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => const ChatPage()),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.white38,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: IntrinsicWidth(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Ionicons.chatbubble_ellipses,
                               color: Colors.white,
-                              fontSize: 14.sp,
-                              // fontWeight: FontWeight.w500,
+                              size: 3.h,
                             ),
-                          ),
-                        ],
+                            SizedBox(width: 0.5.h),
+                            Text(
+                              "Hubungi Dokter",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                                // fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -451,7 +460,7 @@ class _DoctorViewState extends State<DoctorView> {
                         onPressed: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => const ChatPage()),
+                                builder: (context) => PasienView()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

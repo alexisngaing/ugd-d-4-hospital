@@ -37,7 +37,7 @@ class _ObatViewState extends State<ObatView> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(15),
             child: Column(
               children: [
                 GestureDetector(
@@ -48,8 +48,7 @@ class _ObatViewState extends State<ObatView> {
                     );
                   },
                   child: Container(
-                    width: 80.w,
-                    height: 87,
+                    width: 90.w,
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -109,8 +108,7 @@ class _ObatViewState extends State<ObatView> {
                   height: 20,
                 ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -167,8 +165,7 @@ class _ObatViewState extends State<ObatView> {
                   height: 20,
                 ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -225,8 +222,7 @@ class _ObatViewState extends State<ObatView> {
                   height: 20,
                 ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -283,8 +279,7 @@ class _ObatViewState extends State<ObatView> {
                   height: 20,
                 ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -342,8 +337,7 @@ class _ObatViewState extends State<ObatView> {
                   height: 20,
                 ),
                 Container(
-                  width: 80.w,
-                  height: 87,
+                  width: 90.w,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
