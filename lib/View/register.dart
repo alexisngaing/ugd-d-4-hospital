@@ -27,6 +27,7 @@ class _RegisterViewState extends State<RegisterView> {
   TextEditingController genderController = TextEditingController();
   TextEditingController noTelpController = TextEditingController();
   TextEditingController dateController = TextEditingController();
+  TextEditingController noTelpVerificationController = TextEditingController();
   bool isEmailUniqueValidator = false;
   bool isLoading = false;
   Uint8List? imageFile;
@@ -131,7 +132,7 @@ class _RegisterViewState extends State<RegisterView> {
                     TextFormField(
                       key: const ValueKey('noTelp'),
                       controller: noTelpController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'No Telp',
                         hintText: '090090',
                         prefixIcon: Icon(Icons.phone_android),
@@ -143,6 +144,37 @@ class _RegisterViewState extends State<RegisterView> {
                         if (p0.length < 5) {
                           return 'No Telpon Minimal 5 digit';
                         }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      key: const ValueKey('noTelpVerification'),
+                      controller: noTelpVerificationController,
+                      decoration: const InputDecoration(
+                        labelText: 'Verifikasi No Telp (3 digit terakhir)',
+                        hintText: '123',
+                        prefixIcon: Icon(Icons.verified_user),
+                      ),
+                      validator: (value) {
+                        final originalNoTelp = noTelpController.text;
+
+                        if (originalNoTelp.isEmpty) {
+                          return 'Nomor Telepon harus diisi terlebih dahulu!';
+                        }
+
+                        final lastThreeDigits =
+                            originalNoTelp.substring(originalNoTelp.length - 3);
+
+                        if (value == null || value.isEmpty) {
+                          return 'Verifikasi No Telp tidak boleh kosong!';
+                        }
+
+                        if (value != lastThreeDigits) {
+                          _showErrorAlertDialog(context,
+                              'Verifikasi No Telp tidak sesuai dengan 3 digit terakhir nomor telepon! Akun Kamu akan tidak Terauthorisasi jika kamu tidak memasukkan 3 digit terakhir nomor telepon yang benar!');
+                          return 'Verifikasi No Telp tidak sesuai dengan 3 digit terakhir nomor telepon!';
+                        }
+
                         return null;
                       },
                     ),
@@ -257,5 +289,32 @@ class _RegisterViewState extends State<RegisterView> {
       return true;
     }
     return false;
+  }
+
+  void _showErrorAlertDialog(BuildContext context, String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(
+              Icons.error,
+              color: Colors.red,
+            ),
+            SizedBox(width: 8),
+            Text('Error'),
+          ],
+        ),
+        content: Text(errorMessage),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 }
