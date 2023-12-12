@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:ugd_4_hospital/View/home.dart';
-import 'package:ugd_4_hospital/View/login.dart';
-
-// import 'package:ugd_4_hospital/view/login.dart';
+// import 'package:ugd_4_hospital/View/home.dart';
+//import 'package:ugd_4_hospital/View/login.dart';
+import 'package:ugd_4_hospital/component/splash_screen.dart';
+//import 'package:ugd_4_hospital/view/login.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:ugd_4_hospital/View/home.dart';
@@ -45,11 +45,11 @@ class MainApp extends StatelessWidget {
               height: 12.5.h,
             );
       return const MaterialApp(
-        home:
-            // LoginPage()
-            // //klo mau nyoba aktifin ini
-            HomePage(),
-      );
+          debugShowCheckedModeBanner: false, home: SplashScreen()
+          //LoginPage()
+          // //klo mau nyoba aktifin ini
+          //HomePage(),
+          );
     });
   }
 }
