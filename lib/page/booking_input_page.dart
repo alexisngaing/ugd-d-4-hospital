@@ -68,7 +68,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
         }
 
         showSnackBar(
-            context, 'Success', Colors.green, const Duration(seconds: 2));
+            context, 'Success', Color(0xff15C73C), const Duration(seconds: 2));
         Navigator.pop(context);
       } catch (err) {
         showSnackBar(
@@ -80,7 +80,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.id == null ? "Tambah Booking" : "Edit Booking"),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xff15C73C),
       ),
       body: Container(
           padding: const EdgeInsets.all(10),
@@ -179,8 +179,8 @@ class _PasienInputPageState extends State<PasienInputPage> {
                             widget.id == null ? 'Tambah' : 'Edit',
                           ),
                           style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.green),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color(0xff15C73C)),
                           ),
                         ),
                       )

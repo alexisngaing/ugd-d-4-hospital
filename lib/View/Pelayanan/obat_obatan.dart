@@ -37,7 +37,7 @@ class _ObatViewState extends State<ObatView> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Column(
               children: [
                 GestureDetector(
@@ -103,6 +103,7 @@ class _ObatViewState extends State<ObatView> {
                   ),
                 ),
                 // First Section
+
                 SizedBox(
                   height: 20,
                 ),
@@ -331,6 +332,7 @@ class _ObatViewState extends State<ObatView> {
                     ],
                   ),
                 ),
+
                 SizedBox(
                   height: 20,
                 ),

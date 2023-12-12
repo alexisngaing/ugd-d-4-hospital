@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/View/login.dart';
 import 'package:ugd_4_hospital/View/profile_kelompok.dart';
 import 'package:ugd_4_hospital/View/profile.dart';
@@ -88,7 +89,7 @@ class SettingView extends StatelessWidget {
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const LoginPage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
             },
           ),

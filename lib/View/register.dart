@@ -59,13 +59,22 @@ class _RegisterViewState extends State<RegisterView> {
               child: Container(
                 margin: EdgeInsets.all(16.sp),
                 padding: EdgeInsets.all(16.sp),
-                height: 550.sp,
+                height: 60.h,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.sp),
+                  borderRadius: BorderRadius.circular(20.sp),
                 ),
                 child: Column(
                   children: [
+                    SizedBox(height: 2.h),
+                    Text(
+                      'Register',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
                     TextFormField(
                       key: const ValueKey('username'),
                       controller: usernameController,
@@ -231,6 +240,7 @@ class _RegisterViewState extends State<RegisterView> {
                         return null;
                       },
                     ),
+                    SizedBox(height: 2.h),
                     ElevatedButton(
                       key: const ValueKey('registerButton'),
                       onPressed: () async {

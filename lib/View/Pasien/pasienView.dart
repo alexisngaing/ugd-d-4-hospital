@@ -1,6 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:ugd_4_hospital/View/home.dart';
 import 'package:ugd_4_hospital/model/Booking.dart';
 import 'package:ugd_4_hospital/database/API/BookingClient.dart';
 import 'package:ugd_4_hospital/page/booking_input_page.dart';
@@ -78,6 +79,14 @@ class PasienView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text("Data Booking"),
         backgroundColor: const Color(0xff15C73C),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -105,63 +114,63 @@ class PasienView extends ConsumerWidget {
             )
           else
             listener.when(
-              data: (bookings) => SingleChildScrollView(
-                child: Column(
-                    children: bookings
-                        .map((book) => scrollViewItem(book, context, ref))
-                        .toList()),
-              ),
+              data: (bookings) {
+                if (bookings.isNotEmpty) {
+                  return SingleChildScrollView(
+                    child: Column(
+                        children: bookings
+                            .map((book) => scrollViewItem(book, context, ref))
+                            .toList()),
+                  );
+                } else {
+                  return Container(
+                    width: 90.w,
+                    height: 60.h,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 4,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Positioned(
+                          child: SvgPicture.asset(
+                            "images/sad-female.svg",
+                            height: 40.h,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          child: RichText(
+                            text: TextSpan(
+                              text:
+                                  'Maaf. Kamu belum mendaftar konsultasi apapun',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18.sp,
+                              ),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
               error: (err, s) => Center(child: Text(err.toString())),
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
             ),
           SizedBox(height: 2.h),
-          Container(
-              width: 90.w,
-              height: 60.h,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 4,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Positioned(
-                    child: SvgPicture.asset(
-                      "images/sad-female.svg",
-                      height: 40.h,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15.w),
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'Maaf. Kamu belum mendaftar konsultasi apapun',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18.sp,
-                        ),
-                        // children: <TextSpan>[
-                        //   TextSpan(
-                        //     text: ' More text...',
-                        //     style: TextStyle(
-                        //         fontWeight: FontWeight.bold, fontSize: 18.sp),
-                        //   ),
-                        // ],
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ))
         ],
       ),
     );

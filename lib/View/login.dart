@@ -86,16 +86,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             child: Container(
               margin: EdgeInsets.all(16.sp),
               padding: EdgeInsets.all(16.sp),
-              height: 350.sp,
+              height: 45.h,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(10.sp),
+                borderRadius: BorderRadius.circular(20.sp),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Login Page',
+                    'Login',
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
