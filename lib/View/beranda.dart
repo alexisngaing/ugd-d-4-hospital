@@ -14,35 +14,35 @@ import 'package:ugd_4_hospital/View/Pelayanan/obat_obatan.dart';
 import 'package:ugd_4_hospital/View/Pelayanan/ambulance.dart';
 
 class BerandaView extends StatelessWidget {
-  List imgs = [
+  final List imgs = [
     "doctor1.jpg",
     "doctor2.jpg",
     "doctor3.jpg",
     "doctor4.jpg",
   ];
 
-  List doctorName = [
+  final List doctorName = [
     "Dr. Cintya",
     "Dr. Jenny",
     "Dr. Jeon",
     "Dr. Sukma",
   ];
 
-  List doctorRole = [
+  final List doctorRole = [
     "Spesialis Kejiwaan",
     "Dokter Umum",
     "Dokter Gigi",
     "Dokter Umum",
   ];
 
-  List experience = [
+  final List experience = [
     "11 Tahun",
     "9 Tahun",
     "10 Tahun",
     "7 Tahun",
   ];
 
-  List stars = [
+  final List stars = [
     "5.0",
     "4.9",
     "4.5",
