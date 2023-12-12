@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+//import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -74,38 +74,38 @@ class BerandaView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       child: Image.asset(
                         "images/gus.jpg",
-                        width: 30.sp,
-                        height: 30.sp,
+                        width: 30,
+                        height: 30,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  Row(
+                  const Row(
                     children: [
-                      Icon(Icons.search, size: 22.sp),
-                      SizedBox(width: 2.w),
+                      Icon(Icons.search, size: 22),
+                      SizedBox(width: 2),
                       Icon(
                         Icons.notifications_none,
-                        size: 22.sp,
+                        size: 22,
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 2.h),
+            const SizedBox(height: 2),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
                   RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                         style: TextStyle(
-                          fontSize: 18.sp,
+                          fontSize: 18,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
                         ),
-                        children: const [
+                        children: [
                           TextSpan(text: "Hai, "),
                           TextSpan(
                             text: "Dodi Firmansyahhhh",
@@ -118,13 +118,13 @@ class BerandaView extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 2.h),
+            const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
                   child: Container(
-                    width: 95.w,
+                    width: 400,
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -144,15 +144,15 @@ class BerandaView extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "Masuk ke Rumah Sakit \n& Ruang Publik",
                               style: TextStyle(
-                                fontSize: 18.sp,
+                                fontSize: 18,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            SizedBox(height: 5.h),
+                            const SizedBox(height: 5),
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -169,21 +169,21 @@ class BerandaView extends StatelessWidget {
                                     Radius.circular(10),
                                   ),
                                 ),
-                                child: Row(
+                                child: const Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Icon(
                                       Icons.qr_code_scanner_rounded,
                                       color: Colors.white,
-                                      size: 3.h,
+                                      size: 3,
                                     ),
-                                    SizedBox(width: 1.w),
+                                    SizedBox(width: 1),
                                     Text(
                                       "Check-in",
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 15.sp,
+                                        fontSize: 15,
                                       ),
                                     ),
                                   ],
@@ -196,7 +196,7 @@ class BerandaView extends StatelessWidget {
                         SvgPicture.asset(
                           "images/scan-bg.svg",
                           // width: 11.w,
-                          height: 13.h,
+                          height: 100,
                           // fit: BoxFit.cover,
                         ),
                       ],
@@ -205,21 +205,21 @@ class BerandaView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 3.h),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+            const SizedBox(height: 3),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 "Pelayanan Kami",
                 style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
             ),
-            SizedBox(height: 1.5.h),
+            const SizedBox(height: 1.5),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.h),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -247,17 +247,17 @@ class BerandaView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: FaIcon(
+                          child: const FaIcon(
                             FontAwesomeIcons.stethoscope,
-                            size: 22.sp,
+                            size: 22,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 1.h),
-                        Text(
+                        const SizedBox(height: 1),
+                        const Text(
                           "Konsultasi",
                           style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             color: Colors.black,
                           ),
                         ),
@@ -287,17 +287,17 @@ class BerandaView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: FaIcon(
+                          child: const FaIcon(
                             FontAwesomeIcons.pills,
-                            size: 22.sp,
+                            size: 22,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 1.h),
-                        Text(
+                        const SizedBox(height: 1),
+                        const Text(
                           "Obat-obatan",
                           style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             color: Colors.black,
                           ),
                         ),
@@ -327,17 +327,17 @@ class BerandaView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: FaIcon(
+                          child: const FaIcon(
                             FontAwesomeIcons.truckMedical,
-                            size: 22.sp,
+                            size: 22,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 1.h),
-                        Text(
+                        const SizedBox(height: 1),
+                        const Text(
                           "Ambulance",
-                          style: TextStyle(
-                            fontSize: 14.sp,
+                          style: const TextStyle(
+                            fontSize: 14,
                             color: Colors.black,
                           ),
                         ),
@@ -347,13 +347,13 @@ class BerandaView extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 3.h),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+            const SizedBox(height: 3),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 "Dokter Terpopuler",
                 style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -399,17 +399,17 @@ class BerandaView extends StatelessWidget {
                         ),
                         Text(
                           "${doctorName[index]}",
-                          style: TextStyle(
-                            fontSize: 16.sp,
+                          style: const TextStyle(
+                            fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
                           ),
                         ),
                         Text(
                           "${doctorRole[index]}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                           ),
                         ),
                         Row(
@@ -429,17 +429,17 @@ class BerandaView extends StatelessWidget {
                                     padding: const EdgeInsets.all(2),
                                     child: Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Ionicons.bag,
                                           color: Colors.black,
-                                          size: 16.sp,
+                                          size: 16,
                                         ),
-                                        SizedBox(width: 0.5.w),
+                                        const SizedBox(width: 0.5),
                                         Text(
                                           "${experience[index]}",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black,
-                                            fontSize: 14.sp,
+                                            fontSize: 14,
                                           ),
                                         ),
                                       ],
@@ -448,7 +448,7 @@ class BerandaView extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(width: 1.5.w),
+                            const SizedBox(width: 1.5),
                             Container(
                               decoration: BoxDecoration(
                                 color: const Color(0xffDDDDDD),
@@ -462,17 +462,17 @@ class BerandaView extends StatelessWidget {
                                     padding: const EdgeInsets.all(2),
                                     child: Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.star,
                                           color: Colors.amber,
-                                          size: 16.sp,
+                                          size: 16,
                                         ),
-                                        SizedBox(width: 0.5.w),
+                                        const SizedBox(width: 0.5),
                                         Text(
                                           "${stars[index]}",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black,
-                                            fontSize: 14.sp,
+                                            fontSize: 14,
                                           ),
                                         ),
                                       ],
