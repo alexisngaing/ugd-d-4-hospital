@@ -59,21 +59,21 @@ class _GeoLocationState extends State<GeoLocationPage> {
                 Text(
                   "Lokasi Anda",
                   style: TextStyle(
-                    fontSize: 5.5.sp,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(
-                  height: 2.0.h,
+                  height: 6.0.h,
                 ),
                 Text(
                   _currentAddress,
                   style: TextStyle(
-                    fontSize: 3.5.sp,
+                    fontSize: 16.sp,
                   ),
                 ),
                 SizedBox(
-                  height: 3.0.h,
+                  height: 5.0.h,
                 ),
                 ElevatedButton(
                   onPressed: () async {
@@ -91,9 +91,10 @@ class _GeoLocationState extends State<GeoLocationPage> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Icon(Icons.location_pin, size: 4.0.h),
-                      SizedBox(width: 1.0.w),
-                      Text('Temukan Lokasi Saya', style: TextStyle(fontSize: 2.5.sp)),
+                      Icon(Icons.location_pin, size: 6.0.h),
+                      SizedBox(width: 4.0.w),
+                      Text('Temukan Lokasi Saya',
+                          style: TextStyle(fontSize: 15.sp)),
                     ],
                   ),
                 )
