@@ -44,7 +44,8 @@ class MainApp extends StatelessWidget {
               width: 100.w,
               height: 12.5.h,
             );
-      return const MaterialApp(home: SplashScreen()
+      return const MaterialApp(
+          debugShowCheckedModeBanner: false, home: SplashScreen()
           //LoginPage()
           // //klo mau nyoba aktifin ini
           //HomePage(),
