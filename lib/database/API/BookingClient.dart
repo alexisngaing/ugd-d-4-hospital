@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class BookingClient {
-  static final String url = '10.0.2.2:8000';
+  static final String url = '20.40.99.235:8000';
   static final String endpoint = 'api/book';
 
   // For Linux
