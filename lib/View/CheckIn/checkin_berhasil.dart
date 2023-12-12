@@ -13,7 +13,7 @@ class HalamanBerhasilCheckIn extends StatelessWidget {
           children: [
             Container(
               width: 90.w,
-              height: 70.h,
+              height: 300.h,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -28,13 +28,9 @@ class HalamanBerhasilCheckIn extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: SvgPicture.asset(
-                      "images/scan-bg.svg",
-                      height: 30.h,
-                    ),
+                  SvgPicture.asset(
+                    "images/scan-bg.svg",
+                    height: 50.h,
                   ),
                   SizedBox(height: 2.h),
                   Padding(
