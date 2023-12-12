@@ -122,95 +122,85 @@ class BerandaView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InkWell(
-                  onTap: () {},
-                  child: Stack(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 9,
-                              spreadRadius: 1,
-                            ),
-                          ],
+                Center(
+                  child: Container(
+                    width: 95.w,
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 9,
+                          spreadRadius: 1,
                         ),
-                        child: Row(
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ],
+                    ),
+                    child: Row(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Masuk ke Rumah Sakit \n& Ruang Publik",
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                SizedBox(height: 5.h),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const CheckInPage(),
-                                        ));
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(5),
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xff15C73C),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Icon(
-                                          Icons.qr_code_scanner_rounded,
-                                          color: Colors.white,
-                                          size: 3.h,
-                                        ),
-                                        SizedBox(width: 2.w),
-                                        Text(
-                                          "Check-in",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15.sp,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(width: 7.w),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: SvgPicture.asset(
-                                "images/scan-bg.svg",
-                                width: 11.w,
-                                height: 11.h,
-                                // fit: BoxFit.cover,
+                            Text(
+                              "Masuk ke Rumah Sakit \n& Ruang Publik",
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
+                            SizedBox(height: 5.h),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const CheckInPage(),
+                                    ));
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(5),
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff15C73C),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(
+                                      Icons.qr_code_scanner_rounded,
+                                      color: Colors.white,
+                                      size: 3.h,
+                                    ),
+                                    SizedBox(width: 1.w),
+                                    Text(
+                                      "Check-in",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15.sp,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
                           ],
                         ),
-                      ),
-                      SizedBox(width: 5.w),
-                    ],
+                        // SizedBox(width: 2.w),
+                        SvgPicture.asset(
+                          "images/scan-bg.svg",
+                          // width: 11.w,
+                          height: 13.h,
+                          // fit: BoxFit.cover,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
