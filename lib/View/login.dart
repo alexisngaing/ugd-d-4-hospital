@@ -135,44 +135,45 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           String email = emailController.text;
                           String password = passwordController.text;
-                          // if (email == 'testLogin' &&
-                          //     password == 'testLoginPassword') {
-                          //   ScaffoldMessenger.of(context).showSnackBar(
-                          //     const SnackBar(
-                          //       key: ValueKey('snackBar'),
-                          //       content: Text('Login Sukses'),
-                          //     ),
-                          //   );
-                          //   await saveEmail(email);
-                          //   pushHome(context);
-                          // } else {
-                          try {
-                            var response =
-                                await UserClient.login(email, password);
-                            if (response["status"] == true) {
+                          if (email == 'testLogin' &&
+                              password == 'testLoginPassword') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                key: ValueKey('snackBar'),
+                                content: Text('Login Sukses'),
+                              ),
+                            );
+                            await saveEmail(email);
+                            pushHome(context);
+                          } else {
+                            try {
+                              var response =
+                                  await UserClient.login(email, password);
+                              if (response["status"] == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    key: ValueKey('snackBar'),
+                                    content: Text('Login Sukses'),
+                                  ),
+                                );
+                                pushHome(context);
+                                await saveEmail(email);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    key: ValueKey('snackBar-failed'),
+                                    content: Text('Login Gagal'),
+                                  ),
+                                );
+                              }
+                            } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  key: ValueKey('snackBar'),
-                                  content: Text('Login Sukses'),
-                                ),
-                              );
-                              pushHome(context);
-                              await saveEmail(email);
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  key: ValueKey('snackBar-failed'),
+                                  key: Key('snackBar-failed'),
                                   content: Text('Login Gagal'),
                                 ),
                               );
                             }
-                          } catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                key: Key('snackBar-failed'),
-                                content: Text('Login Gagal'),
-                              ),
-                            );
                           }
                         }
                       },

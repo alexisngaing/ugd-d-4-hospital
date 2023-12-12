@@ -9,11 +9,11 @@ void main() {
       ResponsiveSizer(
         builder: (context, orientation, deviceType) {
           final double containerHeight =
-              Device.orientation == Orientation.portrait ? 100.h : 100.h;
+              Device.orientation == Orientation.portrait ? 1000.h : 1000.h;
 
           return MaterialApp(
             home: SizedBox(
-              width: 100.w,
+              width: 500.w,
               height: containerHeight,
               child: const RegisterView(),
             ),
@@ -27,6 +27,7 @@ void main() {
     expect(find.text('Password'), findsOneWidget);
     expect(find.text('No Telp'), findsOneWidget);
     expect(find.text('Tanggal'), findsOneWidget);
+    expect(find.text('Verifikasi No Telp (3 digit terakhir)'), findsOneWidget);
     expect(find.byType(ElevatedButton), findsOneWidget);
 
     await tester.enterText(
@@ -36,6 +37,8 @@ void main() {
     await tester.enterText(
         find.byKey(const ValueKey('password')), 'test_password');
     await tester.enterText(find.byKey(const ValueKey('noTelp')), '123456789');
+    await tester.enterText(
+        find.byKey(const ValueKey('noTelpVerification')), '789');
 
     await tester.tap(find.byKey(const ValueKey('tanggal')));
     await tester.pumpAndSettle();
