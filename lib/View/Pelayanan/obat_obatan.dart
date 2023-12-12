@@ -37,7 +37,7 @@ class _ObatViewState extends State<ObatView> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(15),
+            padding: EdgeInsets.all(20),
             child: Column(
               children: [
                 GestureDetector(
@@ -48,7 +48,8 @@ class _ObatViewState extends State<ObatView> {
                     );
                   },
                   child: Container(
-                    width: 90.w,
+                    width: 80.w,
+                    height: 87,
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -103,11 +104,13 @@ class _ObatViewState extends State<ObatView> {
                   ),
                 ),
                 // First Section
+
                 SizedBox(
                   height: 20,
                 ),
                 Container(
-                  width: 90.w,
+                  width: 80.w,
+                  height: 87,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -164,7 +167,8 @@ class _ObatViewState extends State<ObatView> {
                   height: 20,
                 ),
                 Container(
-                  width: 90.w,
+                  width: 80.w,
+                  height: 87,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -221,7 +225,8 @@ class _ObatViewState extends State<ObatView> {
                   height: 20,
                 ),
                 Container(
-                  width: 90.w,
+                  width: 80.w,
+                  height: 87,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -278,7 +283,8 @@ class _ObatViewState extends State<ObatView> {
                   height: 20,
                 ),
                 Container(
-                  width: 90.w,
+                  width: 80.w,
+                  height: 87,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -331,11 +337,13 @@ class _ObatViewState extends State<ObatView> {
                     ],
                   ),
                 ),
+
                 SizedBox(
                   height: 20,
                 ),
                 Container(
-                  width: 90.w,
+                  width: 80.w,
+                  height: 87,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
