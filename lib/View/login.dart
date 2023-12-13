@@ -86,7 +86,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             child: Container(
               margin: EdgeInsets.all(16.sp),
               padding: EdgeInsets.all(16.sp),
-              height: 45.h,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20.sp),
@@ -177,10 +176,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           }
                         }
                       },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: const Color.fromARGB(255, 2, 168, 223),
-                      ),
                       key: const ValueKey('login'),
                       child: const Text('Login'),
                     ),

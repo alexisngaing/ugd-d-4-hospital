@@ -45,7 +45,7 @@ void main() {
       await tester.enterText(
           find.byKey(const ValueKey('deskripsi')), 'Deskripsi Pasien');
       await tester.enterText(find.byKey(const ValueKey('umur')), '25');
-      await tester.enterText(find.byKey(const ValueKey('dokter')), 'gambar');
+      await tester.enterText(find.byKey(const ValueKey('dokter')), 'arren');
 
       await tester.pumpAndSettle();
       await tester.pump(Duration(seconds: 5));

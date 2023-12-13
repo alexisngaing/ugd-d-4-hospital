@@ -10,7 +10,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 void main() {
   setUpAll(() => HttpOverrides.global = null);
 
-  testWidgets('Show Data Booking Widget - Show Data Booking',
+  testWidgets('Delete Data Booking Widget - Show Data Booking',
       (WidgetTester tester) async {
     final screenSize = tester.binding.window.physicalSize /
         tester.binding.window.devicePixelRatio;

@@ -101,7 +101,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
                             border: UnderlineInputBorder(),
                             labelText: 'Masukkan Nama',
                           ),
-                          key: ValueKey('nama'),
+                          key: const ValueKey('nama'),
                           controller: nameController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -120,7 +120,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
                             border: UnderlineInputBorder(),
                             labelText: 'Masukkan Deskripsi',
                           ),
-                          key: ValueKey('deskripsi'),
+                          key: const ValueKey('deskripsi'),
                           controller: descController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -140,7 +140,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
                             border: UnderlineInputBorder(),
                             labelText: 'Masukkan Umur',
                           ),
-                          key: ValueKey('umur'),
+                          key: const ValueKey('umur'),
                           controller: umurController,
                         ),
                       ),
@@ -153,7 +153,7 @@ class _PasienInputPageState extends State<PasienInputPage> {
                             suffixIcon: Icon(Icons.local_hospital_sharp),
                             labelText: 'Masukkan Nama Dokter',
                           ),
-                          key: ValueKey('dokter'),
+                          key: const ValueKey('dokter'),
                           controller: pictureController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {

@@ -28,7 +28,7 @@ void main() {
 
           return MaterialApp(
             home: SizedBox(
-              width: 100.w,
+              width: 600.w,
               height: containerHeight,
               child: const ProviderScope(child: LoginPage()),
             ),
