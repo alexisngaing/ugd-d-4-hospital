@@ -84,9 +84,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           key: _formKey,
           child: Center(
             child: Container(
+              height: 50.h,
               margin: EdgeInsets.all(16.sp),
               padding: EdgeInsets.all(16.sp),
-              height: 45.h,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20.sp),

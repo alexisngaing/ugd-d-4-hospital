@@ -22,7 +22,7 @@ void main() {
           builder: (context, orientation, deviceType) {
             return MaterialApp(
               home: Container(
-                width: 500.0, // Adjust the width as needed
+                width: 500.0,
                 height: 1000.0,
                 child: ProviderScope(child: PasienView()),
               ),

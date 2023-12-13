@@ -28,13 +28,9 @@ class HalamanBerhasilCheckIn extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: SvgPicture.asset(
-                      "images/scan-bg.svg",
-                      height: 30.h,
-                    ),
+                  SvgPicture.asset(
+                    "images/scan-bg.svg",
+                    height: 30.h,
                   ),
                   SizedBox(height: 2.h),
                   Padding(
